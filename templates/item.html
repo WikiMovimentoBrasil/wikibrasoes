@@ -1,0 +1,443 @@
+{% extends "base.html" %}
+
+{% block navbar %}
+    {% with lang=lang, username=username %}
+        {% include 'topnavbar.html' %}
+    {% endwith %}
+{% endblock %}
+
+{% block title %}{% if metadata.obra_label %}{{ metadata.obra_label[0] }}{% else %}{{ metadata.obra_qid[0] }}
+{% endif %}{% endblock %}
+
+{% block scripts %}
+    <script src="{{ url_for('static', filename= 'jquery.zoom.js') }}"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename= 'owl.carousel.min.css') }}">
+    <script src="{{ url_for('static', filename= 'owl.carousel.js') }}"></script>
+{% endblock %}
+
+{% block content %}
+    <div class="w3-row">
+        <div id="image" class="w3-container w3-half">
+            {% if category_images|length > 0 %}
+                <div class="owl-carousel owl-theme">
+                    <span class="img_span" style="display: inline-block; position: relative; overflow: hidden;">
+                        <img style="display: block" class="owl-lazy image_item" alt="
+
+
+
+
+
+                                {% if metadata.obra_label[0] %}{{ metadata.obra_label[0] }}{% else %}{{ metadata.obra_qid[0] }}{% endif %} - {{ category_images[0] }}"
+                             data-src="https://commons.wikimedia.org/wiki/Special:FilePath/{{ category_images[0] }}?width=2000px">
+                    </span>
+                    {% for imagem_categoria in category_images[1:] %}
+                        <span class="img_span" style="display: inline-block; position: relative; overflow: hidden;">
+                            <img class="owl-lazy image_item" alt="
+
+
+
+
+
+                                    {% if metadata.obra_label[0] %}{{ metadata.obra_label[0] }}{% else %}{{ metadata.obra_qid[0] }}{% endif %} - {{ imagem_categoria }}"
+                                 data-src="https://commons.wikimedia.org/wiki/Special:FilePath/{{ imagem_categoria }}?width=2000px">
+                        </span>
+                    {% endfor %}
+                </div>
+                <a target="_blank" href="https://commons.wikimedia.org/wiki/{{ metadata.category }}">
+                    {{ _("Veja as imagens desse objeto no Wikimedia Commons") }}
+                </a>
+            {% else %}
+                <div class="owl-carousel owl-theme">
+                    <span class="img_span" style="display: inline-block; position: relative; overflow: hidden;">
+                        <img style="display: block;max-width: 100%" class="owl-lazy image_item" alt="
+
+
+
+
+
+                                {% if metadata.obra_label[0] %}{{ metadata.obra_label[0] }}{% else %}{{ metadata.obra_qid[0] }}{% endif %}"
+                             data-src="https://commons.wikimedia.org/wiki/Special:FilePath/{{ metadata.imagem[0] }}?width=2000px">
+                    </span>
+                </div>
+                {% if metadata.imagem[0]!="Calaamad suaal.png" %}
+                    <a target="_blank"
+                       href="https://commons.wikimedia.org/wiki/Special:FilePath/{{ metadata.imagem[0] }}">
+                        {{ _("Veja essa imagem no Wikimedia Commons") }}
+                    </a>
+                {% endif %}
+            {% endif %}
+            <br><br>
+            <table class="table table-responsive table-striped"
+                   style="overflow: hidden; font-size: 125%; width: 100%; table-layout: fixed; overflow-wrap: break-word;">
+                <tr>
+                    <th>{{ _("Objeto") }}</th>
+                    <td><a tabindex="0" target="_blank"
+                           href="https://www.wikidata.org/wiki/{{ metadata.obra_qid[0] }}">{{ metadata.obra_label[0] }}</a>
+                    </td>
+                </tr>
+                {% if metadata.instancia %}
+                    <tr>
+                        <th>{{ _("Instância de") }}</th>
+                        <td>
+                            {% for elem in metadata.instancia %}
+                                {% set elem_parts = elem.split('@') %}
+                                <a tabindex="0" target="_blank"
+                                   href="https://www.wikidata.org/wiki/{{ elem_parts[0] }}">{{ elem_parts[1] }}</a>
+                                {{ ";" if not loop.last }}
+                            {% endfor %}
+                        </td>
+                    </tr>
+                {% endif %}
+                {% if metadata.colecao %}
+                    <tr>
+                        <th>{{ _("Coleção") }}</th>
+                        <td>
+                            {% for elem in metadata.colecao %}
+                                {% set elem_parts = elem.split('@') %}
+                                <a tabindex="0" target="_blank"
+                                   href="https://www.wikidata.org/wiki/{{ elem_parts[0] }}">{{ elem_parts[1] }}</a>
+                                {{ ";" if not loop.last }}
+                            {% endfor %}
+                        </td>
+                    </tr>
+                {% endif %}
+                {% if metadata.numero_de_inventario %}
+                    <tr>
+                        <th>{{ _("Número de inventário") }}</th>
+                        <td>
+                            {% for elem in metadata.numero_de_inventario %}
+                                {{ elem }}
+                            {% endfor %}
+                        </td>
+                    </tr>
+                {% endif %}
+                {% if metadata.data %}
+                    <tr>
+                        <th>{{ _("Data") }}</th>
+                        <td>
+                            {% for elem in metadata.data %}{{ elem }}{{ ";" if not loop.last }}{% endfor %}
+                        </td>
+                    </tr>
+                {% endif %}
+                {% if metadata.criador %}
+                    <tr>
+                        <th>{{ _("Criador(a)") }}</th>
+                        <td>
+                            {% for elem in metadata.criador %}
+                                {% set elem_parts = elem.split('@') %}
+                                <a tabindex="0" target="_blank"
+                                   href="https://www.wikidata.org/wiki/{{ elem_parts[0] }}">{{ elem_parts[1] }}</a>
+                                {{ ";" if not loop.last }}
+                            {% endfor %}
+                        </td>
+                    </tr>
+                {% endif %}
+                {% if metadata.material %}
+                    <tr>
+                        <th>{{ _("Material") }}</th>
+                        <td>
+                            {% for elem in metadata.material %}
+                                {% set elem_parts = elem.split('@') %}
+                                <a tabindex="0" target="_blank"
+                                   href="https://www.wikidata.org/wiki/{{ elem_parts[0] }}">{{ elem_parts[1] }}</a>
+                                {{ ";" if not loop.last }}
+                            {% endfor %}
+                        </td>
+                    </tr>
+                {% endif %}
+                {% if metadata.altura and metadata.largura %}
+                    <tr>
+                        <th>{{ _("Dimensões") }}</th>
+                        <td>
+                            {% set elem_parts_altura = metadata.altura[0].split('@') %}
+                            {% set elem_parts_largura = metadata.largura[0].split('@') %}
+                            {{ elem_parts_altura[0] }} {{ elem_parts_altura[1] }}
+                            &times; {{ elem_parts_largura[0] }} {{ elem_parts_largura[1] }}
+                        </td>
+                    </tr>
+                {% endif %}
+                {% if metadata.metodo %}
+                    <tr>
+                        <th>{{ _("Método de fabricação") }}</th>
+                        <td>
+                            {% for elem in metadata.metodo %}
+                                {% set elem_parts = elem.split('@') %}
+                                <a tabindex="0" target="_blank"
+                                   href="https://www.wikidata.org/wiki/{{ elem_parts[0] }}">{{ elem_parts[1] }}</a>
+                                {{ ";" if not loop.last }}
+                            {% endfor %}
+                        </td>
+                    </tr>
+                {% endif %}
+                {% if metadata.audio %}
+                    <tr>
+                        <th>{{ _("Versão audível") }}</th>
+                        <td>
+                            <audio controls>
+                                <source src="https://commons.wikimedia.org/wiki/Special:FilePath/{{ metadata.audio[0] }}"
+                                        type="audio/ogg">
+                                {{ _("Seu navegador não suporta este elemento de áudio") }}
+                            </audio>
+                        </td>
+                    </tr>
+                {% endif %}
+            </table>
+        </div>
+        <div class="w3-container w3-half">
+            {% if not username %}
+                <h2 style="text-align:center">
+                    {{ _("Faça a sua autenticação clicando no botão 'Autenticar-se' no canto superior direito") }}
+                </h2>
+            {% endif %}
+            <form id="brasao_form" method="post" enctype="multipart/form-data"
+                  style="overflow: hidden; font-size: 125%; width: 100%; table-layout: fixed; overflow-wrap: break-word;">
+                {# action="{{ url_for("item", qid=qid) }}" #}
+                <div class="w3-container w3-row" id="brasao_container" style="padding: 0.75rem;">
+                    <div class="w3-container">
+                        {{ _("Você consegue identificar na lista qual o brasão retratado?") }}
+                    </div>
+                    <div class="w3-container">
+                        <select id='brasao' style="width:100%; height: 2em">
+                            <option value="no" selected>{{ _("--Selecione uma opção--") }}</option>
+                            <option value="no">{{ _("Não") }}</option>
+                            {% for brasao in brasoes %}
+                                <option value="{{ brasao.qid }}">{{ brasao.label }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                {# COROA #}
+                <div class="w3-container w3-row" id="coroa_container" style="background-color:rgba(0,0,0,.05); padding: 0.75rem;">
+                    <div class="w3-container">
+                        {{ _("Este brasão possui uma coroa? Se sim, identifique o tipo:") }}
+                    </div>
+                    <div class="w3-container">
+                        <select id='coroa' style="width:100%; height: 2em">
+                            <option value="no" selected>{{ _("--Selecione uma opção--") }}</option>
+                            {% for crown in crowns %}
+                                <option value="{{ crown.qid }}">{{ crown.label }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                <div class="w3-container w3-row" id="cor_coroa_container" style="background-color:rgba(0,0,0,.05); padding: 0.75rem;">
+                    <div class="w3-container">
+                        {{ _("Cor da coroa:") }}
+                    </div>
+                    <div class="w3-container">
+                        <select id='coroa_cor' style="width:100%; height: 2em">
+                            <option value="no" selected>{{ _("--Selecione uma opção--") }}</option>
+                            {% for cor in colors %}
+                                <option value="{{ cor.qid }}">{{ cor.label }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                {# CAMPO #}
+                <div class="w3-container w3-row" id="campo_container" style="padding: 0.75rem;">
+                    <div class="w3-container">
+                        {{ _("O campo está dividido?") }}
+                    </div>
+                    <div class="w3-container">
+                        <select id='campo' style="width:100%; height: 2em">
+                            <option value="no" selected>{{ _("Não") }}</option>
+                            <option value="yes">{{ _("Sim") }}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="w3-container w3-row" id="campo_divisao_container" style="padding: 0.75rem;">
+                    <div class="w3-container">
+                        {{ _("Como está dividido o campo do escudo?") }}
+                    </div>
+                    <div class="w3-container">
+                        <select multiple id='divisao' style="width:100%">
+                            <option value="no" selected>{{ _("--Selecione ao menos uma opção--") }}</option>
+                            {% for partition in partitions %}
+                                <option value="{{ partition.qid }}">{{ partition.label }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                <div class="w3-container w3-row" id="campo_cor_container" style="padding: 0.75rem;">
+                    <div class="w3-container">
+                        {{ _("Cor(es) do campo:") }}
+                    </div>
+                    <div class="w3-container">
+                        <select multiple id='campo_cor' style="width:100%">
+                            <option value="no" selected>{{ _("--Selecione uma opção--") }}</option>
+                            {% for cor in colors %}
+                                <option value="{{ cor.qid }}">{{ cor.label }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                {# FIGURAS #}
+                <div class="w3-container w3-row" id="figuras_container" style="background-color:rgba(0,0,0,.05); padding: 0.75rem;">
+                    <div class="w3-container">
+                        {{ _("Quais são as figuras heráldicas retratadas?") }}
+                    </div>
+                    <div class="w3-container w3-half">
+                        <div id="figuras"></div>
+                        <a class="button" title="{{ _('Adicionar figura') }}">
+                            <button type="button" class="button" data-toggle="modal"
+                                    data-qid="{{ metadata.obra_qid[0] }}" data-instance="figura" data-target="#addModal"
+                                    style="background-color:#008000;margin: 0; width:100%;font-size: 100%;padding:10px">
+                                {{ _("Adicionar") }}
+                            </button>
+                        </a>
+                    </div>
+                </div>
+                {# SUPORTES #}
+                <div class="w3-container w3-row" id="suportes_container" style="padding: 0.75rem;">
+                    <div class="w3-container">
+                        {{ _("O brasão possui suportes ou tenentes? Se sim, indique-os.") }}
+                    </div>
+                    <div class="w3-container w3-half">
+                        <div id="suportes"></div>
+                        <a class="button" title="{{ _('Adicionar suporte') }}">
+                            <button type="button" class="button" data-toggle="modal"
+                                    data-qid="{{ metadata.obra_qid[0] }}" data-instance="suporte" data-target="#addModal"
+                                    style="background-color:#008000;margin: 0; width:100%;font-size: 100%;padding:10px">
+                                {{ _("Adicionar") }}
+                            </button>
+                        </a>
+                    </div>
+                </div>
+                {# PAQUIFE #}
+                <div class="w3-container w3-row" id="paquife_container" style="background-color:rgba(0,0,0,.05); padding: 0.75rem;">
+                    <div class="w3-container">
+                        {{ _("O brasão possui paquife?") }}
+                    </div>
+                    <div class="w3-container">
+                        <select id='paquife' style="width:100%; height: 2em">
+                            <option value="no" selected>{{ _("Não") }}</option>
+                            <option value="yes">{{ _("Sim") }}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="w3-container w3-row" id="paquife_cor_container" style="background-color:rgba(0,0,0,.05); padding: 0.75rem;">
+                    <div class="w3-container">
+                        {{ _("Cor(es) do paquife:") }}
+                    </div>
+                    <div class="w3-container">
+                        <select multiple id='paquife_cor' style="width:100%">
+                            <option value="no" selected>{{ _("--Selecione uma opção--") }}</option>
+                            {% for cor in colors %}
+                                <option value="{{ cor.qid }}">{{ cor.label }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                {# LEMA #}
+                <div class="w3-container w3-row" id="lema_container" style="padding: 0.75rem;">
+                    <div class="w3-container">
+                        {{ _("Lema:") }}
+                    </div>
+                    <div class="w3-container">
+                        <input id="lema" type="text" maxlength="1490" style="width: 100%"/>
+                    </div>
+                </div>
+            </form>
+            <div id="add" class="w3-container" style="justify-content: center;">
+                <a class="button" id="adicionar_declaracoes" tabindex="0" title="{{ _('Adicionar') }}">
+                    <button type="button" class="button" data-toggle="modal"
+                            data-qid="{{ metadata.obra_qid[0] }}" data-target="#sendModal"
+                            style="background-color:#008000;width:100%;margin:10px 0 0 0">
+                        {{ _("ADICIONAR") }}
+                    </button>
+                </a>
+            </div>
+            <div id="back" class="w3-container" style="justify-content: center;">
+                <a class="button" tabindex="0" href="{{ url_for('inicio') }}">
+                    <button type="button" class="button" id="back"
+                            style="background-color:#D04125;width:100%;margin:10px 0">
+                        {{ _("VOLTAR À PÁGINA INICIAL") }}
+                    </button>
+                </a>
+            </div>
+            {% if next_qid %}
+                <div id="next" class="w3-container" style="justify-content: center;">
+                    <a class="button" tabindex="0" href="{{ url_for('item', qid=next_qid) }}">
+                        <button type="button" class="button" id="next"
+                                style="background-color:#4D4D4D;width:100%;margin:0;color:white">
+                            {{ _("PULAR ESTE ITEM") }}
+                        </button>
+                    </a>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+    <script>
+        $('#sendModal').on('hidden.bs.modal', function () {
+            document.getElementById("send_image_form").reset();
+        });
+
+        $("#send_image_form").submit(function (e) {
+            e.preventDefault();
+            var formData = new FormData(this);
+            var error = "{{ _('Ocorreu algum erro! Verifique o formulário e tente novamente. Caso o erro persista, por favor, reporte em https://github.com/WikiMovimentoBrasil/wikiusos/issues') }}";
+
+            $.ajax({
+                url: "/send_file",
+                type: "POST",
+                data: formData,
+                success: function (response) {
+                    alert(response)
+                },
+                error: function () {
+                    alert(error)
+                },
+                cache: false,
+                contentType: false,
+                processData: false
+            });
+        });
+
+        $(document).ready(function () {
+            $('.owl-item.active .owl-lazy.image_item')
+                .parent()
+                .zoom();
+        })
+
+        $('.owl-lazy.image_item').hover(function () {
+            $(this)
+                .parent()
+                .zoom();
+        })
+
+        $('.owl-carousel').owlCarousel({
+            items: 1,
+            lazyLoad: true,
+            loop: true,
+            margin: 10,
+            nav: true,
+            navText: ['<i class="fa fa-angle-left" aria-hidden="true"></i>', '<i class="fa fa-angle-right" aria-hidden="true"></i>']
+        });
+
+        $(document).ready(function () {
+            $('[data-toggle="popover"]').popover({html: true});
+        });
+
+        $('#adicionar_declaracoes, #coroa_container, #cor_coroa_container, #campo_container, #campo_divisao_container, #campo_cor_container, #figuras_container, #suportes_container, #paquife_container, #paquife_cor_container, #lema_container').hide();
+
+        $('#brasao').change(function () {
+            var selected = $('#brasao option:selected').val();
+            $('#adicionar_declaracoes, #coroa_container, #campo_container, #figuras_container, #suportes_container, #paquife_container, #lema_container').toggle(selected != "no");
+        })
+
+        $('#coroa').change(function () {
+            var selected = $('#coroa option:selected').val();
+            $('#cor_coroa_container').toggle(selected != "no");
+        })
+
+        $('#campo').change(function () {
+            var selected = $('#campo option:selected').val();
+            $('#campo_divisao_container, #campo_cor_container').toggle(selected != "no");
+        })
+
+        $('#paquife').change(function () {
+            var selected = $('#paquife option:selected').val();
+            $('#paquife_cor_container').toggle(selected != "no");
+        })
+    </script>
+{% endblock %}

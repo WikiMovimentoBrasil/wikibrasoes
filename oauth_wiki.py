@@ -2,7 +2,7 @@ from flask import current_app, session
 from requests_oauthlib import OAuth1Session
 from urllib.parse import urlencode
 
-project = "https://commons.wikimedia.org/w/api.php?"
+project = "https://www.wikidata.org/w/api.php?"
 
 
 def raw_request(params):
@@ -17,7 +17,7 @@ def raw_request(params):
     return oauth.get(url, timeout=4)
 
 
-def raw_post_request(files, params):
+def raw_post_request(params):
     app = current_app
     url = project
     client_key = app.config['CONSUMER_KEY']
@@ -26,7 +26,7 @@ def raw_post_request(files, params):
                           client_secret=client_secret,
                           resource_owner_key=session['owner_key'],
                           resource_owner_secret=session['owner_secret'])
-    return oauth.post(url, files=files, data=params, timeout=4)
+    return oauth.post(url, data=params, timeout=4)
 
 
 def api_request(params):

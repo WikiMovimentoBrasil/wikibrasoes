@@ -178,6 +178,25 @@ def post_search_entity(term, lang="pt-br"):
     return data
 
 
+def post_search_query(term, lang="pt-br"):
+    url = 'https://www.wikidata.org/w/api.php'
+    params = {
+        'action': 'query',
+        'list': 'search',
+        'srprop': '',
+        'srsearch': term + ' heraldry',
+        'format': 'json',
+        'srlimit': 50,
+        'uselang': lang,
+    }
+    result = requests.get(url=url, params=params, headers={'User-agent': 'Wikibrasoes 1.0'})
+    data = result.json()
+
+    if "query" in data:
+        return data["query"]
+    return data
+
+
 def filter_by_instancia(qids, lang="pt-br"):
     if lang == "pt-br" or lang == "pt":
         lang = "pt-br,pt"
@@ -219,32 +238,17 @@ def query_quantidade(query):
     return valor
 
 
-def filter_by_category(data, cat):
-    qids = "wd:" + " wd:".join([x["id"] for x in data["search"]])
+def get_labels(data):
     filtered_items = []
 
-    categories = {
-        "Elementos da natureza": "SELECT DISTINCT ?item (SAMPLE(STR(?itemLabelptbr)) AS ?labelptbr) (SAMPLE(STR(?itemDescriptionptbr)) AS ?descrptbr) (SAMPLE(STR(?itemLabelpt)) AS ?labelpt) (SAMPLE(STR(?itemDescriptionpt)) AS ?descrpt) (SAMPLE(STR(?itemLabelen)) AS ?labelen) (SAMPLE(STR(?itemDescriptionen)) AS ?descren) WITH { SELECT DISTINCT ?item WHERE { VALUES ?item {" + qids + "} { ?item wdt:P31 wd:Q16521. } UNION { ?item (wdt:P279/(wdt:P279*)) wd:Q16521. } UNION { ?item (wdt:P279/wdt:P31) wd:Q55983715. } UNION { ?item wdt:P31 wd:Q55983715. } UNION { ?item wdt:P31 wd:Q16521. } UNION { ?item (wdt:P31/wdt:P279) wd:Q38829. } UNION {?item wdt:P31 wd:Q12089225.} UNION {?item wdt:P279/wdt:P31* wd:Q12089225.} UNION {?item wdt:P279/wdt:P279* wd:Q8063.} UNION {?item wdt:P361 wd:Q764.}}} AS %items WHERE { INCLUDE %items. OPTIONAL{?item rdfs:label ?itemLabelptbr. FILTER(LANG(?itemLabelptbr)='pt-br')} OPTIONAL{?item schema:description ?itemDescriptionptbr. FILTER(LANG(?itemDescriptionptbr)='pt-br')} OPTIONAL{?item rdfs:label ?itemLabelpt. FILTER(LANG(?itemLabelpt)='pt')} OPTIONAL{?item schema:description ?itemDescriptionpt. FILTER(LANG(?itemDescriptionpt)='pt')} OPTIONAL{?item rdfs:label ?itemLabelen. FILTER(LANG(?itemLabelen)='en')} OPTIONAL{?item schema:description ?itemDescriptionen. FILTER(LANG(?itemDescriptionen)='en')}} GROUP BY ?item",
-        "Ornamentos arquitetônicos": "SELECT DISTINCT ?item (SAMPLE(STR(?itemLabelptbr)) AS ?labelptbr) (SAMPLE(STR(?itemDescriptionptbr)) AS ?descrptbr) (SAMPLE(STR(?itemLabelpt)) AS ?labelpt) (SAMPLE(STR(?itemDescriptionpt)) AS ?descrpt) (SAMPLE(STR(?itemLabelen)) AS ?labelen) (SAMPLE(STR(?itemDescriptionen)) AS ?descren) WITH { SELECT DISTINCT ?item WHERE { VALUES ?item {" + qids + "} {?item wdt:P279? wd:Q183272.} UNION {?item wdt:P279? wd:Q12277.} UNION {?item wdt:P279/wdt:P279* wd:Q391414.}}} AS %items WHERE { INCLUDE %items. OPTIONAL{?item rdfs:label ?itemLabelptbr. FILTER(LANG(?itemLabelptbr)='pt-br')} OPTIONAL{?item schema:description ?itemDescriptionptbr. FILTER(LANG(?itemDescriptionptbr)='pt-br')} OPTIONAL{?item rdfs:label ?itemLabelpt. FILTER(LANG(?itemLabelpt)='pt')} OPTIONAL{?item schema:description ?itemDescriptionpt. FILTER(LANG(?itemDescriptionpt)='pt')} OPTIONAL{?item rdfs:label ?itemLabelen. FILTER(LANG(?itemLabelen)='en')} OPTIONAL{?item schema:description ?itemDescriptionen. FILTER(LANG(?itemDescriptionen)='en')}} GROUP BY ?item",
-        "Seres mitológicos": "SELECT DISTINCT ?item (SAMPLE(STR(?itemLabelptbr)) AS ?labelptbr) (SAMPLE(STR(?itemDescriptionptbr)) AS ?descrptbr) (SAMPLE(STR(?itemLabelpt)) AS ?labelpt) (SAMPLE(STR(?itemDescriptionpt)) AS ?descrpt) (SAMPLE(STR(?itemLabelen)) AS ?labelen) (SAMPLE(STR(?itemDescriptionen)) AS ?descren) WITH {SELECT DISTINCT ?item WHERE { VALUES ?item {" + qids + "} {?item wdt:P31/wdt:P279* wd:Q21070598.} UNION {?item wdt:P31/wdt:P279* wd:Q24334685.} UNION {?item wdt:P31/wdt:P279* wd:Q95074.}}} AS %items WHERE { INCLUDE %items. OPTIONAL{?item rdfs:label ?itemLabelptbr. FILTER(LANG(?itemLabelptbr)='pt-br')} OPTIONAL{?item schema:description ?itemDescriptionptbr. FILTER(LANG(?itemDescriptionptbr)='pt-br')} OPTIONAL{?item rdfs:label ?itemLabelpt. FILTER(LANG(?itemLabelpt)='pt')} OPTIONAL{?item schema:description ?itemDescriptionpt. FILTER(LANG(?itemDescriptionpt)='pt')} OPTIONAL{?item rdfs:label ?itemLabelen. FILTER(LANG(?itemLabelen)='en')} OPTIONAL{?item schema:description ?itemDescriptionen. FILTER(LANG(?itemDescriptionen)='en')}} GROUP BY ?item",
-        "Transporte": "SELECT DISTINCT ?item (SAMPLE(STR(?itemLabelptbr)) AS ?labelptbr) (SAMPLE(STR(?itemDescriptionptbr)) AS ?descrptbr) (SAMPLE(STR(?itemLabelpt)) AS ?labelpt) (SAMPLE(STR(?itemDescriptionpt)) AS ?descrpt) (SAMPLE(STR(?itemLabelen)) AS ?labelen) (SAMPLE(STR(?itemDescriptionen)) AS ?descren) WITH { SELECT DISTINCT ?item WHERE { VALUES ?item {" + qids + "} {?item wdt:P279* wd:Q334166.} UNION {?item wdt:P31/wdt:P279* wd:Q334166} UNION {?item wdt:P279/wdt:P31 wd:Q334166}}} AS %items WHERE { INCLUDE %items. OPTIONAL{?item rdfs:label ?itemLabelptbr. FILTER(LANG(?itemLabelptbr)='pt-br')} OPTIONAL{?item schema:description ?itemDescriptionptbr. FILTER(LANG(?itemDescriptionptbr)='pt-br')} OPTIONAL{?item rdfs:label ?itemLabelpt. FILTER(LANG(?itemLabelpt)='pt')} OPTIONAL{?item schema:description ?itemDescriptionpt. FILTER(LANG(?itemDescriptionpt)='pt')} OPTIONAL{?item rdfs:label ?itemLabelen. FILTER(LANG(?itemLabelen)='en')} OPTIONAL{?item schema:description ?itemDescriptionen. FILTER(LANG(?itemDescriptionen)='en')}} GROUP BY ?item",
-        "Outros": "SELECT DISTINCT ?item (SAMPLE(STR(?itemLabelptbr)) AS ?labelptbr) (SAMPLE(STR(?itemDescriptionptbr)) AS ?descrptbr) (SAMPLE(STR(?itemLabelpt)) AS ?labelpt) (SAMPLE(STR(?itemDescriptionpt)) AS ?descrpt) (SAMPLE(STR(?itemLabelen)) AS ?labelen) (SAMPLE(STR(?itemDescriptionen)) AS ?descren) WITH { SELECT DISTINCT ?item WHERE { VALUES ?item {" + qids + "} } } AS %items WHERE { INCLUDE %items. OPTIONAL{?item rdfs:label ?itemLabelptbr. FILTER(LANG(?itemLabelptbr)='pt-br')} OPTIONAL{?item schema:description ?itemDescriptionptbr. FILTER(LANG(?itemDescriptionptbr)='pt-br')} OPTIONAL{?item rdfs:label ?itemLabelpt. FILTER(LANG(?itemLabelpt)='pt')} OPTIONAL{?item schema:description ?itemDescriptionpt. FILTER(LANG(?itemDescriptionpt)='pt')} OPTIONAL{?item rdfs:label ?itemLabelen. FILTER(LANG(?itemLabelen)='en')} OPTIONAL{?item schema:description ?itemDescriptionen. FILTER(LANG(?itemDescriptionen)='en')}} GROUP BY ?item"
-        # "Cabelos, barbas e bigodes": "SELECT DISTINCT ?item WHERE { VALUES ?item {" + qids + "} {?item_ wdt:P8839 ?item.} UNION {?item wdt:P31|wdt:P279* wd:Q327496.} UNION {?item wdt:P31|wdt:P279* wd:Q42804.} UNION {?item wdt:P31|wdt:P279* wd:Q15179.} }",
-    }
+    if "search" in data and len(data["search"]) > 0:
+        qids = "wd:" + " wd:".join([x["title"] for x in data["search"]])
 
-    if cat in categories:
-        _filter = query_wikidata(categories[cat])
+        query = "SELECT DISTINCT ?item (SAMPLE(STR(?itemLabelptbr)) AS ?labelptbr) (SAMPLE(STR(?itemDescriptionptbr)) AS ?descrptbr) (SAMPLE(STR(?itemLabelpt)) AS ?labelpt) (SAMPLE(STR(?itemDescriptionpt)) AS ?descrpt) (SAMPLE(STR(?itemLabelen)) AS ?labelen) (SAMPLE(STR(?itemDescriptionen)) AS ?descren) WITH { SELECT DISTINCT ?item WHERE { VALUES ?item {" + qids + "} } } AS %items WHERE { INCLUDE %items. OPTIONAL{?item rdfs:label ?itemLabelptbr. FILTER(LANG(?itemLabelptbr)='pt-br')} OPTIONAL{?item schema:description ?itemDescriptionptbr. FILTER(LANG(?itemDescriptionptbr)='pt-br')} OPTIONAL{?item rdfs:label ?itemLabelpt. FILTER(LANG(?itemLabelpt)='pt')} OPTIONAL{?item schema:description ?itemDescriptionpt. FILTER(LANG(?itemDescriptionpt)='pt')} OPTIONAL{?item rdfs:label ?itemLabelen. FILTER(LANG(?itemLabelen)='en')} OPTIONAL{?item schema:description ?itemDescriptionen. FILTER(LANG(?itemDescriptionen)='en')}} GROUP BY ?item"
+
+        _filter = query_wikidata(query)
         results = _filter["results"]["bindings"]
         filtered_items = extract_items(results)
-    else:
-        filtered_items = [{"id": x["id"],
-                           "labelptbr": x["label"] if "label" in x else "",
-                           "labelpt": x["label"] if "label" in x else "",
-                           "labelen": x["label"] if "label" in x else "",
-                           "descrptbr": x["description"] if "description" in x else "",
-                           "descrpt": x["description"] if "description" in x else "",
-                           "descren": x["description"] if "description" in x else ""} for x in data["search"]]
-    # new_data = [search_result for search_result in data["search"] if search_result["id"] in filtered_items]
 
     return filtered_items
 

@@ -21,24 +21,16 @@
             {% if category_images|length > 0 %}
                 <div class="owl-carousel owl-theme">
                     <span class="img_span" style="display: inline-block; position: relative; overflow: hidden;">
-                        <img style="display: block" class="owl-lazy image_item" alt="
-
-
-
-
-
-                                {% if metadata.obra_label[0] %}{{ metadata.obra_label[0] }}{% else %}{{ metadata.obra_qid[0] }}{% endif %} - {{ category_images[0] }}"
+                        <img style="display: block" class="owl-lazy image_item"
+                             alt="{% if metadata.obra_label[0] %}{{ metadata.obra_label[0] }}
+{% else %}{{ metadata.obra_qid[0] }}{% endif %} - {{ category_images[0] }}"
                              data-src="https://commons.wikimedia.org/wiki/Special:FilePath/{{ category_images[0] }}?width=2000px">
                     </span>
                     {% for imagem_categoria in category_images[1:] %}
                         <span class="img_span" style="display: inline-block; position: relative; overflow: hidden;">
-                            <img class="owl-lazy image_item" alt="
-
-
-
-
-
-                                    {% if metadata.obra_label[0] %}{{ metadata.obra_label[0] }}{% else %}{{ metadata.obra_qid[0] }}{% endif %} - {{ imagem_categoria }}"
+                            <img class="owl-lazy image_item"
+                                 alt="{% if metadata.obra_label[0] %}{{ metadata.obra_label[0] }}
+{% else %}{{ metadata.obra_qid[0] }}{% endif %} - {{ imagem_categoria }}"
                                  data-src="https://commons.wikimedia.org/wiki/Special:FilePath/{{ imagem_categoria }}?width=2000px">
                         </span>
                     {% endfor %}
@@ -49,13 +41,9 @@
             {% else %}
                 <div class="owl-carousel owl-theme">
                     <span class="img_span" style="display: inline-block; position: relative; overflow: hidden;">
-                        <img style="display: block;max-width: 100%" class="owl-lazy image_item" alt="
-
-
-
-
-
-                                {% if metadata.obra_label[0] %}{{ metadata.obra_label[0] }}{% else %}{{ metadata.obra_qid[0] }}{% endif %}"
+                        <img style="display: block;max-width: 100%" class="owl-lazy image_item"
+                             alt="{% if metadata.obra_label[0] %}{{ metadata.obra_label[0] }}
+{% else %}{{ metadata.obra_qid[0] }}{% endif %}"
                              data-src="https://commons.wikimedia.org/wiki/Special:FilePath/{{ metadata.imagem[0] }}?width=2000px">
                     </span>
                 </div>
@@ -189,15 +177,15 @@
                     {{ _("Faça a sua autenticação clicando no botão 'Autenticar-se' no canto superior direito") }}
                 </h2>
             {% endif %}
-            <form id="brasao_form" method="post" enctype="multipart/form-data"
+            <form id="brasao_form" method="post" action="{{ url_for("send_brasao") }}"
                   style="overflow: hidden; font-size: 125%; width: 100%; table-layout: fixed; overflow-wrap: break-word;">
-                {# action="{{ url_for("item", qid=qid) }}" #}
-                <div class="w3-container w3-row" id="brasao_container" style="padding: 0.75rem;">
+                <input type="hidden" name="qid" value="{{ qid }}">
+                <div class="w3-container w3-row stripped0" id="brasao_container">
                     <div class="w3-container">
                         {{ _("Você consegue identificar na lista qual o brasão retratado?") }}
                     </div>
                     <div class="w3-container">
-                        <select id='brasao' style="width:100%; height: 2em">
+                        <select id='brasao' name="brasao" style="width:100%; height: 2em">
                             <option value="no" selected>{{ _("--Selecione uma opção--") }}</option>
                             <option value="no">{{ _("Não") }}</option>
                             {% for brasao in brasoes %}
@@ -207,12 +195,15 @@
                     </div>
                 </div>
                 {# COROA #}
-                <div class="w3-container w3-row" id="coroa_container" style="background-color:rgba(0,0,0,.05); padding: 0.75rem;">
+                <div class="w3-container w3-row stripped1" id="coroa_container">
                     <div class="w3-container">
-                        {{ _("Este brasão possui uma coroa? Se sim, identifique o tipo:") }}
+                        {{ _("Este brasão possui uma <a target='_blank' href='https://pt.wikipedia.org/wiki/Coroa_(heráldica)'>coroa</a>?") }} {{ _("Se sim, identifique o tipo:") }}<sup><a
+                            href='' onclick='return false;' style='font-size: 60%' data-toggle='popover'
+                            data-trigger='focus'
+                            data-content='Uma coroa, coronel ou diadema é um anel de metal ornamentado que identifica a posição nobiliárquica do detentor do brasão.'>&#9432;</a></sup>
                     </div>
                     <div class="w3-container">
-                        <select id='coroa' style="width:100%; height: 2em">
+                        <select id='coroa' name="coroa" style="width:100%; height: 2em">
                             <option value="no" selected>{{ _("--Selecione uma opção--") }}</option>
                             {% for crown in crowns %}
                                 <option value="{{ crown.qid }}">{{ crown.label }}</option>
@@ -220,12 +211,99 @@
                         </select>
                     </div>
                 </div>
-                <div class="w3-container w3-row" id="cor_coroa_container" style="background-color:rgba(0,0,0,.05); padding: 0.75rem;">
+                <div class="w3-container w3-row stripped1" id="cor_coroa_container">
                     <div class="w3-container">
-                        {{ _("Cor da coroa:") }}
+                        {{ _("<a target='_blank' href='https://pt.wikipedia.org/wiki/Esmalte_(heráldica)'>Cor</a> da coroa:") }}<sup><a
+                            href='' onclick='return false;' style='font-size: 60%' data-toggle='popover'
+                            data-trigger='focus'
+                            data-content='Em heráldica, cores, ou esmaltes são colorações de diversos elementos de um brasão. São tradicionalmente divididas em <i>metais</i>, <i>cores</i>, <i>peles</i> e <i>cores naturais</i>.'>&#9432;</a></sup>
                     </div>
                     <div class="w3-container">
-                        <select id='coroa_cor' style="width:100%; height: 2em">
+                        <select id='coroa_cor' name="coroa_cor" style="width:100%; height: 2em">
+                            <option value="no" selected>{{ _("--Selecione uma opção--") }}</option>
+                            {% for cor in colors %}
+                                <option value="{{ cor.qid }}">{{ cor.label }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                {# ELMO #}
+                <div class="w3-container w3-row stripped0" id="elmo_container">
+                    <div class="w3-container">
+                        {{ _("O brasão possui <a target='_blank' href='https://pt.wikipedia.org/wiki/Elmo_(heráldica)'>elmo</a>?") }}<sup><a
+                            href='' onclick='return false;' style='font-size: 60%' data-toggle='popover'
+                            data-trigger='focus'
+                            data-content='Elmo é um equipamento de proteção para a cabeça. Em heráldica, posiciona-se acima do escudo e serve de base para o virol e o timbre.'>&#9432;</a></sup>
+                    </div>
+                    <div class="w3-container">
+                        <select id='elmo' name="elmo" style="width:100%; height: 2em">
+                            <option value="no" selected>{{ _("Não") }}</option>
+                            <option value="yes">{{ _("Sim") }}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="w3-container w3-row stripped0" id="elmo_cor_container">
+                    <div class="w3-container">
+                        {{ _("Cor(es) do elmo:") }}
+                    </div>
+                    <div class="w3-container">
+                        <select multiple id='elmo_cor' name="elmo_cor" style="width:100%">
+                            <option value="no" selected>{{ _("--Selecione uma opção--") }}</option>
+                            {% for cor in colors %}
+                                <option value="{{ cor.qid }}">{{ cor.label }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                {# PAQUIFE #}
+                <div class="w3-container w3-row stripped1" id="paquife_container">
+                    <div class="w3-container">
+                        {{ _("O brasão possui <a target='_blank' href='https://pt.wikipedia.org/wiki/Paquife'>paquife</a>?") }}<sup><a
+                            href='' onclick='return false;' style='font-size: 60%' data-toggle='popover'
+                            data-trigger='focus'
+                            data-content='Paquife é o desenho de um manto, capa, plumagem ou folhagem ao redor de um escudo, saindo do elmo.'>&#9432;</a></sup>
+                    </div>
+                    <div class="w3-container">
+                        <select id='paquife' name="paquife" style="width:100%; height: 2em">
+                            <option value="no" selected>{{ _("Não") }}</option>
+                            <option value="yes">{{ _("Sim") }}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="w3-container w3-row stripped1" id="paquife_cor_container">
+                    <div class="w3-container">
+                        {{ _("Cor(es) do paquife:") }}
+                    </div>
+                    <div class="w3-container">
+                        <select multiple id='paquife_cor' name="paquife_cor" style="width:100%">
+                            <option value="no" selected>{{ _("--Selecione uma opção--") }}</option>
+                            {% for cor in colors %}
+                                <option value="{{ cor.qid }}">{{ cor.label }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                {# VIROL #}
+                <div class="w3-container w3-row stripped0" id="virol_container">
+                    <div class="w3-container">
+                        {{ _("O brasão possui <a target='_blank' href='https://pt.wikipedia.org/wiki/Virol'>virol</a>?") }}<sup><a
+                            href='' onclick='return false;' style='font-size: 60%' data-toggle='popover'
+                            data-trigger='focus'
+                            data-content='O virol é uma peça de tecido torcido localizada entre o elmo e o timbre. Tinha a função de manter o paquife no lugar correto.'>&#9432;</a></sup>
+                    </div>
+                    <div class="w3-container">
+                        <select id='virol' name="virol" style="width:100%; height: 2em">
+                            <option value="no" selected>{{ _("Não") }}</option>
+                            <option value="yes">{{ _("Sim") }}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="w3-container w3-row stripped0" id="virol_cor_container">
+                    <div class="w3-container">
+                        {{ _("Cor(es) do virol:") }}
+                    </div>
+                    <div class="w3-container">
+                        <select multiple id='virol_cor' name="virol_cor" style="width:100%">
                             <option value="no" selected>{{ _("--Selecione uma opção--") }}</option>
                             {% for cor in colors %}
                                 <option value="{{ cor.qid }}">{{ cor.label }}</option>
@@ -234,23 +312,29 @@
                     </div>
                 </div>
                 {# CAMPO #}
-                <div class="w3-container w3-row" id="campo_container" style="padding: 0.75rem;">
+                <div class="w3-container w3-row stripped1" id="campo_container">
                     <div class="w3-container">
-                        {{ _("O campo está dividido?") }}
+                        {{ _("O <a target='_blank' href='https://pt.wikipedia.org/wiki/Campo_(heráldica)'>campo</a> está dividido?") }}<sup><a
+                            href='' onclick='return false;' style='font-size: 60%' data-toggle='popover'
+                            data-trigger='focus'
+                            data-content='Em heráldica, o campo é o plano de fundo do brasão, que pode ser dividido e receber cores distintas.'>&#9432;</a></sup>
                     </div>
                     <div class="w3-container">
-                        <select id='campo' style="width:100%; height: 2em">
+                        <select id='campo' name="campo" style="width:100%; height: 2em">
                             <option value="no" selected>{{ _("Não") }}</option>
                             <option value="yes">{{ _("Sim") }}</option>
                         </select>
                     </div>
                 </div>
-                <div class="w3-container w3-row" id="campo_divisao_container" style="padding: 0.75rem;">
+                <div class="w3-container w3-row stripped1" id="campo_divisao_container">
                     <div class="w3-container">
-                        {{ _("Como está dividido o campo do escudo?") }}
+                        {{ _("Como está <a target='_blank' href='https://pt.wikipedia.org/wiki/Partições_do_campo_(heráldica)'>dividido</a> o campo do escudo?") }}<sup><a
+                            href='' onclick='return false;' style='font-size: 60%' data-toggle='popover'
+                            data-trigger='focus'
+                            data-content='O campo de um brasão pode ser dividido de diversas maneiras. Estas divisões também podem ser redivididas. Cada tipo de divisão tem um nome específico.'>&#9432;</a></sup>
                     </div>
                     <div class="w3-container">
-                        <select multiple id='divisao' style="width:100%">
+                        <select multiple id='divisao' name="divisao" style="width:100%">
                             <option value="no" selected>{{ _("--Selecione ao menos uma opção--") }}</option>
                             {% for partition in partitions %}
                                 <option value="{{ partition.qid }}">{{ partition.label }}</option>
@@ -258,12 +342,15 @@
                         </select>
                     </div>
                 </div>
-                <div class="w3-container w3-row" id="campo_cor_container" style="padding: 0.75rem;">
+                <div class="w3-container w3-row stripped1" id="campo_cor_container">
                     <div class="w3-container">
-                        {{ _("Cor(es) do campo:") }}
+                        {{ _("<a target='_blank' href='https://pt.wikipedia.org/wiki/Esmalte_(heráldica)'>Cor</a> do campo:") }}<sup><a
+                            href='' onclick='return false;' style='font-size: 60%' data-toggle='popover'
+                            data-trigger='focus'
+                            data-content='Em heráldica, cores, ou esmaltes são colorações de diversos elementos de um brasão. São tradicionalmente divididas em <i>metais</i>, <i>cores</i>, <i>peles</i> e <i>cores naturais</i>.'>&#9432;</a></sup>
                     </div>
                     <div class="w3-container">
-                        <select multiple id='campo_cor' style="width:100%">
+                        <select multiple id='campo_cor' name="campo_cor" style="width:100%">
                             <option value="no" selected>{{ _("--Selecione uma opção--") }}</option>
                             {% for cor in colors %}
                                 <option value="{{ cor.qid }}">{{ cor.label }}</option>
@@ -272,76 +359,84 @@
                     </div>
                 </div>
                 {# FIGURAS #}
-                <div class="w3-container w3-row" id="figuras_container" style="background-color:rgba(0,0,0,.05); padding: 0.75rem;">
-                    <div class="w3-container">
-                        {{ _("Quais são as figuras heráldicas retratadas?") }}
-                    </div>
-                    <div class="w3-container w3-half">
-                        <div id="figuras"></div>
-                        <a class="button" title="{{ _('Adicionar figura') }}">
-                            <button type="button" class="button" data-toggle="modal"
-                                    data-qid="{{ metadata.obra_qid[0] }}" data-instance="figura" data-target="#addModal"
-                                    style="background-color:#008000;margin: 0; width:100%;font-size: 100%;padding:10px">
-                                {{ _("Adicionar") }}
-                            </button>
-                        </a>
-                    </div>
-                </div>
+{#                <div class="w3-container w3-row stripped0" id="figuras_container">#}
+{#                    <div class="w3-container">#}
+{#                        {{ _("Quais são as <a target='_blank' href='https://pt.wikipedia.org/wiki/Figuras_(heráldica)'>figuras heráldicas</a> retratadas?") }}<sup><a#}
+{#                            href='' onclick='return false;' style='font-size: 60%' data-toggle='popover'#}
+{#                            data-trigger='focus'#}
+{#                            data-content='Figuras heráldicas são todos e quaisquer elementos que se encontrem dentro do brasão.'>&#9432;</a></sup>#}
+{#                    </div>#}
+{#                    <div class="w3-container w3-half">#}
+{#                        <button type="button" class="button" data-toggle="modal"#}
+{#                                data-instance="figura" data-target="#addModal"#}
+{#                                style="background-color:#008000;margin: 0; width:100%;font-size: 100%;padding:10px">#}
+{#                            {{ _("Adicionar") }}#}
+{#                        </button>#}
+{#                    </div>#}
+{#                    <div class="w3-container w3-half" id="figura_list" style="padding:0; display: none" ></div>#}
+{#                </div>#}
                 {# SUPORTES #}
-                <div class="w3-container w3-row" id="suportes_container" style="padding: 0.75rem;">
+{#                <div class="w3-container w3-row stripped1" id="suportes_container">#}
+{#                    <div class="w3-container">#}
+{#                        {{ _("O brasão possui <a target='_blank' href='https://pt.wikipedia.org/wiki/Suporte_(heráldica)'>suportes ou tenentes</a>?") }} {{ _("Se sim, indique-os.") }}<sup><a#}
+{#                            href='' onclick='return false;' style='font-size: 60%' data-toggle='popover'#}
+{#                            data-trigger='focus'#}
+{#                            data-content='Suportes são elementos que sustentam o escudo do brasão. São divididos entre <i>tenentes</i> (figuras humanas) e <i>suportes</i> (figuras não humanas)'>&#9432;</a></sup>#}
+{#                    </div>#}
+{#                    <div class="w3-container w3-half">#}
+{#                        <button type="button" class="button" data-toggle="modal"#}
+{#                                data-instance="suporte" data-target="#addModal"#}
+{#                                style="background-color:#008000;margin: 0; width:100%;font-size: 100%;padding:10px">#}
+{#                            {{ _("Adicionar") }}#}
+{#                        </button>#}
+{#                    </div>#}
+{#                    <div class="w3-container w3-half" id="suporte_list" style="padding:0; display: none"></div>#}
+{#                </div>#}
+                {# TIMBRE #}
+{#                <div class="w3-container w3-row stripped0" id="timbre_container">#}
+{#                    <div class="w3-container">#}
+{#                        {{ _("O brasão possui <a target='_blank' href='https://pt.wikipedia.org/wiki/Timbre_(heráldica)'>timbre(s)</a>?") }} {{ _("Se sim, indique-o(s).") }}<sup><a#}
+{#                            href='' onclick='return false;' style='font-size: 60%' data-toggle='popover'#}
+{#                            data-trigger='focus'#}
+{#                            data-content='Timbre é uma figura colocada sobre o elmo e o virol que serve tanto para distinguir os detentores dos brasões entre si quanto para marcar seus graus de nobreza.'>&#9432;</a></sup>#}
+{#                    </div>#}
+{#                    <div class="w3-container w3-half">#}
+{#                        <button type="button" class="button" data-toggle="modal"#}
+{#                                data-instance="timbre" data-target="#addModal"#}
+{#                                style="background-color:#008000;margin: 0; width:100%;font-size: 100%;padding:10px">#}
+{#                            {{ _("Adicionar") }}#}
+{#                        </button>#}
+{#                    </div>#}
+{#                    <div class="w3-container" id="timbre_list" style="padding:0; display: none"></div>#}
+{#                </div>#}
+                {# LEMA #}
+                <div class="w3-container w3-row stripped1" id="lema_container">
                     <div class="w3-container">
-                        {{ _("O brasão possui suportes ou tenentes? Se sim, indique-os.") }}
+                        {{ _("O brasão possui um <a target='_blank' href='https://pt.wikipedia.org/wiki/Lema'>lema</a>?") }} {{ _("Se sim, escreva-o abaixo:") }}<sup><a
+                            href='' onclick='return false;' style='font-size: 60%' data-toggle='popover'
+                            data-trigger='focus'
+                            data-content='Lema, mote ou moto é uma frase, uma ideia ou um grupo de conceitos que representam o detentor do brasão.'>&#9432;</a></sup>
                     </div>
-                    <div class="w3-container w3-half">
-                        <div id="suportes"></div>
-                        <a class="button" title="{{ _('Adicionar suporte') }}">
-                            <button type="button" class="button" data-toggle="modal"
-                                    data-qid="{{ metadata.obra_qid[0] }}" data-instance="suporte" data-target="#addModal"
-                                    style="background-color:#008000;margin: 0; width:100%;font-size: 100%;padding:10px">
-                                {{ _("Adicionar") }}
-                            </button>
-                        </a>
+                    <div class="w3-container">
+                        <input id="lema" name="lema" type="text" maxlength="1490" style="width: 100%"/>
                     </div>
                 </div>
-                {# PAQUIFE #}
-                <div class="w3-container w3-row" id="paquife_container" style="background-color:rgba(0,0,0,.05); padding: 0.75rem;">
+                <div class="w3-container w3-row stripped1" id="lema_lang_container">
                     <div class="w3-container">
-                        {{ _("O brasão possui paquife?") }}
+                        {{ _("Se o brasão possui um lema, em qual idioma está escrito?") }}
                     </div>
                     <div class="w3-container">
-                        <select id='paquife' style="width:100%; height: 2em">
-                            <option value="no" selected>{{ _("Não") }}</option>
-                            <option value="yes">{{ _("Sim") }}</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="w3-container w3-row" id="paquife_cor_container" style="background-color:rgba(0,0,0,.05); padding: 0.75rem;">
-                    <div class="w3-container">
-                        {{ _("Cor(es) do paquife:") }}
-                    </div>
-                    <div class="w3-container">
-                        <select multiple id='paquife_cor' style="width:100%">
-                            <option value="no" selected>{{ _("--Selecione uma opção--") }}</option>
-                            {% for cor in colors %}
-                                <option value="{{ cor.qid }}">{{ cor.label }}</option>
+                        <select id='lema_lang' name="lema_lang" style="width:100%; height: 2em">
+                            {% for language in languages %}
+                                <option value="{{ language.qid }}">{{ language.label }}</option>
                             {% endfor %}
                         </select>
-                    </div>
-                </div>
-                {# LEMA #}
-                <div class="w3-container w3-row" id="lema_container" style="padding: 0.75rem;">
-                    <div class="w3-container">
-                        {{ _("Lema:") }}
-                    </div>
-                    <div class="w3-container">
-                        <input id="lema" type="text" maxlength="1490" style="width: 100%"/>
                     </div>
                 </div>
             </form>
             <div id="add" class="w3-container" style="justify-content: center;">
                 <a class="button" id="adicionar_declaracoes" tabindex="0" title="{{ _('Adicionar') }}">
-                    <button type="button" class="button" data-toggle="modal"
-                            data-qid="{{ metadata.obra_qid[0] }}" data-target="#sendModal"
+                    <button type="submit" form="brasao_form" id="sendbrasao" class="button"
                             style="background-color:#008000;width:100%;margin:10px 0 0 0">
                         {{ _("ADICIONAR") }}
                     </button>
@@ -367,31 +462,259 @@
             {% endif %}
         </div>
     </div>
+    <div class="modal" id="addModal">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title"></h3>
+                    <button type="button" class="close" data-dismiss="modal" style="font-size:125%; ">&times;
+                    </button>
+                </div>
+                <div class="modal-body">
+{#                    <div class="w3-container" style="padding:0 0 16px 0;font-size: 115%">#}
+{#                        {{ _("Teste") }}#}
+{#                    </div>#}
+                    <div class="w3-container" style="padding:0 0 16px 0">
+                        <div class="form-inline">
+                            <input type="search" class="form-control" placeholder="{{ _('Pesquise') }}"
+                                   id="search_field"
+                                   style="font-size: 125%;width:90%">
+                            <button id="do_the_search" type="submit"
+                                    style="font-size: 100%;margin:0;width:10%;padding:10px"><i class="fa fa-search"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="w3-container" id="select_instruction" style="display:none; padding:0 0 16px 0;font-size: 125%">
+                        {{ _("Selecione uma opção:") }}
+                    </div>
+                    <div class="w3-container" style="padding:0">
+                        <form id="search_results"></form>
+                    </div>
+                    <div class="w3-container" id="quantidade_container" style="display:none;padding:0 0 16px 0;font-size: 125%">
+                        {{ _("Indique a quantidade:") }}
+                        <br>
+                        <input type="number" class="form-control" id="quantidade"
+                               min="1" step="1" placeholder="{{ _('Quantidade') }}"
+                               style="font-size: 100%;width:100%">
+                    </div>
+                    <div class="w3-container" id="elemento_cor_container" style="display:none;padding:0;font-size: 125%;">
+                        {{ _("<a target='_blank' href='https://pt.wikipedia.org/wiki/Esmalte_(heráldica)'>Cor(es)</a>:") }}<sup><a
+                            href='' onclick='return false;' style='font-size: 60%' data-toggle='popover'
+                            data-trigger='focus'
+                            data-content='Em heráldica, cores, ou esmaltes são colorações de diversos elementos de um brasão. São tradicionalmente divididas em <i>metais</i>, <i>cores</i>, <i>peles</i> e <i>cores naturais</i>.'>&#9432;</a></sup>
+                        <br>
+                        <select multiple id='element_cor' name="element_cor" style="width:100%;height: 6em">
+                            <option value="no" selected>{{ _("--Selecione uma opção--") }}</option>
+                            {% for cor in colors %}
+                                <option value="{{ cor.qid }}">{{ cor.label }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer" id="secondModal">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                            style="font-size:125%; ">{{ _("Cancelar") }}</button>
+                    <button type="button" id="addstatement" class="btn btn-primary"
+                            style="font-size:125%; background-color: #0068a3"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal" id="editModal">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title"></h3>
+                    <button type="button" class="close" data-dismiss="modal" style="font-size:125%; ">&times;
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="w3-container" style="font-size:150%; padding:0 0 16px 0">
+                        <span id="declaracao"></span>
+                    </div>
+                    <div class="w3-container" style="font-size:150%; padding:0 0 16px 0">
+                        <span id="quantidade_declaracao"></span>
+                    </div>
+                    <div class="w3-container" style="font-size:150%; padding:0 0 16px 0">
+                        <span id="cor_declaracao"></span>
+                    </div>
+                </div>
+                <div class="modal-footer" id="secondModal">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                            style="font-size:125%; ">{{ _("Cancelar") }}</button>
+{#                    <button type="button" id="removestatement" class="btn btn-primary"#}
+{#                            style="font-size:125%; background-color: #d04125"></button>#}
+                </div>
+            </div>
+        </div>
+    </div>
     <script>
-        $('#sendModal').on('hidden.bs.modal', function () {
-            document.getElementById("send_image_form").reset();
+        $('#addModal').on('show.bs.modal', function (event) {
+            var instance = $(event.relatedTarget).attr('data-instance');
+            var title = "{{ _('Adicionar') }} " + instance;
+
+            $("#select_instruction").hide();
+            $("#quantidade_container").hide();
+            $("#elemento_cor_container").hide();
+            $(this).find("#secondModal #addstatement").empty();
+            $(this).find("#secondModal #addstatement").append(title);
+            $(this).find("#secondModal #addstatement").attr('data-instance', instance);
+            $(this).find("#search_field").attr('data-instance', instance);
+            $(this).find(".modal-title").empty();
+            $(this).find(".modal-title").append(title);
+        })
+
+        $('#addModal').on('hidden.bs.modal', function () {
+            $(this).find("#secondModal #addstatement").empty();
+            $(this).find("#secondModal #addstatement").attr('data-instance', "");
+            $(this).find("#search_field").attr('data-instance', "");
+            $(this).find("#search_field").empty();
+            $(this).find("#search_field").val('');
+            $("#search_field").trigger('reset');
+            $("#search_results").empty();
+            $("#quantidade").val('');
+            $("#element_cor").val('no');
+        })
+
+        $('#editModal').on('show.bs.modal', function (event) {
+            var id = $(event.relatedTarget).attr('id');
+            var cor = $(event.relatedTarget).attr('data-cor');
+            var label = $(event.relatedTarget).attr('data-label');
+            var quantidade = $(event.relatedTarget).attr('data-quantidade');
+            var aux = id.split("@");
+            var instance = aux[0];
+            var qid_ = aux[1];
+            var title = instance.charAt(0).toUpperCase() + instance.slice(1);
+            var quant_text = "{{ _('Quantidade: ') }}";
+            var cor_text = "{{ _('Cor(es): ') }}";
+            if (quantidade === "0"){
+                var quantidade_value = "{{ _('Quantidade não declarada') }}"
+            } else {
+                var quantidade_value=quantidade
+            }
+
+            $("#declaracao").append(title + ": " + '<a target="_blank" href="https://www.wikidata.org/wiki/' + qid_ + '">' + label + '</a>');
+            $("#quantidade_declaracao").text(quant_text + quantidade_value);
+            $("#cor_declaracao").append(cor_text + get_color(cor));
+
+            {#$("#removestatement")#}
+        })
+
+        $('#editModal').on('hide.bs.modal', function (event) {
+            $("#declaracao").text("");
+            $("#quantidade_declaracao").text("");
+            $("#cor_declaracao").text("");
+
+            {#$("#removestatement")#}
+        })
+
+        function get_color(elem_colors) {
+            var cores = {{ colors|safe }};
+            var results = []
+            var list_colors = elem_colors.split(",");
+            $.each(list_colors, function(index_1, cor_lista) {
+               $.each(cores, function(index_2, cor) {
+                   if (cor["qid"] === cor_lista) {
+                       results.push('<a target="_blank" href="https://www.wikidata.org/wiki/' + cor["qid"] + '">' + cor["label"] + '</a>');
+                   }
+               });
+            });
+            return results.join("; ")
+        }
+
+        $("#search_field").keypress(function (event) {
+            if (event.keyCode === 13) {
+                $("#do_the_search").click();
+            }
         });
 
-        $("#send_image_form").submit(function (e) {
-            e.preventDefault();
-            var formData = new FormData(this);
-            var error = "{{ _('Ocorreu algum erro! Verifique o formulário e tente novamente. Caso o erro persista, por favor, reporte em https://github.com/WikiMovimentoBrasil/wikiusos/issues') }}";
+        $("#do_the_search").on('click', function (event) {
+            var wait = "{{ _('Pesquisando o banco de dados...') }}";
+            if ($("#search_field")[0].value) {
+                $("#search_results").empty();
+                $("#search_results").append(wait);
+                search();
+            } else {
+                $("#search_results").empty();
+            }
+        });
+
+        $("#addstatement").on('click', function (event){
+            var option_checked = $("input[name='claim_option']:checked");
+
+            if (option_checked.length > 0) {
+                var instance = $(this).attr('data-instance');
+                var tag = "#" + instance + "_list";
+                var option_value = option_checked.val();
+                var option_label = option_checked.attr('data-label');
+                var sucess_stat = "{{ _('Declaração inserida com sucesso!') }}";
+
+                var quantidade = $("#quantidade").val()||"0";
+                var cor = $("#element_cor").val();
+                if (option_label === "") {
+                    option_label = option_value
+                }
+                if ($(tag).children().length < 1) {
+                    $(tag).show()
+                }
+                $(tag).append(
+                    '<div class="w3-container" id="' + instance + '@' + option_value + '" style="padding:0 16px 16px 16px">' +
+                    '<button type="button" data-toggle="modal" data-target="#editModal" style="width:100%; font-size: 100%; margin: 0; padding: 10px;" data-quantidade="' + quantidade + '" data-cor="' + cor + '" data-label="' + option_label + '" id="' + instance + '@' + option_value + '"> ' +
+                    option_label + '</button><input type="hidden" id="' + instance + '@' + option_value + '" name="' + instance + '" value="' + option_value + '@' + quantidade + '@' + cor + '"></div>')
+
+                alert(sucess_stat);
+                $('#addModal').modal("hide");
+            }
+            else {
+                var select_one = "{{ _('Selecione um elemento') }}";
+                alert(select_one);
+            }
+        });
+
+        function search() {
+            var input = $('#search_field')[0].value;
+            var instance = $('#search_field')[0].dataset['instance'];
+            var data = {'term': input, 'instance': instance};
 
             $.ajax({
-                url: "/send_file",
+                url: "/search",
                 type: "POST",
-                data: formData,
+                data: JSON.stringify(data),
+                contentType: "application/json",
+                dataType: "json",
+
                 success: function (response) {
-                    alert(response)
+                    $("#search_results").empty();
+                    var no_result = "{{ _('Nenhum resultado obtido') }}";
+
+                    if (response.length > 0) {
+                        $("#select_instruction").show();
+                        $("#quantidade_container").show();
+                        $("#elemento_cor_container").show();
+                        for (var i = 0; i < (Math.min(15, response.length)); i++) {
+                            if (response[i]["descr"]) {
+                                var sep = ': ';
+                            } else {
+                                var sep = '';
+                            }
+                            $("#search_results").append('<input type="radio" id="' + response[i]["qid"] + '" name="claim_option" data-label="' + response[i]["label"] + '" value="' + response[i]["qid"] + '"> ' +
+                                '<label for="' + response[i]["qid"] + '" style="font-size: 125%"><b style="color: #004266;font-size: 125%">' + response[i]["label"] + ' (' + response[i]["qid"] + ')</b></label>' + sep + response[i]["descr"] + '<br>');
+                        }
+                    } else {
+                        $("#select_instruction").hide();
+                        $("#quantidade_container").hide();
+                        $("#elemento_cor_container").hide();
+                        $("#quantidade").val('');
+                        $("#element_cor").val('no');
+                        $("#search_results").append(no_result);
+                    }
                 },
                 error: function () {
-                    alert(error)
-                },
-                cache: false,
-                contentType: false,
-                processData: false
+                    var select_one = "{{ _('Selecione um elemento') }}";
+                    alert(select_one);
+                }
             });
-        });
+        };
 
         $(document).ready(function () {
             $('.owl-item.active .owl-lazy.image_item')
@@ -418,11 +741,11 @@
             $('[data-toggle="popover"]').popover({html: true});
         });
 
-        $('#adicionar_declaracoes, #coroa_container, #cor_coroa_container, #campo_container, #campo_divisao_container, #campo_cor_container, #figuras_container, #suportes_container, #paquife_container, #paquife_cor_container, #lema_container').hide();
+        $('#adicionar_declaracoes, #coroa_container, #cor_coroa_container, #elmo_container, #elmo_cor_container, #paquife_container, #paquife_cor_container, #virol_container, #virol_cor_container, #campo_container, #campo_divisao_container, #campo_cor_container, #figuras_container, #suportes_container, #timbre_container, #lema_container, #lema_lang_container').hide();
 
         $('#brasao').change(function () {
             var selected = $('#brasao option:selected').val();
-            $('#adicionar_declaracoes, #coroa_container, #campo_container, #figuras_container, #suportes_container, #paquife_container, #lema_container').toggle(selected != "no");
+            $('#adicionar_declaracoes, #coroa_container, #elmo_container, #paquife_container, #virol_container, #campo_container, #figuras_container, #suportes_container, #timbre_container, #lema_container').toggle(selected != "no");
         })
 
         $('#coroa').change(function () {
@@ -430,14 +753,29 @@
             $('#cor_coroa_container').toggle(selected != "no");
         })
 
-        $('#campo').change(function () {
-            var selected = $('#campo option:selected').val();
-            $('#campo_divisao_container, #campo_cor_container').toggle(selected != "no");
+        $('#elmo').change(function () {
+            var selected = $('#elmo option:selected').val();
+            $('#elmo_cor_container').toggle(selected != "no");
         })
 
         $('#paquife').change(function () {
             var selected = $('#paquife option:selected').val();
             $('#paquife_cor_container').toggle(selected != "no");
+        })
+
+        $('#virol').change(function () {
+            var selected = $('#virol option:selected').val();
+            $('#virol_cor_container').toggle(selected != "no");
+        })
+
+        $('#campo').change(function () {
+            var selected = $('#campo option:selected').val();
+            $('#campo_divisao_container, #campo_cor_container').toggle(selected != "no");
+        })
+
+        $('#lema').on('input', function () {
+            var text = $('#lema').val();
+            $('#lema_lang_container').toggle(text != "");
         })
     </script>
 {% endblock %}

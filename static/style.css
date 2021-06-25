@@ -15,8 +15,8 @@ a {
 }
 
 a:hover:not(.button) {
-    background-color: black;
-    color: #871249;
+    background-color: #871249;
+    color: #FFFFFF;
 }
 
 .topnav {
@@ -130,6 +130,18 @@ button {
     text-align: center;
 }
 
+.tag_button {
+    background-color: #871249;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-size: 100%;
+    margin: 0;
+    padding: 10px;
+    width: 100%;
+    text-align: center;
+}
+
 .grid_image {
     overflow: hidden;
     margin-top: 20px;
@@ -209,4 +221,14 @@ tbody {
 .popover-body {
     font-size: 150%;
     font-family: Josefin Sans, sans-serif;
+}
+
+.stripped0 {
+    background-color:#FFFFFF;
+    padding: 0.75rem;
+}
+
+.stripped1 {
+    background-color:rgba(0,0,0,.05);
+    padding: 0.75rem;
 }

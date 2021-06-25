@@ -1,12 +1,19 @@
+##############################################################
+# IMPORTAÇÃO DE BIBLIOTECAS E FUNÇÕES
+##############################################################
 import os
 import json
 import yaml
-from flask import Flask, render_template, request, session, redirect, url_for, g
+from flask import Flask, render_template, request, session, redirect, url_for, g, jsonify
 from flask_babel import Babel
-from wikidata import query_quantidade, query_by_type, query_metadata_of_work, query_next_qid, api_category_members
-from oauth_wiki import get_username, get_token
+from wikidata import query_quantidade, query_by_type, query_metadata_of_work, query_next_qid, api_category_members, \
+    post_search_entity, get_labels, post_search_query
+from oauth_wiki import get_username, get_token, raw_post_request
 from requests_oauthlib import OAuth1Session
 
+##############################################################
+# INICIALIZAÇÃO
+##############################################################
 __dir__ = os.path.dirname(__file__)
 app = Flask(__name__)
 app.config.update(yaml.safe_load(open(os.path.join(__dir__, 'config.yaml'))))
@@ -35,7 +42,7 @@ def login():
 
     client_key = app.config['CONSUMER_KEY']
     client_secret = app.config['CONSUMER_SECRET']
-    base_url = 'https://commons.wikimedia.org/w/index.php'
+    base_url = 'https://www.wikidata.org/w/index.php'
     request_token_url = base_url + '?title=Special%3aOAuth%2finitiate'
 
     oauth = OAuth1Session(client_key,
@@ -46,7 +53,7 @@ def login():
     session['owner_key'] = fetch_response.get('oauth_token')
     session['owner_secret'] = fetch_response.get('oauth_token_secret')
 
-    base_authorization_url = 'https://commons.wikimedia.org/wiki/Special:OAuth/authorize'
+    base_authorization_url = 'https://www.wikidata.org/wiki/Special:OAuth/authorize'
     authorization_url = oauth.authorization_url(base_authorization_url,
                                                 oauth_consumer_key=client_key)
     return redirect(authorization_url)
@@ -54,7 +61,7 @@ def login():
 
 @app.route("/oauth-callback", methods=["GET"])
 def oauth_callback():
-    base_url = 'https://commons.wikimedia.org/w/index.php'
+    base_url = 'https://www.wikidata.org/w/index.php'
     client_key = app.config['CONSUMER_KEY']
     client_secret = app.config['CONSUMER_SECRET']
 
@@ -144,6 +151,7 @@ def page_not_found(e):
     return render_template('error.html')
 
 
+# Função para exibir a tela inicial do aplicativo
 @app.route('/')
 @app.route('/home')
 @app.route('/inicio')
@@ -155,6 +163,7 @@ def inicio():
                            lang=lang)
 
 
+# Função para exibir a tela de descrição do aplicativo
 @app.route('/about')
 @app.route('/sobre')
 def sobre():
@@ -170,6 +179,7 @@ def sobre():
                            number_works=quantidade)
 
 
+# Função para exibir a tela com o vídeo tutorial do aplicativo
 @app.route('/tutorial')
 def tutorial():
     username = get_username()
@@ -179,6 +189,7 @@ def tutorial():
                            lang=lang)
 
 
+# Função para exibir a tela de descrição dos outros aplicativos
 @app.route('/apps')
 def apps():
     username = get_username()
@@ -188,6 +199,7 @@ def apps():
                            lang=lang)
 
 
+# Função para exibir a tela das obras de uma coleção
 @app.route('/colecao/<type>')
 def colecao(type):
     username = get_username()
@@ -212,6 +224,7 @@ def colecao(type):
         return redirect(url_for('inicio'))
 
 
+# Função para exibir a tela principal do aplicativo
 @app.route('/item/<qid>', methods=["GET"])
 def item(qid):
     username = get_username()
@@ -226,6 +239,13 @@ def item(qid):
     next_qid = query_next_qid(next_qid_query)
 
     brasoes = [{"qid": "Q5198811", "label": "Brasão da cidade de São Paulo"}]
+
+    languages = [{"qid": "Q750553", "label": "Português brasileiro"},
+                 {"qid": "Q5146", "label": "Português"},
+                 {"qid": "Q397", "label": "Latim"},
+                 {"qid": "Q1860", "label": "Inglês"},
+                 {"qid": "Q1321", "label": "Espanhol"},
+                 {"qid": "Q150", "label": "Francês"}]
 
     crowns = [{"qid": "Q15320147", "label": "Astral crown"},
               {"qid": "Q2047836", "label": "camp crown"},
@@ -309,8 +329,225 @@ def item(qid):
                            brasoes=brasoes,
                            crowns=crowns,
                            colors=colors,
-                           partitions=partitions
+                           partitions=partitions,
+                           languages=languages
                            )
+
+
+@app.route('/brasao', methods=["GET"])
+def brasao():
+    return render_template("brasao.html")
+
+
+@app.route('/send_brasao', methods=["POST"])
+def send_brasao():
+    form = request.form
+
+    if "brasao" in form and form["brasao"] != "no":
+        post_item(json.dumps([{make_stat("P180", form["brasao"], [])}]))
+        statements = []
+
+        # COROA
+        if "coroa" in form and form["coroa"] != "no":
+            coroa = form["coroa"]
+            if "coroa_cor" in form and form["coroa_cor"] != "no":
+                coroa_cor = form["coroa_cor"]
+                statements.append(make_stat(
+                    "P180",
+                    "Q908430",
+                    [{"pq": "P1114", "type": "number", "val": 1},
+                     {"pq": "P462", "type": "qid", "val": coroa_cor},
+                     {"pq": "P518", "type": "qid", "val": coroa}]))
+
+        # ELMO
+        if "elmo" in form and form["elmo"] != "no":
+            if "elmo_cor" in form and form["elmo_cor"] != "no":
+                elmo_cor = form["elmo_cor"]
+                statements.append(make_stat(
+                    "P180",
+                    "Q910873",
+                    [{"pq": "P1114", "type": "number", "val": 1},
+                     {"pq": "P462", "type": "qid", "val": elmo_cor}]))
+
+        # PAQUIFE
+        if "paquife" in form and form["paquife"] != "no":
+            if "paquife_cor" in form and form["paquife_cor"] != "no":
+                paquife_cor = request.form.getlist("paquife_cor")
+                statements.append(make_stat(
+                    "P180",
+                    "Q1289089",
+                    [{"pq": "P462", "type": "qid", "val": y} for y in paquife_cor]))
+        # VIROL
+        if "virol" in form and form["virol"] != "no":
+            if "virol_cor" in form and form["virol_cor"] != "no":
+                virol_cor = form["virol_cor"]
+                statements.append(make_stat(
+                    "P180",
+                    "Q910873",
+                    [{"pq": "P462", "type": "qid", "val": y} for y in virol_cor]))
+        # CAMPO
+        if "campo" in form and form["campo"] != "no":
+            if "divisao" in form and form["divisao"] != "no":
+                divisao = request.form.getlist("divisao")
+
+                if "campo_cor" in form and form["campo_cor"] != "no":
+                    campo_cor = request.form.getlist("campo_cor")
+                    statements.append(make_stat(
+                        "P180",
+                        "Q372254",
+                        [{"pq": "P1354", "type": "qid", "val": x} for x in divisao] +
+                        [{"pq": "P462", "type": "qid", "val": y} for y in campo_cor]))
+
+        # # FIGURA
+        # if "figura" in form:
+        #     figura_values = [figura_aux.split("@") for figura_aux in request.form.getlist("figura")]
+        #
+        #     figuras = [{"qid": figura[0], "quantidade": figura[1], "cores": figura[2]} for figura in figura_values]
+        #     statements.append(make_stat(
+        #         "P180",
+        #         "",
+        #                 [{"pq": "P1354", "type": "qid", "val": x} for x in divisao] +
+        #                 [{"pq": "P462", "type": "qid", "val": y} for y in campo_cor]))
+
+        # LEMA
+        if "lema" in form and form["lema"]:
+            lema = form["lema"]
+            if "lema_lang" in form and form["lema_lang"] != "no":
+                lema_lang = form["lema_lang"]
+                statements.append(make_monolingual_stat("P1451", lema, lema_lang))
+                #TODO: Adicionar possibilidade de inserir listel com cor e texto do lema
+        statements = json.dumps(statements)
+        post_item(json.dumps(statements), form["brasao"])
+    return redirect(url_for("item", qid=form["qid"]))
+
+
+def post_item(statements, qid):
+    token = get_token()
+    data = statements
+
+    params = {
+        "action": "wbeditentity",
+        "format": "json",
+        "token": token,
+        "id": qid,
+        "data": data
+    }
+
+    result = raw_post_request(params)
+    if 'error' in result.json():
+        return jsonify('204')
+    else:
+        return jsonify('200')
+
+
+def make_stat(prop, val, qualifiers):
+    result_item = {
+        "mainsnak":
+            {"snaktype": "value",
+             "property": prop,
+             "datavalue":
+                 {
+                     "value":
+                         {
+                             "entity-type": "item",
+                             "numeric-id": int(val.strip("Q"))
+                         },
+                     "type": "wikibase-entityid"
+                 }
+             },
+        "type": "statement",
+        "rank": "normal"
+    }
+    if qualifiers:
+        result_item["qualifiers"] = make_qualifiers(qualifiers)
+
+    return result_item
+
+
+def make_monolingual_stat(prop, val, lang):
+    result_item = {
+        "mainsnak":
+            {
+                "snaktype": "value",
+                "property": prop,
+                "datavalue":
+                    {
+                        "value":
+                            {
+                                "text": val,
+                                "language": lang
+                            },
+                        "type": "monolingualtext"
+                    }
+            },
+        "type": "statement",
+        "rank": "normal",
+    }
+    return result_item
+
+
+def make_qualifiers(qualifiers):
+    qualificadores = {"P462": [], "P1354": [], "P518": [], "P1114": []}
+
+    for qual in qualifiers:
+        if qual["pq"] in ["P462", "P1354", "P518"]:
+            qualificadores[qual["pq"]].append({
+                "snaktype": "value",
+                "property": qual["pq"],
+                "datavalue": {
+                    "value": {
+                        "entity-type": "item",
+                        "numeric-id": int(qual["val"].strip("Q"))
+                    },
+                    "type": "wikibase-entityid"
+                },
+                "datatype": "wikibase-item"
+            })
+        elif qual["pq"] in ["P1114"]:
+            qualificadores[qual["pq"]].append({
+                "snaktype": "value",
+                "property": qual["pq"],
+                "datavalue": {
+                    "value": {
+                        "amount": "+"+str(qual["val"]),
+                        "unit": "1"
+                    },
+                    "type": "quantity"
+                },
+                "datatype": "quantity"
+            })
+        else:
+            pass
+
+    resultados_qual = {}
+    for key in qualificadores.keys():
+        if qualificadores[key]:
+            resultados_qual[key] = qualificadores[key]
+    return resultados_qual
+
+
+# Requisição para procurar entidades e filtrá-las pelos tesauros
+@app.route('/search', methods=['GET', 'POST'])
+def search_entity():
+    if request.method == "POST":
+        jsondata = request.get_json()
+        term = jsondata['term']
+        instance = jsondata['instance']
+        lang = pt_to_ptbr(get_locale())
+
+        data_1 = post_search_query(term, lang)
+        data_2 = post_search_entity(term, lang)
+
+        new_data = get_labels(data_1) + get_labels(data_2)
+        items = []
+        for item_ in new_data:
+            item_["labelptbr"] = item_["labelpt"] if not item_["labelptbr"] else item_["labelptbr"]
+            item_["descrptbr"] = item_["descrpt"] if not item_["descrptbr"] else item_["descrptbr"]
+            items.append({"qid": item_["id"],
+                          "label": item_["labelptbr"] if lang != "en" else item_["labelen"],
+                          "descr": item_["descrptbr"] if lang != "en" else item_["descren"]})
+
+        return jsonify(items), 200
 
 
 if __name__ == '__main__':

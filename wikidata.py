@@ -86,6 +86,17 @@ def query_motifs_metadata(query, qid):
     return result
 
 
+def query_items(query):
+    data = query_wikidata(query)
+    result = []
+    if "results" in data and "bindings" in data["results"]:
+        results = data["results"]["bindings"]
+        for item in results:
+            if "qid" in item and "label" in item:
+                result.append({"qid": item["qid"]["value"], "label": item["label"]["value"]})
+    return result
+
+
 def api_category_members(category):
     url = 'https://commons.wikimedia.org/w/api.php'
     params = {
@@ -242,26 +253,36 @@ def get_labels(data):
     filtered_items = []
 
     if "search" in data and len(data["search"]) > 0:
-        qids = "wd:" + " wd:".join([x["title"] for x in data["search"]])
+        list_of_qids = [x["title"] for x in data["search"]]
+        qids = "wd:" + " wd:".join(list_of_qids)
 
         query = "SELECT DISTINCT ?item (SAMPLE(STR(?itemLabelptbr)) AS ?labelptbr) (SAMPLE(STR(?itemDescriptionptbr)) AS ?descrptbr) (SAMPLE(STR(?itemLabelpt)) AS ?labelpt) (SAMPLE(STR(?itemDescriptionpt)) AS ?descrpt) (SAMPLE(STR(?itemLabelen)) AS ?labelen) (SAMPLE(STR(?itemDescriptionen)) AS ?descren) WITH { SELECT DISTINCT ?item WHERE { VALUES ?item {" + qids + "} } } AS %items WHERE { INCLUDE %items. OPTIONAL{?item rdfs:label ?itemLabelptbr. FILTER(LANG(?itemLabelptbr)='pt-br')} OPTIONAL{?item schema:description ?itemDescriptionptbr. FILTER(LANG(?itemDescriptionptbr)='pt-br')} OPTIONAL{?item rdfs:label ?itemLabelpt. FILTER(LANG(?itemLabelpt)='pt')} OPTIONAL{?item schema:description ?itemDescriptionpt. FILTER(LANG(?itemDescriptionpt)='pt')} OPTIONAL{?item rdfs:label ?itemLabelen. FILTER(LANG(?itemLabelen)='en')} OPTIONAL{?item schema:description ?itemDescriptionen. FILTER(LANG(?itemDescriptionen)='en')}} GROUP BY ?item"
 
         _filter = query_wikidata(query)
         results = _filter["results"]["bindings"]
-        filtered_items = extract_items(results)
+        filtered_items = extract_items(results, list_of_qids)
 
     return filtered_items
 
 
-def extract_items(results):
+def extract_items(results, list_of_qids):
     items = []
+    resultados = []
+
     for result in results:
-        items.append({"id": result["item"]["value"].replace("http://www.wikidata.org/entity/", ""),
-                      "labelptbr": result["labelptbr"]["value"] if "labelptbr" in result else "",
-                      "labelpt": result["labelpt"]["value"] if "labelpt" in result else "",
-                      "labelen": result["labelen"]["value"] if "labelen" in result else "",
-                      "descrptbr": result["descrptbr"]["value"] if "descrptbr" in result else "",
-                      "descrpt": result["descrpt"]["value"] if "descrpt" in result else "",
-                      "descren": result["descren"]["value"] if "descren" in result else "",
-                      })
-    return items
+        if "labelpt" in result or "labelpt-br" in result:
+            items.append({"id": result["item"]["value"].replace("http://www.wikidata.org/entity/", ""),
+                          "labelptbr": result["labelptbr"]["value"] if "labelptbr" in result else "",
+                          "labelpt": result["labelpt"]["value"] if "labelpt" in result else "",
+                          "labelen": result["labelen"]["value"] if "labelen" in result else "",
+                          "descrptbr": result["descrptbr"]["value"] if "descrptbr" in result else "",
+                          "descrpt": result["descrpt"]["value"] if "descrpt" in result else "",
+                          "descren": result["descren"]["value"] if "descren" in result else "",
+                          })
+
+    for qid in list_of_qids:
+        for item in items:
+            if item["id"] == qid:
+                resultados.append(item)
+
+    return resultados

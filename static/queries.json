@@ -107,6 +107,15 @@
     "query": "SELECT (COUNT(DISTINCT(?item)) AS ?number_works) WHERE { ?item wdt:P195 wd:Q56677470; wdt:P18 ?imagem. MINUS { ?item wdt:P31 wd:Q125191. } MINUS { ?item wdt:P31 wd:Q3305213. } MINUS { ?item wdt:P31 wd:Q18965. } MINUS { ?item wdt:P31 wd:Q11034. } MINUS { ?item wdt:P31 wd:Q192425. } MINUS { ?item wdt:P31 wd:Q1572315. } MINUS { ?item wdt:P31 wd:Q4006. } MINUS { ?item wdt:P31 wd:Q11060274. } MINUS { ?item wdt:P31 wd:Q216526. } MINUS { ?item wdt:P31 wd:Q2668072. } MINUS { ?item wdt:P31 wd:Q93184. } MINUS { ?item wdt:P31 wd:Q8011558. } MINUS { ?item wdt:P31 wd:Q49848. } MINUS { ?item wdt:P31 wd:Q23013246. } MINUS { ?item wdt:P31 wd:Q488053. } MINUS { ?item wdt:P31 wd:Q1261026. } MINUS { ?item wdt:P31 wd:Q595597. } MINUS { ?item wdt:P31 wd:Q43013. } MINUS { ?item wdt:P31 wd:Q18573970. } MINUS { ?item wdt:P31 wd:Q628403. } MINUS { ?item wdt:P31 wd:Q1156791. } MINUS { ?item wdt:P31 wd:Q1155772. } MINUS { ?item wdt:P31 wd:Q1027879. } MINUS { ?item wdt:P31 wd:Q162827. } }"
   },
   "Next_qid": {
-    "query": "SELECT ?obra_next_qid WHERE { BIND(wd:QIDDAOBRA AS ?obra) ?obra wdt:P31 ?instancia. ?obra_next wdt:P195 wd:Q56677470; wdt:P18 []; wdt:P31 ?instancia; schema:dateModified ?date_modified. FILTER(?obra_next!=?obra) BIND(SUBSTR(STR(?obra_next),32) AS ?obra_next_qid) } ORDER BY ASC(?date_modified) LIMIT 50"
+    "query": "SELECT ?obra_next_qid WITH { SELECT ?obra_next ?obra WHERE { BIND(wd:Q55851798 AS ?obra) ?obra wdt:P31 ?instancia. ?obra_next wdt:P195 wd:Q56677470; wdt:P31 ?instancia; wdt:P18 []; schema:dateModified ?date_modified. } ORDER BY ASC(?date_modified) LIMIT 50 } AS %results WHERE { INCLUDE %results. FILTER(?obra_next!=?obra) BIND(SUBSTR(STR(?obra_next),32) AS ?obra_next_qid) }"
+  },
+  "crowns": {
+    "query": "SELECT DISTINCT ?qid ?label WHERE { SERVICE wikibase:label {bd:serviceParam wikibase:language \"LANGUAGE,pt-br,pt,en,la,es,fr,de\". ?item rdfs:label ?label} ?item wdt:P31|wdt:P279 wd:Q908430. FILTER(?item not in (wd:Q2522930, wd:Q1632209,wd:Q4287993,wd:Q15853983,wd:Q105414456,wd:Q20181505)) BIND(SUBSTR(STR(?item),32) AS ?qid)} ORDER BY ?label"
+  },
+  "partitions": {
+    "query": "SELECT DISTINCT ?qid ?label WHERE { SERVICE wikibase:label {bd:serviceParam wikibase:language \"LANGUAGE,pt-br,pt,en,la,es,fr,de\". ?item rdfs:label ?label} ?item wdt:P31|wdt:P279 wd:Q260703. FILTER(?item not in (wd:Q1052647)) BIND(SUBSTR(STR(?item),32) AS ?qid)} ORDER BY ?label"
+  },
+  "brasoes": {
+    "query": "SELECT DISTINCT ?qid ?label WHERE { VALUES ?item {wd:Q107366391 wd:Q9664727 wd:Q107366378 wd:Q107366377 wd:Q8778141 wd:Q107366396 wd:Q20055797 wd:Q18462982 wd:Q9665074 wd:Q107366376 wd:Q107366395 wd:Q107366394 wd:Q107366393 wd:Q9665234 wd:Q107366379 wd:Q9665267 wd:Q9665281 wd:Q107366372 wd:Q107366387 wd:Q107366397 wd:Q18463362 wd:Q20058877 wd:Q107366373 wd:Q107366375 wd:Q107366388 wd:Q9665832 wd:Q25442792 wd:Q107366385 wd:Q9665758 wd:Q107366383 wd:Q107366386 wd:Q9665808 wd:Q18463792 wd:Q5198811 wd:Q107366389 wd:Q9665890 wd:Q107366381 wd:Q107366384 wd:Q107366380 wd:Q9665926 wd:Q18463877 wd:Q107366390 wd:Q107366382} SERVICE wikibase:label { bd:serviceParam wikibase:language 'LANGUAGE,pt-br,pt,en,es,fr,de,ja'. ?item rdfs:label ?label.} BIND(SUBSTR(STR(?item),32) AS ?qid) } ORDER BY ?label"
   }
 }

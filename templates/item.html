@@ -189,7 +189,7 @@
                             <option value="no" selected>{{ _("--Selecione uma opção--") }}</option>
                             <option value="no">{{ _("Não") }}</option>
                             {% for brasao in brasoes %}
-                                <option value="{{ brasao.qid }}">{{ brasao.label }}</option>
+                                <option value="{{ brasao.qid }}">{{ brasao.label[lang] }}</option>
                             {% endfor %}
                         </select>
                     </div>
@@ -206,7 +206,7 @@
                         <select id='coroa' name="coroa" style="width:100%; height: 2em">
                             <option value="no" selected>{{ _("--Selecione uma opção--") }}</option>
                             {% for crown in crowns %}
-                                <option value="{{ crown.qid }}">{{ crown.label }}</option>
+                                <option value="{{ crown.qid }}">{{ crown.label[lang] }}</option>
                             {% endfor %}
                         </select>
                     </div>
@@ -222,7 +222,7 @@
                         <select id='coroa_cor' name="coroa_cor" style="width:100%; height: 2em">
                             <option value="no" selected>{{ _("--Selecione uma opção--") }}</option>
                             {% for cor in colors %}
-                                <option value="{{ cor.qid }}">{{ cor.label }}</option>
+                                <option value="{{ cor.qid }}">{{ cor.label[lang] }}</option>
                             {% endfor %}
                         </select>
                     </div>
@@ -250,7 +250,7 @@
                         <select multiple id='elmo_cor' name="elmo_cor" style="width:100%">
                             <option value="no" selected>{{ _("--Selecione uma opção--") }}</option>
                             {% for cor in colors %}
-                                <option value="{{ cor.qid }}">{{ cor.label }}</option>
+                                <option value="{{ cor.qid }}">{{ cor.label[lang] }}</option>
                             {% endfor %}
                         </select>
                     </div>
@@ -278,7 +278,7 @@
                         <select multiple id='paquife_cor' name="paquife_cor" style="width:100%">
                             <option value="no" selected>{{ _("--Selecione uma opção--") }}</option>
                             {% for cor in colors %}
-                                <option value="{{ cor.qid }}">{{ cor.label }}</option>
+                                <option value="{{ cor.qid }}">{{ cor.label[lang] }}</option>
                             {% endfor %}
                         </select>
                     </div>
@@ -306,7 +306,7 @@
                         <select multiple id='virol_cor' name="virol_cor" style="width:100%">
                             <option value="no" selected>{{ _("--Selecione uma opção--") }}</option>
                             {% for cor in colors %}
-                                <option value="{{ cor.qid }}">{{ cor.label }}</option>
+                                <option value="{{ cor.qid }}">{{ cor.label[lang] }}</option>
                             {% endfor %}
                         </select>
                     </div>
@@ -353,62 +353,62 @@
                         <select multiple id='campo_cor' name="campo_cor" style="width:100%">
                             <option value="no" selected>{{ _("--Selecione uma opção--") }}</option>
                             {% for cor in colors %}
-                                <option value="{{ cor.qid }}">{{ cor.label }}</option>
+                                <option value="{{ cor.qid }}">{{ cor.label[lang] }}</option>
                             {% endfor %}
                         </select>
                     </div>
                 </div>
                 {# FIGURAS #}
-{#                <div class="w3-container w3-row stripped0" id="figuras_container">#}
-{#                    <div class="w3-container">#}
-{#                        {{ _("Quais são as <a target='_blank' href='https://pt.wikipedia.org/wiki/Figuras_(heráldica)'>figuras heráldicas</a> retratadas?") }}<sup><a#}
-{#                            href='' onclick='return false;' style='font-size: 60%' data-toggle='popover'#}
-{#                            data-trigger='focus'#}
-{#                            data-content='Figuras heráldicas são todos e quaisquer elementos que se encontrem dentro do brasão.'>&#9432;</a></sup>#}
-{#                    </div>#}
-{#                    <div class="w3-container w3-half">#}
-{#                        <button type="button" class="button" data-toggle="modal"#}
-{#                                data-instance="figura" data-target="#addModal"#}
-{#                                style="background-color:#008000;margin: 0; width:100%;font-size: 100%;padding:10px">#}
-{#                            {{ _("Adicionar") }}#}
-{#                        </button>#}
-{#                    </div>#}
-{#                    <div class="w3-container w3-half" id="figura_list" style="padding:0; display: none" ></div>#}
-{#                </div>#}
+                <div class="w3-container w3-row stripped0" id="figuras_container">
+                    <div class="w3-container">
+                        {{ _("Quais são as <a target='_blank' href='https://pt.wikipedia.org/wiki/Figuras_(heráldica)'>figuras heráldicas</a> retratadas?") }}<sup><a
+                            href='' onclick='return false;' style='font-size: 60%' data-toggle='popover'
+                            data-trigger='focus'
+                            data-content='Figuras heráldicas são todos e quaisquer elementos que se encontrem dentro do brasão.'>&#9432;</a></sup>
+                    </div>
+                    <div class="w3-container w3-half">
+                        <button type="button" class="button" data-toggle="modal"
+                                data-instance="figura" data-target="#addModal"
+                                style="background-color:#008000;margin: 0; width:100%;font-size: 100%;padding:10px">
+                            {{ _("Adicionar") }}
+                        </button>
+                    </div>
+                    <div class="w3-container w3-half" id="figura_list" style="padding:0; display: none" ></div>
+                </div>
                 {# SUPORTES #}
-{#                <div class="w3-container w3-row stripped1" id="suportes_container">#}
-{#                    <div class="w3-container">#}
-{#                        {{ _("O brasão possui <a target='_blank' href='https://pt.wikipedia.org/wiki/Suporte_(heráldica)'>suportes ou tenentes</a>?") }} {{ _("Se sim, indique-os.") }}<sup><a#}
-{#                            href='' onclick='return false;' style='font-size: 60%' data-toggle='popover'#}
-{#                            data-trigger='focus'#}
-{#                            data-content='Suportes são elementos que sustentam o escudo do brasão. São divididos entre <i>tenentes</i> (figuras humanas) e <i>suportes</i> (figuras não humanas)'>&#9432;</a></sup>#}
-{#                    </div>#}
-{#                    <div class="w3-container w3-half">#}
-{#                        <button type="button" class="button" data-toggle="modal"#}
-{#                                data-instance="suporte" data-target="#addModal"#}
-{#                                style="background-color:#008000;margin: 0; width:100%;font-size: 100%;padding:10px">#}
-{#                            {{ _("Adicionar") }}#}
-{#                        </button>#}
-{#                    </div>#}
-{#                    <div class="w3-container w3-half" id="suporte_list" style="padding:0; display: none"></div>#}
-{#                </div>#}
+                <div class="w3-container w3-row stripped1" id="suportes_container">
+                    <div class="w3-container">
+                        {{ _("O brasão possui <a target='_blank' href='https://pt.wikipedia.org/wiki/Suporte_(heráldica)'>suportes ou tenentes</a>?") }} {{ _("Se sim, indique-os.") }}<sup><a
+                            href='' onclick='return false;' style='font-size: 60%' data-toggle='popover'
+                            data-trigger='focus'
+                            data-content='Suportes são elementos que sustentam o escudo do brasão. São divididos entre <i>tenentes</i> (figuras humanas) e <i>suportes</i> (figuras não humanas)'>&#9432;</a></sup>
+                    </div>
+                    <div class="w3-container w3-half">
+                        <button type="button" class="button" data-toggle="modal"
+                                data-instance="suporte" data-target="#addModal"
+                                style="background-color:#008000;margin: 0; width:100%;font-size: 100%;padding:10px">
+                            {{ _("Adicionar") }}
+                        </button>
+                    </div>
+                    <div class="w3-container w3-half" id="suporte_list" style="padding:0; display: none"></div>
+                </div>
                 {# TIMBRE #}
-{#                <div class="w3-container w3-row stripped0" id="timbre_container">#}
-{#                    <div class="w3-container">#}
-{#                        {{ _("O brasão possui <a target='_blank' href='https://pt.wikipedia.org/wiki/Timbre_(heráldica)'>timbre(s)</a>?") }} {{ _("Se sim, indique-o(s).") }}<sup><a#}
-{#                            href='' onclick='return false;' style='font-size: 60%' data-toggle='popover'#}
-{#                            data-trigger='focus'#}
-{#                            data-content='Timbre é uma figura colocada sobre o elmo e o virol que serve tanto para distinguir os detentores dos brasões entre si quanto para marcar seus graus de nobreza.'>&#9432;</a></sup>#}
-{#                    </div>#}
-{#                    <div class="w3-container w3-half">#}
-{#                        <button type="button" class="button" data-toggle="modal"#}
-{#                                data-instance="timbre" data-target="#addModal"#}
-{#                                style="background-color:#008000;margin: 0; width:100%;font-size: 100%;padding:10px">#}
-{#                            {{ _("Adicionar") }}#}
-{#                        </button>#}
-{#                    </div>#}
-{#                    <div class="w3-container" id="timbre_list" style="padding:0; display: none"></div>#}
-{#                </div>#}
+                <div class="w3-container w3-row stripped0" id="timbre_container">
+                    <div class="w3-container">
+                        {{ _("O brasão possui <a target='_blank' href='https://pt.wikipedia.org/wiki/Timbre_(heráldica)'>timbre(s)</a>?") }} {{ _("Se sim, indique-o(s).") }}<sup><a
+                            href='' onclick='return false;' style='font-size: 60%' data-toggle='popover'
+                            data-trigger='focus'
+                            data-content='Timbre é uma figura colocada sobre o elmo e o virol que serve tanto para distinguir os detentores dos brasões entre si quanto para marcar seus graus de nobreza.'>&#9432;</a></sup>
+                    </div>
+                    <div class="w3-container w3-half">
+                        <button type="button" class="button" data-toggle="modal"
+                                data-instance="timbre" data-target="#addModal"
+                                style="background-color:#008000;margin: 0; width:100%;font-size: 100%;padding:10px">
+                            {{ _("Adicionar") }}
+                        </button>
+                    </div>
+                    <div class="w3-container" id="timbre_list" style="padding:0; display: none"></div>
+                </div>
                 {# LEMA #}
                 <div class="w3-container w3-row stripped1" id="lema_container">
                     <div class="w3-container">
@@ -506,7 +506,7 @@
                         <select multiple id='element_cor' name="element_cor" style="width:100%;height: 6em">
                             <option value="no" selected>{{ _("--Selecione uma opção--") }}</option>
                             {% for cor in colors %}
-                                <option value="{{ cor.qid }}">{{ cor.label }}</option>
+                                <option value="{{ cor.qid }}">{{ cor.label[lang] }}</option>
                             {% endfor %}
                         </select>
                     </div>
@@ -633,6 +633,10 @@
             if ($("#search_field")[0].value) {
                 $("#search_results").empty();
                 $("#search_results").append(wait);
+                $("#quantidade").val('');
+                $("#element_cor").val('no');
+                $("#quantidade_container").hide();
+                $("#elemento_cor_container").hide();
                 search();
             } else {
                 $("#search_results").empty();

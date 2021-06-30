@@ -5,9 +5,9 @@ import os
 import json
 import yaml
 from flask import Flask, render_template, request, session, redirect, url_for, g, jsonify
-from flask_babel import Babel
+from flask_babel import Babel, gettext
 from wikidata import query_quantidade, query_by_type, query_metadata_of_work, query_next_qid, api_category_members, \
-    post_search_entity, get_labels, post_search_query
+    post_search_entity, get_labels, post_search_query, query_wikidata, query_items
 from oauth_wiki import get_username, get_token, raw_post_request
 from requests_oauthlib import OAuth1Session
 
@@ -238,81 +238,115 @@ def item(qid):
     work_metadata = query_metadata_of_work(metadata_query, lang=lang)
     next_qid = query_next_qid(next_qid_query)
 
-    brasoes = [{"qid": "Q5198811", "label": "Brasão da cidade de São Paulo"}]
+    # brasoes = query_items(all_queries["brasoes"]["query"].replace("LANGUAGE", lang))
+    brasoes = [
+        {"qid": "Q5198811", "label": {"pt-br": "Brasão da cidade de São Paulo", "en": "Coat of arms of São Paulo"}},
+        {"qid": "Q107366396",
+         "label": {"pt-br": "Brasão da Família Souza Queiróz", "en": "Coat of arms of Souza Queiróz Family"}},
+        {"qid": "Q107366391", "label": {"pt-br": "Brasão de Amparo", "en": "Coat of arms of Amparo"}},
+        {"qid": "Q9664727", "label": {"pt-br": "Brasão de Campinas", "en": "Coat of arms of Campinas"}},
+        {"qid": "Q107366378", "label": {"pt-br": "Brasão de Cananeia", "en": "Coat of arms of Cananeia"}},
+        {"qid": "Q107366377", "label": {"pt-br": "Brasão de Capivarí", "en": "Coat of arms of Capivarí"}},
+        {"qid": "Q20055797", "label": {"pt-br": "Brasão de Franca", "en": "Coat of arms of Franca"}},
+        {"qid": "Q18462982", "label": {"pt-br": "Brasão de Guaratinguetá", "en": "Coat of arms of Guaratinguetá"}},
+        {"qid": "Q9665074", "label": {"pt-br": "Brasão de Guarulhos", "en": "Coat of arms of Guarulhos"}},
+        {"qid": "Q107366376", "label": {"pt-br": "Brasão de Ibitinga", "en": "Coat of arms of Ibitinga"}},
+        {"qid": "Q107366395", "label": {"pt-br": "Brasão de Itanhaém", "en": "Coat of arms of Itanhaém"}},
+        {"qid": "Q107366394", "label": {"pt-br": "Brasão de Itú", "en": "Coat of arms of Itú"}},
+        {"qid": "Q107366393", "label": {"pt-br": "Brasão de Jaboticabal", "en": "Coat of arms of Jaboticabal"}},
+        {"qid": "Q9665234", "label": {"pt-br": "Brasão de Jacareí", "en": "Coat of arms of Jacareí"}},
+        {"qid": "Q107366379", "label": {"pt-br": "Brasão de Jaú", "en": "Coat of arms of Jaú"}},
+        {"qid": "Q9665267", "label": {"pt-br": "Brasão de Joinville", "en": "Coat of arms of Joinville"}},
+        {"qid": "Q9665281", "label": {"pt-br": "Brasão de Jundiaí", "en": "Coat of arms of Jundiaí"}},
+        {"qid": "Q107366372", "label": {"pt-br": "Brasão de Laguna", "en": "Coat of arms of Laguna"}},
+        {"qid": "Q107366387", "label": {"pt-br": "Brasão de Lorena", "en": "Coat of arms of Lorena"}},
+        {"qid": "Q18463362", "label": {"pt-br": "Brasão de Mogi das Cruzes", "en": "Coat of arms of Mogi das Cruzes"}},
+        {"qid": "Q20058877", "label": {"pt-br": "Brasão de Monte Alto", "en": "Coat of arms of Monte Alto"}},
+        {"qid": "Q107366375", "label": {"pt-br": "Brasão de Porto Feliz", "en": "Coat of arms of Porto Feliz"}},
+        {"qid": "Q107366388", "label": {"pt-br": "Brasão de Porto Seguro", "en": "Coat of arms of Porto Seguro"}},
+        {"qid": "Q107366373", "label": {"pt-br": "Brasão de Santana de Parnaíba", "en": "Coat of arms of Parnaíba"}},
+        {"qid": "Q25442792", "label": {"pt-br": "Brasão de Santo Amaro", "en": "Coat of arms of Santo Amaro"}},
+        {"qid": "Q107366385", "label": {"pt-br": "Brasão de Santo André", "en": "Coat of arms of Santo André"}},
+        {"qid": "Q9665758", "label": {"pt-br": "Brasão de Santos", "en": "Coat of arms of Santos"}},
+        {"qid": "Q107366383", "label": {"pt-br": "Brasão de São Bernardo", "en": "Coat of arms of São Bernardo"}},
+        {"qid": "Q107366386", "label": {"pt-br": "Brasão de São Carlos", "en": "Coat of arms of São Carlos"}},
+        {"qid": "Q9665808",
+         "label": {"pt-br": "Brasão de São Francisco do Sul", "en": "Coat of arms of São Francisco do Sul"}},
+        {"qid": "Q9665832",
+         "label": {"pt-br": "Brasão de São José do Rio Preto", "en": "Coat of arms of São José do Rio Preto"}},
+        {"qid": "Q18463792",
+         "label": {"pt-br": "Brasão de São José dos Campos", "en": "Coat of arms of São José dos Campos"}},
+        {"qid": "Q107366389", "label": {"pt-br": "Brasão de São Sebastião", "en": "Coat of arms of São Sebastião"}},
+        {"qid": "Q9665890", "label": {"pt-br": "Brasão de São Vicente", "en": "Coat of arms of São Vicente"}},
+        {"qid": "Q107366381", "label": {"pt-br": "Brasão de Socorro", "en": "Coat of arms of Socorro"}},
+        {"qid": "Q107366384", "label": {"pt-br": "Brasão de Sorocaba", "en": "Coat of arms of Sorocaba"}},
+        {"qid": "Q107366380", "label": {"pt-br": "Brasão de Tatuí", "en": "Coat of arms of Tatuí"}},
+        {"qid": "Q9665926", "label": {"pt-br": "Brasão de Taubaté", "en": "Coat of arms of Taubaté"}},
+        {"qid": "Q18463877", "label": {"pt-br": "Brasão de Tietê", "en": "Coat of arms of Tietê"}},
+        {"qid": "Q107366390", "label": {"pt-br": "Brasão de Ubatuba", "en": "Coat of arms of Ubatuba"}},
+        {"qid": "Q107366382", "label": {"pt-br": "Brasão de Vassouras", "en": "Coat of arms of Vassouras"}},
+        {"qid": "Q8778141", "label": {"pt-br": "Brasão do estado de São Paulo", "en": "Coat of arms of São Paulo"}},
+        {"qid": "Q107366397",
+         "label": {"pt-br": "Brasão do Marquez de Valença", "en": "Coat of arms of the Marquis of Valença"}}]
 
-    languages = [{"qid": "Q750553", "label": "Português brasileiro"},
-                 {"qid": "Q5146", "label": "Português"},
-                 {"qid": "Q397", "label": "Latim"},
-                 {"qid": "Q1860", "label": "Inglês"},
-                 {"qid": "Q1321", "label": "Espanhol"},
-                 {"qid": "Q150", "label": "Francês"}]
+    languages = [{"label": gettext("Português brasileiro"), "iso": "pt-br"},
+                 {"label": gettext("Português"), "iso": "pt"},
+                 {"label": gettext("Latim"), "iso": "la"},
+                 {"label": gettext("Inglês"), "iso": "en"},
+                 {"label": gettext("Espanhol"), "iso": "es"},
+                 {"label": gettext("Francês"), "iso": "fr"},
+                 {"label": gettext("Alemão"), "iso": "de"}]
 
-    crowns = [{"qid": "Q15320147", "label": "Astral crown"},
-              {"qid": "Q2047836", "label": "camp crown"},
-              {"qid": "Q429340", "label": "Coroa mural"},
-              {"qid": "Q50324108", "label": "coronet"},
-              {"qid": "Q5788764", "label": "Crown of the Infante"},
-              {"qid": "Q18433798", "label": "imperial crown"},
-              {"qid": "Q70576379", "label": "Imperial crown"},
-              {"qid": "Q58995913", "label": "royal crown"},
-              {"qid": "Q4287993", "label": "Tudor Crown"},
-              {"qid": "Q1399217", "label": "Volkskrone"}]
+    # crowns = query_items(all_queries["crowns"]["query"].replace("LANGUAGE", lang))
+    crowns = [{"qid": "Q114971", "label": {"pt-br": "coronel de barão", "en": "crown of baron"}},
+              {"qid": "Q1216485", "label": {"pt-br": "coroa de nobreza", "en": "noble crown"}},
+              {"qid": "Q1277481", "label": {"pt-br": "coroa de conde", "en": "count's crown"}},
+              {"qid": "Q1399217", "label": {"pt-br": "coroa do povo", "en": "Volkskrone"}},
+              {"qid": "Q139952", "label": {"pt-br": "coroa oriental", "en": "eastern crown"}},
+              {"qid": "Q1483321", "label": {"pt-br": "coroa principesca", "en": "princely crown"}},
+              {"qid": "Q15320147", "label": {"pt-br": "coroa astral", "en": "astral crown"}},
+              {"qid": "Q1603282", "label": {"pt-br": "coroa de elmo", "en": "helmet crown"}},
+              {"qid": "Q16553123", "label": {"pt-br": "coroa celestial", "en": "celestial crown"}},
+              {"qid": "Q17461213", "label": {"pt-br": "coronel de marquês", "en": "marquess crown"}},
+              {"qid": "Q18433798", "label": {"pt-br": "coroa imperial", "en": "imperial crown"}},
+              {"qid": "Q2047836", "label": {"pt-br": "coroa castrense", "en": "camp crown"}},
+              {"qid": "Q2522134", "label": {"pt-br": "coronel de visconde", "en": "viscount crown"}},
+              {"qid": "Q3693964", "label": {"pt-br": "coroa de espinhos", "en": "crown of thorns"}},
+              {"qid": "Q429340", "label": {"pt-br": "coroa mural", "en": "mural crown"}},
+              {"qid": "Q50324108", "label": {"pt-br": "coronel", "en": "coronet"}},
+              {"qid": "Q5788764", "label": {"pt-br": "coroa do Infante", "en": "crown of the Infante"}},
+              {"qid": "Q58995913", "label": {"pt-br": "coroa real", "en": "royal crown"}},
+              {"qid": "Q593235", "label": {"pt-br": "coroa naval", "en": "naval crown"}},
+              {"qid": "Q8351075", "label": {"pt-br": "coronel de conde", "en": "count's coronet"}}]
 
-    colors = [{"qid": "Q430099", "label": "or"},
-              {"qid": "Q936472", "label": "argento"},
-              {"qid": "Q1785501", "label": "azure"},
-              {"qid": "Q858055", "label": "gules"},
-              {"qid": "Q4401253", "label": "purpure"},
-              {"qid": "Q936496", "label": "sable"},
-              {"qid": "Q10858582", "label": "murrey"},
-              {"qid": "Q218177", "label": "sanguinho"},
-              {"qid": "Q218169", "label": "tenné"},
-              {"qid": "Q1055869", "label": "azul-celeste"},
-              {"qid": "Q1663655", "label": "carnação"},
-              {"qid": "Q218173", "label": "cendrée"},
-              {"qid": "Q3040333", "label": "laranja"}]
+    colors = [{"qid": "Q88219768", "label": {"pt-br": "aço", "en": "steel"}, "file": "cor_aço.svg"},
+              {"qid": "Q936472", "label": {"pt-br": "argent", "en": "argent"}, "file": "cor_argent.svg"},
+              {"qid": "Q107348978", "label": {"pt-br": "bronze", "en": "bronze"}, "file": "cor_bronze.svg"},
+              {"qid": "Q107348994", "label": {"pt-br": "chumbo", "en": "lead"}, "file": "cor_chumbo.svg"},
+              {"qid": "Q15830500", "label": {"pt-br": "cobre", "en": "copper"}, "file": "cor_cobre.svg"},
+              {"qid": "Q3743211", "label": {"pt-br": "ferro", "en": "iron"}, "file": "cor_ferro.svg"},
+              {"qid": "Q430099", "label": {"pt-br": "or", "en": "or"}, "file": "cor_or.svg"},
+              {"qid": "Q1785501", "label": {"pt-br": "azure", "en": "azure"}, "file": "cor_azure.svg"},
+              {"qid": "Q858055", "label": {"pt-br": "gules", "en": "gules"}, "file": "cor_gules.svg"},
+              {"qid": "Q4401253", "label": {"pt-br": "purpure", "en": "purpure"}, "file": "cor_purpure.svg"},
+              {"qid": "Q936496", "label": {"pt-br": "sable", "en": "sable"}, "file": "cor_sable.svg"},
+              {"qid": "Q936535", "label": {"pt-br": "vert", "en": "vert"}, "file": "cor_vert.svg"},
+              {"qid": "Q107349007", "label": {"pt-br": "amaranto", "en": "amaranth"}, "file": "cor_amaranto.svg"},
+              {"qid": "Q1055869", "label": {"pt-br": "azul-celeste", "en": "bleu celeste"},
+               "file": "cor_azul-celeste.svg"},
+              {"qid": "Q105721308", "label": {"pt-br": "brunâtre", "en": "brunâtre"}, "file": "cor_brunâtre.svg"},
+              {"qid": "Q1663655", "label": {"pt-br": "carnação", "en": "carnation"}, "file": "cor_carnação.svg"},
+              {"qid": "Q218173", "label": {"pt-br": "cendrée", "en": "cendrée"}, "file": "cor_cendrée.svg"},
+              {"qid": "Q1867823", "label": {"pt-br": "cor natural", "en": "natural color"}, "file": "cor_natural.svg"},
+              {"qid": "Q3040333", "label": {"pt-br": "laranja", "en": "orange"}, "file": "cor_laranja.svg"},
+              {"qid": "Q16977936", "label": {"pt-br": "rosa", "en": "rose"}, "file": "cor_rosa.svg"},
+              {"qid": "Q10858582", "label": {"pt-br": "murrey", "en": "murrey"}, "file": "cor_murrey.svg"},
+              {"qid": "Q218177", "label": {"pt-br": "sanguinho", "en": "sanguine"}, "file": "cor_sanguinho.svg"},
+              {"qid": "Q218169", "label": {"pt-br": "tenné", "en": "tenné"}, "file": "cor_tenné.svg"},
+              {"qid": "Q384324", "label": {"pt-br": "arminho", "en": "ermine"}, "file": "cor_arminho.svg"},
+              {"qid": "Q356887", "label": {"pt-br": "veiro", "en": "vair"}, "file": "cor_veiro.svg"}]
 
-    partitions = [{"qid": "Q27304931", "label": "chapé"},
-                  {"qid": "Q27307662", "label": "chapé ployé"},
-                  {"qid": "Q2394938", "label": "chaussé"},
-                  {"qid": "Q3689354", "label": "chequy counterchanged"},
-                  {"qid": "Q3925792", "label": "chequy of 15"},
-                  {"qid": "Q3925799", "label": "chequy of nine"},
-                  {"qid": "Q3689252", "label": "counterquartered"},
-                  {"qid": "Q3603323", "label": "embrassé"},
-                  {"qid": "Q1471238", "label": "Franconian Rake"},
-                  {"qid": "Q3799048", "label": "inquartato in grembi ritondati"},
-                  {"qid": "Q3800675", "label": "interzato abbracciato"},
-                  {"qid": "Q3800678", "label": "interzato in grembi ritondati"},
-                  {"qid": "Q3800679", "label": "interzato in grembo appuntato"},
-                  {"qid": "Q3800686", "label": "interzato in scudetto"},
-                  {"qid": "Q3998872", "label": "party per bend"},
-                  {"qid": "Q27305194", "label": "party per chevron"},
-                  {"qid": "Q3999669", "label": "party per fess"},
-                  {"qid": "Q27429803", "label": "party per fess wavy"},
-                  {"qid": "Q2672501", "label": "party per pale"},
-                  {"qid": "Q30233953", "label": "party per pale embattled"},
-                  {"qid": "Q95981351", "label": "party per pale pily"},
-                  {"qid": "Q30232869", "label": "party per pale wavy"},
-                  {"qid": "Q3799047", "label": "party per saltire"},
-                  {"qid": "Q3797569", "label": "per chevron enhanced"},
-                  {"qid": "Q3999671", "label": "per fess, the base per pale"},
-                  {"qid": "Q3955076", "label": "per fess, the chief per pale"},
-                  {"qid": "Q3955087", "label": "per pale, the dexter per fess"},
-                  {"qid": "Q3896860", "label": "per pale, the sinister per fess"},
-                  {"qid": "Q3799049", "label": "quarterly en equerre"},
-                  {"qid": "Q3937798", "label": "recoupé"},
-                  {"qid": "Q3932255", "label": "Reinterzato"},
-                  {"qid": "Q3936339", "label": "reparti"},
-                  {"qid": "Q3800674", "label": "tierced"},
-                  {"qid": "Q3800677", "label": "tierced per bend"},
-                  {"qid": "Q3800684", "label": "tierced per bend sinister"},
-                  {"qid": "Q3800685", "label": "tierced per chevron"},
-                  {"qid": "Q3800676", "label": "tierced per fess"},
-                  {"qid": "Q3800682", "label": "tierced per pale"},
-                  {"qid": "Q3800683", "label": "tierced per pall"},
-                  {"qid": "Q27516259", "label": "tierced per pall reversed"},
-                  {"qid": "Q3991737", "label": "tiro"}]
+    partitions = query_items(all_queries["partitions"]["query"].replace("LANGUAGE", lang))
 
     if "category" in work_metadata:
         category_images = api_category_members(work_metadata["category"])
@@ -344,47 +378,58 @@ def send_brasao():
     form = request.form
 
     if "brasao" in form and form["brasao"] != "no":
-        post_item(json.dumps([{make_stat("P180", form["brasao"], [])}]))
+        # post_item(json.dumps([{make_stat("P180", form["brasao"], [])}]))
+        values_already_on_wd = get_item(form["brasao"])
         statements = []
 
         # COROA
         if "coroa" in form and form["coroa"] != "no":
             coroa = form["coroa"]
             if "coroa_cor" in form and form["coroa_cor"] != "no":
-                coroa_cor = form["coroa_cor"]
+                coroa_cor = request.form.getlist("coroa_cor")
+                edit_or_create = check_items(values_already_on_wd, coroa, "Q908430")
                 statements.append(make_stat(
                     "P180",
-                    "Q908430",
-                    [{"pq": "P1114", "type": "number", "val": 1},
-                     {"pq": "P462", "type": "qid", "val": coroa_cor},
-                     {"pq": "P518", "type": "qid", "val": coroa}]))
+                    coroa,
+                    [{"pq": "P1114", "type": "number", "val": 1}] +
+                    [{"pq": "P462", "type": "qid", "val": y} for y in coroa_cor if y != "no"] +
+                    [{"pq": "P1354", "type": "qid", "val": "Q908430"}],
+                    edit_or_create))
 
         # ELMO
         if "elmo" in form and form["elmo"] != "no":
             if "elmo_cor" in form and form["elmo_cor"] != "no":
-                elmo_cor = form["elmo_cor"]
+                elmo_cor = request.form.getlist("elmo_cor")
+                edit_or_create = check_items(values_already_on_wd, "Q910873", "")
                 statements.append(make_stat(
                     "P180",
                     "Q910873",
-                    [{"pq": "P1114", "type": "number", "val": 1},
-                     {"pq": "P462", "type": "qid", "val": elmo_cor}]))
+                    [{"pq": "P1114", "type": "number", "val": 1}] +
+                    [{"pq": "P462", "type": "qid", "val": y} for y in elmo_cor if y != "no"],
+                    edit_or_create))
 
         # PAQUIFE
         if "paquife" in form and form["paquife"] != "no":
             if "paquife_cor" in form and form["paquife_cor"] != "no":
                 paquife_cor = request.form.getlist("paquife_cor")
+                edit_or_create = check_items(values_already_on_wd, "Q1289089", "")
                 statements.append(make_stat(
                     "P180",
                     "Q1289089",
-                    [{"pq": "P462", "type": "qid", "val": y} for y in paquife_cor]))
+                    [{"pq": "P462", "type": "qid", "val": y} for y in paquife_cor if y != "no"],
+                    edit_or_create))
+
         # VIROL
         if "virol" in form and form["virol"] != "no":
             if "virol_cor" in form and form["virol_cor"] != "no":
-                virol_cor = form["virol_cor"]
+                virol_cor = request.form.getlist("virol_cor")
+                edit_or_create = check_items(values_already_on_wd, "Q910873", "")
                 statements.append(make_stat(
                     "P180",
                     "Q910873",
-                    [{"pq": "P462", "type": "qid", "val": y} for y in virol_cor]))
+                    [{"pq": "P462", "type": "qid", "val": y} for y in virol_cor if y != "no"],
+                    edit_or_create))
+
         # CAMPO
         if "campo" in form and form["campo"] != "no":
             if "divisao" in form and form["divisao"] != "no":
@@ -392,33 +437,96 @@ def send_brasao():
 
                 if "campo_cor" in form and form["campo_cor"] != "no":
                     campo_cor = request.form.getlist("campo_cor")
+                    edit_or_create = check_items(values_already_on_wd, "Q372254", "")
                     statements.append(make_stat(
                         "P180",
                         "Q372254",
                         [{"pq": "P1354", "type": "qid", "val": x} for x in divisao] +
-                        [{"pq": "P462", "type": "qid", "val": y} for y in campo_cor]))
+                        [{"pq": "P462", "type": "qid", "val": y} for y in campo_cor if y != "no"],
+                        edit_or_create))
 
-        # # FIGURA
-        # if "figura" in form:
-        #     figura_values = [figura_aux.split("@") for figura_aux in request.form.getlist("figura")]
-        #
-        #     figuras = [{"qid": figura[0], "quantidade": figura[1], "cores": figura[2]} for figura in figura_values]
-        #     statements.append(make_stat(
-        #         "P180",
-        #         "",
-        #                 [{"pq": "P1354", "type": "qid", "val": x} for x in divisao] +
-        #                 [{"pq": "P462", "type": "qid", "val": y} for y in campo_cor]))
+        # FIGURA
+        if "figura" in form:
+            figura_values = [figura_aux.split("@") for figura_aux in request.form.getlist("figura")]
+            for figura in figura_values:
+                edit_or_create = check_items(values_already_on_wd, figura[0], "Q1424805")
+                statements.append(make_stat(
+                    "P180",
+                    figura[0],
+                    [{"pq": "P1354", "type": "qid", "val": "Q1424805"}] +
+                    [{"pq": "P1114", "type": "number", "val": figura[1]}] +
+                    [{"pq": "P462", "type": "qid", "val": y} for y in figura[2].split(",") if y != "no"],
+                    edit_or_create))
+
+        # SUPORTE
+        if "suporte" in form:
+            suporte_values = [suporte_aux.split("@") for suporte_aux in request.form.getlist("suporte")]
+
+            for suporte in suporte_values:
+                edit_or_create = check_items(values_already_on_wd, suporte[0], "Q725975")
+                statements.append(make_stat(
+                    "P180",
+                    suporte[0],
+                    [{"pq": "P1354", "type": "qid", "val": "Q725975"}] +
+                    [{"pq": "P1114", "type": "number", "val": suporte[1]}] +
+                    [{"pq": "P462", "type": "qid", "val": y} for y in suporte[2].split(",") if y != "no"],
+                    edit_or_create))
+
+        # TIMBRE
+        if "timbre" in form:
+            timbre_values = [timbre_aux.split("@") for timbre_aux in request.form.getlist("timbre")]
+
+            for timbre in timbre_values:
+                edit_or_create = check_items(values_already_on_wd, timbre[0], "Q668732")
+                statements.append(make_stat(
+                    "P180",
+                    timbre[0],
+                    [{"pq": "P1354", "type": "qid", "val": "Q668732"}] +
+                    [{"pq": "P1114", "type": "number", "val": timbre[1]}] +
+                    [{"pq": "P462", "type": "qid", "val": y} for y in timbre[2].split(",") if y != "no"],
+                    edit_or_create))
 
         # LEMA
         if "lema" in form and form["lema"]:
             lema = form["lema"]
             if "lema_lang" in form and form["lema_lang"] != "no":
                 lema_lang = form["lema_lang"]
-                statements.append(make_monolingual_stat("P1451", lema, lema_lang))
-                #TODO: Adicionar possibilidade de inserir listel com cor e texto do lema
+                edit_or_create = check_items(values_already_on_wd, lema, "")
+                statements.append(make_monolingual_stat("P1451", lema, lema_lang, edit_or_create))
+                # TODO: Adicionar possibilidade de inserir listel com cor e texto do lema
+
         statements = json.dumps(statements)
         post_item(json.dumps(statements), form["brasao"])
     return redirect(url_for("item", qid=form["qid"]))
+
+
+def get_item(qid):
+    items = []
+    values = query_wikidata("SELECT ?p ?ps ?pqv WHERE { wd:" +
+                            qid +
+                            " p:P180|p:P1451 ?p. ?p ps:P180|ps:P1451 ?ps. OPTIONAL {?p pq:P1354 ?pqv.} } ORDER BY DESC(?pqv)")
+    if "results" in values and "bindings" in values["results"]:
+        for result in values["results"]["bindings"]:
+            item = {}
+            if "p" in result:
+                item["id"] = result["p"]["value"].replace("http://www.wikidata.org/entity/statement/", "")
+            if "ps" in result:
+                item["val"] = result["ps"]["value"].replace("http://www.wikidata.org/entity/", "")
+            if "pqv" in result:
+                item["qual"] = result["pqv"]["value"].replace("http://www.wikidata.org/entity/", "")
+            items.append(item)
+    return items
+
+
+def check_items(elements_already_on_wd, val, p1354):
+    for element in elements_already_on_wd:
+        if "qual" in element:
+            if val == element["val"] and p1354 == element["qual"]:
+                return element["id"]
+        else:
+            if val == element["val"]:
+                return element["id"]
+    return ""
 
 
 def post_item(statements, qid):
@@ -440,7 +548,7 @@ def post_item(statements, qid):
         return jsonify('200')
 
 
-def make_stat(prop, val, qualifiers):
+def make_stat(prop, val, qualifiers, edit_or_create):
     result_item = {
         "mainsnak":
             {"snaktype": "value",
@@ -461,10 +569,22 @@ def make_stat(prop, val, qualifiers):
     if qualifiers:
         result_item["qualifiers"] = make_qualifiers(qualifiers)
 
+    if edit_or_create:
+        result_item["id"] = edit_or_create.replace("-", "$", 1)
+
     return result_item
 
 
-def make_monolingual_stat(prop, val, lang):
+def make_monolingual_stat(prop, val, lang, edit_or_create):
+    language_codes = {"Q750553": "pt-br",
+                      "Q5146": "pt",
+                      "Q397": "la",
+                      "Q1860": "en",
+                      "Q1321": "es",
+                      "Q150": "fr"}
+
+    language = language_codes[lang] if lang in language_codes else "und"
+
     result_item = {
         "mainsnak":
             {
@@ -475,7 +595,7 @@ def make_monolingual_stat(prop, val, lang):
                         "value":
                             {
                                 "text": val,
-                                "language": lang
+                                "language": language
                             },
                         "type": "monolingualtext"
                     }
@@ -483,6 +603,10 @@ def make_monolingual_stat(prop, val, lang):
         "type": "statement",
         "rank": "normal",
     }
+
+    if edit_or_create:
+        result_item["id"] = edit_or_create.replace("-", "$", 1)
+
     return result_item
 
 
@@ -509,7 +633,7 @@ def make_qualifiers(qualifiers):
                 "property": qual["pq"],
                 "datavalue": {
                     "value": {
-                        "amount": "+"+str(qual["val"]),
+                        "amount": "+" + str(qual["val"]),
                         "unit": "1"
                     },
                     "type": "quantity"

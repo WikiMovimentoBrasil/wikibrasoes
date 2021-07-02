@@ -385,65 +385,81 @@ def send_brasao():
         # COROA
         if "coroa" in form and form["coroa"] != "no":
             coroa = form["coroa"]
+            coroa_cor = []
+
             if "coroa_cor" in form and form["coroa_cor"] != "no":
                 coroa_cor = request.form.getlist("coroa_cor")
-                edit_or_create = check_items(values_already_on_wd, coroa, "Q908430")
-                statements.append(make_stat(
-                    "P180",
-                    coroa,
-                    [{"pq": "P1114", "type": "number", "val": 1}] +
-                    [{"pq": "P462", "type": "qid", "val": y} for y in coroa_cor if y != "no"] +
-                    [{"pq": "P1354", "type": "qid", "val": "Q908430"}],
-                    edit_or_create))
+
+            edit_or_create = check_items(values_already_on_wd, coroa, "Q908430")
+            statements.append(make_stat(
+                "P180",
+                coroa,
+                [{"pq": "P1114", "type": "number", "val": 1}] +
+                [{"pq": "P462", "type": "qid", "val": y} for y in coroa_cor if y != "no"] +
+                [{"pq": "P1354", "type": "qid", "val": "Q908430"}],
+                edit_or_create))
 
         # ELMO
         if "elmo" in form and form["elmo"] != "no":
+            elmo_cor = []
+
             if "elmo_cor" in form and form["elmo_cor"] != "no":
                 elmo_cor = request.form.getlist("elmo_cor")
-                edit_or_create = check_items(values_already_on_wd, "Q910873", "")
-                statements.append(make_stat(
-                    "P180",
-                    "Q910873",
-                    [{"pq": "P1114", "type": "number", "val": 1}] +
-                    [{"pq": "P462", "type": "qid", "val": y} for y in elmo_cor if y != "no"],
-                    edit_or_create))
+
+            edit_or_create = check_items(values_already_on_wd, "Q910873", "")
+            statements.append(make_stat(
+                "P180",
+                "Q910873",
+                [{"pq": "P1114", "type": "number", "val": 1}] +
+                [{"pq": "P462", "type": "qid", "val": y} for y in elmo_cor if y != "no"],
+                edit_or_create))
 
         # PAQUIFE
         if "paquife" in form and form["paquife"] != "no":
+            paquife_cor = []
+
             if "paquife_cor" in form and form["paquife_cor"] != "no":
                 paquife_cor = request.form.getlist("paquife_cor")
-                edit_or_create = check_items(values_already_on_wd, "Q1289089", "")
-                statements.append(make_stat(
-                    "P180",
-                    "Q1289089",
-                    [{"pq": "P462", "type": "qid", "val": y} for y in paquife_cor if y != "no"],
-                    edit_or_create))
+
+            edit_or_create = check_items(values_already_on_wd, "Q1289089", "")
+            statements.append(make_stat(
+                "P180",
+                "Q1289089",
+                [{"pq": "P462", "type": "qid", "val": y} for y in paquife_cor if y != "no"],
+                edit_or_create))
 
         # VIROL
         if "virol" in form and form["virol"] != "no":
+            virol_cor = []
+
             if "virol_cor" in form and form["virol_cor"] != "no":
                 virol_cor = request.form.getlist("virol_cor")
-                edit_or_create = check_items(values_already_on_wd, "Q910873", "")
-                statements.append(make_stat(
-                    "P180",
-                    "Q910873",
-                    [{"pq": "P462", "type": "qid", "val": y} for y in virol_cor if y != "no"],
-                    edit_or_create))
+
+            edit_or_create = check_items(values_already_on_wd, "Q910873", "")
+            statements.append(make_stat(
+                "P180",
+                "Q910873",
+                [{"pq": "P462", "type": "qid", "val": y} for y in virol_cor if y != "no"],
+                edit_or_create))
 
         # CAMPO
-        if "campo" in form and form["campo"] != "no":
+        if "campo" in form and form["campo"]:
+            divisao = []
+            campo_cor = []
+
             if "divisao" in form and form["divisao"] != "no":
                 divisao = request.form.getlist("divisao")
 
-                if "campo_cor" in form and form["campo_cor"] != "no":
-                    campo_cor = request.form.getlist("campo_cor")
-                    edit_or_create = check_items(values_already_on_wd, "Q372254", "")
-                    statements.append(make_stat(
-                        "P180",
-                        "Q372254",
-                        [{"pq": "P1354", "type": "qid", "val": x} for x in divisao] +
-                        [{"pq": "P462", "type": "qid", "val": y} for y in campo_cor if y != "no"],
-                        edit_or_create))
+            if "campo_cor" in form and form["campo_cor"] != "no":
+                campo_cor = request.form.getlist("campo_cor")
+
+            edit_or_create = check_items(values_already_on_wd, "Q372254", "")
+            statements.append(make_stat(
+                "P180",
+                "Q372254",
+                [{"pq": "P1354", "type": "qid", "val": x} for x in divisao] +
+                [{"pq": "P462", "type": "qid", "val": y} for y in campo_cor if y != "no"],
+                edit_or_create))
 
         # FIGURA
         if "figura" in form:
@@ -495,7 +511,7 @@ def send_brasao():
                 statements.append(make_monolingual_stat("P1451", lema, lema_lang, edit_or_create))
                 # TODO: Adicionar possibilidade de inserir listel com cor e texto do lema
 
-        statements = json.dumps(statements)
+        statements = {"claims": statements}
         post_item(json.dumps(statements), form["brasao"])
     return redirect(url_for("item", qid=form["qid"]))
 

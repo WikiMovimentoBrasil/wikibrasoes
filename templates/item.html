@@ -244,10 +244,13 @@
                 </div>
                 <div class="w3-container w3-row stripped0" id="elmo_cor_container">
                     <div class="w3-container">
-                        {{ _("Cor(es) do elmo:") }}
+                        {{ _("<a target='_blank' href='https://pt.wikipedia.org/wiki/Esmalte_(heráldica)'>Cor</a> do elmo:") }}<sup><a
+                            href='' onclick='return false;' style='font-size: 60%' data-toggle='popover'
+                            data-trigger='focus'
+                            data-content='Em heráldica, cores, ou esmaltes são colorações de diversos elementos de um brasão. São tradicionalmente divididas em <i>metais</i>, <i>cores</i>, <i>peles</i> e <i>cores naturais</i>.'>&#9432;</a></sup>
                     </div>
                     <div class="w3-container">
-                        <select multiple id='elmo_cor' name="elmo_cor" style="width:100%">
+                        <select id='elmo_cor' name="elmo_cor" style="width:100%">
                             <option value="no" selected>{{ _("--Selecione uma opção--") }}</option>
                             {% for cor in colors %}
                                 <option value="{{ cor.qid }}">{{ cor.label[lang] }}</option>
@@ -272,11 +275,14 @@
                 </div>
                 <div class="w3-container w3-row stripped1" id="paquife_cor_container">
                     <div class="w3-container">
-                        {{ _("Cor(es) do paquife:") }}
+                        {{ _("<a target='_blank' href='https://pt.wikipedia.org/wiki/Esmalte_(heráldica)'>Cor</a> do paquife:") }}<sup><a
+                            href='' onclick='return false;' style='font-size: 60%' data-toggle='popover'
+                            data-trigger='focus'
+                            data-content='Em heráldica, cores, ou esmaltes são colorações de diversos elementos de um brasão. São tradicionalmente divididas em <i>metais</i>, <i>cores</i>, <i>peles</i> e <i>cores naturais</i>.'>&#9432;</a></sup>
                     </div>
                     <div class="w3-container">
                         <select multiple id='paquife_cor' name="paquife_cor" style="width:100%">
-                            <option value="no" selected>{{ _("--Selecione uma opção--") }}</option>
+                            <option value="no" selected>{{ _("--Selecione ao menos uma opção--") }}</option>
                             {% for cor in colors %}
                                 <option value="{{ cor.qid }}">{{ cor.label[lang] }}</option>
                             {% endfor %}
@@ -300,11 +306,14 @@
                 </div>
                 <div class="w3-container w3-row stripped0" id="virol_cor_container">
                     <div class="w3-container">
-                        {{ _("Cor(es) do virol:") }}
+                        {{ _("<a target='_blank' href='https://pt.wikipedia.org/wiki/Esmalte_(heráldica)'>Cor</a> do virol:") }}<sup><a
+                            href='' onclick='return false;' style='font-size: 60%' data-toggle='popover'
+                            data-trigger='focus'
+                            data-content='Em heráldica, cores, ou esmaltes são colorações de diversos elementos de um brasão. São tradicionalmente divididas em <i>metais</i>, <i>cores</i>, <i>peles</i> e <i>cores naturais</i>.'>&#9432;</a></sup>
                     </div>
                     <div class="w3-container">
                         <select multiple id='virol_cor' name="virol_cor" style="width:100%">
-                            <option value="no" selected>{{ _("--Selecione uma opção--") }}</option>
+                            <option value="no" selected>{{ _("--Selecione ao menos uma opção--") }}</option>
                             {% for cor in colors %}
                                 <option value="{{ cor.qid }}">{{ cor.label[lang] }}</option>
                             {% endfor %}
@@ -344,14 +353,14 @@
                 </div>
                 <div class="w3-container w3-row stripped1" id="campo_cor_container">
                     <div class="w3-container">
-                        {{ _("<a target='_blank' href='https://pt.wikipedia.org/wiki/Esmalte_(heráldica)'>Cor</a> do campo:") }}<sup><a
+                        {{ _("<a target='_blank' href='https://pt.wikipedia.org/wiki/Esmalte_(heráldica)'>Cor(es)</a> do campo:") }}<sup><a
                             href='' onclick='return false;' style='font-size: 60%' data-toggle='popover'
                             data-trigger='focus'
                             data-content='Em heráldica, cores, ou esmaltes são colorações de diversos elementos de um brasão. São tradicionalmente divididas em <i>metais</i>, <i>cores</i>, <i>peles</i> e <i>cores naturais</i>.'>&#9432;</a></sup>
                     </div>
                     <div class="w3-container">
                         <select multiple id='campo_cor' name="campo_cor" style="width:100%">
-                            <option value="no" selected>{{ _("--Selecione uma opção--") }}</option>
+                            <option value="no" selected>{{ _("--Selecione ao menos uma opção--") }}</option>
                             {% for cor in colors %}
                                 <option value="{{ cor.qid }}">{{ cor.label[lang] }}</option>
                             {% endfor %}
@@ -495,7 +504,7 @@
                         <br>
                         <input type="number" class="form-control" id="quantidade"
                                min="1" step="1" placeholder="{{ _('Quantidade') }}"
-                               style="font-size: 100%;width:100%">
+                               style="font-size: 100%;width:100%" required>
                     </div>
                     <div class="w3-container" id="elemento_cor_container" style="display:none;padding:0;font-size: 125%;">
                         {{ _("<a target='_blank' href='https://pt.wikipedia.org/wiki/Esmalte_(heráldica)'>Cor(es)</a>:") }}<sup><a
@@ -749,32 +758,37 @@
 
         $('#brasao').change(function () {
             var selected = $('#brasao option:selected').val();
-            $('#adicionar_declaracoes, #coroa_container, #elmo_container, #paquife_container, #virol_container, #campo_container, #figuras_container, #suportes_container, #timbre_container, #lema_container').toggle(selected != "no");
+            $('#adicionar_declaracoes, #coroa_container, #elmo_container, #paquife_container, #virol_container, #campo_container, #campo_cor_container, #figuras_container, #suportes_container, #timbre_container, #lema_container').toggle(selected != "no");
         })
 
         $('#coroa').change(function () {
             var selected = $('#coroa option:selected').val();
             $('#cor_coroa_container').toggle(selected != "no");
+            $('#coroa_cor').val('no');
         })
 
         $('#elmo').change(function () {
             var selected = $('#elmo option:selected').val();
             $('#elmo_cor_container').toggle(selected != "no");
+            $('#elmo_cor').val('no');
         })
 
         $('#paquife').change(function () {
             var selected = $('#paquife option:selected').val();
             $('#paquife_cor_container').toggle(selected != "no");
+            $('#paquife_cor').val('no');
         })
 
         $('#virol').change(function () {
             var selected = $('#virol option:selected').val();
             $('#virol_cor_container').toggle(selected != "no");
+            $('#virol_cor').val('no');
         })
 
         $('#campo').change(function () {
             var selected = $('#campo option:selected').val();
-            $('#campo_divisao_container, #campo_cor_container').toggle(selected != "no");
+            $('#campo_divisao_container').toggle(selected != "no");
+            $('#divisao').val('no');
         })
 
         $('#lema').on('input', function () {

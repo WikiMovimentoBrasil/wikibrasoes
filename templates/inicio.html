@@ -26,7 +26,7 @@
                 {{ _("Bem-vindo(a) ao <i>Wiki Museu do Ipiranga - O que há no brasão?</i>")}}
             </h2>
             <h3 style="text-align:center; padding-bottom:30px;">
-                {{_("Neste aplicativo, você participa do trabalho de pesquisa do Museu do Ipiranga. Sua tarefa: ")}} {{_("Identificar os elementos que compõem os brasões representados em obras e objetos do acervo do Museu do Ipiranga.")}} {{_("Para participar, é preciso autenticar-se; depois, escolha uma categoria abaixo para começar.")}}
+                {{_("Neste aplicativo, você participa do trabalho de pesquisa do Museu do Ipiranga. Sua tarefa: ")}} {{_("Identificar os <a target=\"_blank\" href=\"https://pt.wikipedia.org/wiki/Heráldica\">elementos heráldicos</a> que compõem os brasões representados em obras e objetos do acervo do Museu do Ipiranga.")}} {{_("Para participar, é preciso autenticar-se; depois, escolha uma categoria abaixo para começar.")}}
             </h3>
         </div>
     </div>
@@ -44,18 +44,18 @@
                 </a>
             </div>
             <div class="w3-container w3-half">
-                <a class="button" href="{{ url_for('colecao', type='decoracao') }}">
+                <a class="button" href="{{ url_for('colecao', type='ornamentos') }}">
                     <button type="button" style="width:100%;">
-                        {{ _('Decoração') }}
+                        {{ _('Ornamentos') }}
                     </button>
                 </a>
             </div>
         </div>
         <div class="w3-row">
             <div class="w3-container w3-half">
-                <a class="button" href="{{ url_for('colecao', type='cozinha') }}">
+                <a class="button" href="{{ url_for('colecao', type='alimentacao') }}">
                     <button type="button" style="width:100%;">
-                        {{ _('Cozinha') }}
+                        {{ _('Alimentação') }}
                     </button>
                 </a>
             </div>

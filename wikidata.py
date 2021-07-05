@@ -92,8 +92,10 @@ def query_items(query):
     if "results" in data and "bindings" in data["results"]:
         results = data["results"]["bindings"]
         for item in results:
-            if "qid" in item and "label" in item:
-                result.append({"qid": item["qid"]["value"], "label": item["label"]["value"]})
+            if "qid" in item:
+                en = item["en"]["value"] if "en" in item else ""
+                pt = item["pt"]["value"] if "pt" in item else ""
+                result.append({"qid": item["qid"]["value"], "label": {"pt-br": pt, "en": en}})
     return result
 
 

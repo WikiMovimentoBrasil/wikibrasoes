@@ -206,7 +206,9 @@
                         <select id='coroa' name="coroa" style="width:100%; height: 2em">
                             <option value="no" selected>{{ _("--Selecione uma opção--") }}</option>
                             {% for crown in crowns %}
-                                <option value="{{ crown.qid }}">{{ crown.label[lang] }}</option>
+                                {% if crown.label[lang] %}
+                                    <option value="{{ crown.qid }}">{{ crown.label[lang] }}</option>
+                                {% endif %}
                             {% endfor %}
                         </select>
                     </div>
@@ -221,8 +223,12 @@
                     <div class="w3-container">
                         <select id='coroa_cor' name="coroa_cor" style="width:100%; height: 2em">
                             <option value="no" selected>{{ _("--Selecione uma opção--") }}</option>
-                            {% for cor in colors %}
-                                <option value="{{ cor.qid }}">{{ cor.label[lang] }}</option>
+                            {% for group_cor in colors %}
+                                <optgroup label="{{ group_cor.label[lang] }}">
+                                    {% for cor in group_cor.list %}
+                                        <option value="{{ cor.qid }}">{{ cor.label[lang] }}</option>
+                                    {% endfor %}
+                                </optgroup>
                             {% endfor %}
                         </select>
                     </div>
@@ -252,8 +258,12 @@
                     <div class="w3-container">
                         <select id='elmo_cor' name="elmo_cor" style="width:100%">
                             <option value="no" selected>{{ _("--Selecione uma opção--") }}</option>
-                            {% for cor in colors %}
-                                <option value="{{ cor.qid }}">{{ cor.label[lang] }}</option>
+                            {% for group_cor in colors %}
+                                <optgroup label="{{ group_cor.label[lang] }}">
+                                    {% for cor in group_cor.list %}
+                                        <option value="{{ cor.qid }}">{{ cor.label[lang] }}</option>
+                                    {% endfor %}
+                                </optgroup>
                             {% endfor %}
                         </select>
                     </div>
@@ -283,8 +293,12 @@
                     <div class="w3-container">
                         <select multiple id='paquife_cor' name="paquife_cor" style="width:100%">
                             <option value="no" selected>{{ _("--Selecione ao menos uma opção--") }}</option>
-                            {% for cor in colors %}
-                                <option value="{{ cor.qid }}">{{ cor.label[lang] }}</option>
+                            {% for group_cor in colors %}
+                                <optgroup label="{{ group_cor.label[lang] }}">
+                                    {% for cor in group_cor.list %}
+                                        <option value="{{ cor.qid }}">{{ cor.label[lang] }}</option>
+                                    {% endfor %}
+                                </optgroup>
                             {% endfor %}
                         </select>
                     </div>
@@ -314,8 +328,12 @@
                     <div class="w3-container">
                         <select multiple id='virol_cor' name="virol_cor" style="width:100%">
                             <option value="no" selected>{{ _("--Selecione ao menos uma opção--") }}</option>
-                            {% for cor in colors %}
-                                <option value="{{ cor.qid }}">{{ cor.label[lang] }}</option>
+                            {% for group_cor in colors %}
+                                <optgroup label="{{ group_cor.label[lang] }}">
+                                    {% for cor in group_cor.list %}
+                                        <option value="{{ cor.qid }}">{{ cor.label[lang] }}</option>
+                                    {% endfor %}
+                                </optgroup>
                             {% endfor %}
                         </select>
                     </div>
@@ -346,7 +364,9 @@
                         <select multiple id='divisao' name="divisao" style="width:100%">
                             <option value="no" selected>{{ _("--Selecione ao menos uma opção--") }}</option>
                             {% for partition in partitions %}
-                                <option value="{{ partition.qid }}">{{ partition.label }}</option>
+                                {% if partition.label[lang] %}
+                                    <option value="{{ partition.qid }}">{{ partition.label[lang] }}</option>
+                                {% endif %}
                             {% endfor %}
                         </select>
                     </div>
@@ -361,8 +381,12 @@
                     <div class="w3-container">
                         <select multiple id='campo_cor' name="campo_cor" style="width:100%">
                             <option value="no" selected>{{ _("--Selecione ao menos uma opção--") }}</option>
-                            {% for cor in colors %}
-                                <option value="{{ cor.qid }}">{{ cor.label[lang] }}</option>
+                            {% for group_cor in colors %}
+                                <optgroup label="{{ group_cor.label[lang] }}">
+                                    {% for cor in group_cor.list %}
+                                        <option value="{{ cor.qid }}">{{ cor.label[lang] }}</option>
+                                    {% endfor %}
+                                </optgroup>
                             {% endfor %}
                         </select>
                     </div>
@@ -480,9 +504,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-{#                    <div class="w3-container" style="padding:0 0 16px 0;font-size: 115%">#}
-{#                        {{ _("Teste") }}#}
-{#                    </div>#}
+                    <div class="w3-container" id="content_add_modal" style="padding:0 0 16px 0;font-size: 115%"></div>
                     <div class="w3-container" style="padding:0 0 16px 0">
                         <div class="form-inline">
                             <input type="search" class="form-control" placeholder="{{ _('Pesquise') }}"
@@ -514,8 +536,12 @@
                         <br>
                         <select multiple id='element_cor' name="element_cor" style="width:100%;height: 6em">
                             <option value="no" selected>{{ _("--Selecione uma opção--") }}</option>
-                            {% for cor in colors %}
-                                <option value="{{ cor.qid }}">{{ cor.label[lang] }}</option>
+                            {% for group_cor in colors %}
+                                <optgroup label="{{ group_cor.label[lang] }}">
+                                    {% for cor in group_cor.list %}
+                                        <option value="{{ cor.qid }}">{{ cor.label[lang] }}</option>
+                                    {% endfor %}
+                                </optgroup>
                             {% endfor %}
                         </select>
                     </div>
@@ -561,6 +587,9 @@
         $('#addModal').on('show.bs.modal', function (event) {
             var instance = $(event.relatedTarget).attr('data-instance');
             var title = "{{ _('Adicionar') }} " + instance;
+            var figura_text = "{{ _('Figuras heráldicas são todos e quaisquer elementos que se encontrem dentro do escudo em um brasão.') }}"
+            var suporte_text = "{{ _('Suportes heráldicos são as figuras que sustentam ou guardam o escudo.') }}"
+            var timbre_text = "{{ _('Timbres são figuras colocadas acima do virol e do elmo em um brasão.') }}"
 
             $("#select_instruction").hide();
             $("#quantidade_container").hide();
@@ -571,6 +600,14 @@
             $(this).find("#search_field").attr('data-instance', instance);
             $(this).find(".modal-title").empty();
             $(this).find(".modal-title").append(title);
+            $(this).find("#content_add_modal").empty();
+            if (instance === "figura") {
+                $(this).find("#content_add_modal").append(figura_text);
+            } else if (instance === "suporte") {
+                $(this).find("#content_add_modal").append(suporte_text);
+            } else if (instance === "timbre") {
+                $(this).find("#content_add_modal").append(timbre_text);
+            }
         })
 
         $('#addModal').on('hidden.bs.modal', function () {

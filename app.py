@@ -238,11 +238,10 @@ def item(qid):
     work_metadata = query_metadata_of_work(metadata_query, lang=lang)
     next_qid = query_next_qid(next_qid_query)
 
-    # brasoes = query_items(all_queries["brasoes"]["query"].replace("LANGUAGE", lang))
+    brasoes = query_items(all_queries["brasoes"]["query"].replace("LANGUAGE", lang))
     brasoes = [
         {"qid": "Q5198811", "label": {"pt-br": "Brasão da cidade de São Paulo", "en": "Coat of arms of São Paulo"}},
-        {"qid": "Q107366396",
-         "label": {"pt-br": "Brasão da Família Souza Queiróz", "en": "Coat of arms of Souza Queiróz Family"}},
+        {"qid": "Q107366396","label": {"pt-br": "Brasão da Família Souza Queiróz", "en": "Coat of arms of Souza Queiróz Family"}},
         {"qid": "Q107366391", "label": {"pt-br": "Brasão de Amparo", "en": "Coat of arms of Amparo"}},
         {"qid": "Q9664727", "label": {"pt-br": "Brasão de Campinas", "en": "Coat of arms of Campinas"}},
         {"qid": "Q107366378", "label": {"pt-br": "Brasão de Cananeia", "en": "Coat of arms of Cananeia"}},
@@ -270,12 +269,9 @@ def item(qid):
         {"qid": "Q9665758", "label": {"pt-br": "Brasão de Santos", "en": "Coat of arms of Santos"}},
         {"qid": "Q107366383", "label": {"pt-br": "Brasão de São Bernardo", "en": "Coat of arms of São Bernardo"}},
         {"qid": "Q107366386", "label": {"pt-br": "Brasão de São Carlos", "en": "Coat of arms of São Carlos"}},
-        {"qid": "Q9665808",
-         "label": {"pt-br": "Brasão de São Francisco do Sul", "en": "Coat of arms of São Francisco do Sul"}},
-        {"qid": "Q9665832",
-         "label": {"pt-br": "Brasão de São José do Rio Preto", "en": "Coat of arms of São José do Rio Preto"}},
-        {"qid": "Q18463792",
-         "label": {"pt-br": "Brasão de São José dos Campos", "en": "Coat of arms of São José dos Campos"}},
+        {"qid": "Q9665808","label": {"pt-br": "Brasão de São Francisco do Sul", "en": "Coat of arms of São Francisco do Sul"}},
+        {"qid": "Q9665832","label": {"pt-br": "Brasão de São José do Rio Preto", "en": "Coat of arms of São José do Rio Preto"}},
+        {"qid": "Q18463792","label": {"pt-br": "Brasão de São José dos Campos", "en": "Coat of arms of São José dos Campos"}},
         {"qid": "Q107366389", "label": {"pt-br": "Brasão de São Sebastião", "en": "Coat of arms of São Sebastião"}},
         {"qid": "Q9665890", "label": {"pt-br": "Brasão de São Vicente", "en": "Coat of arms of São Vicente"}},
         {"qid": "Q107366381", "label": {"pt-br": "Brasão de Socorro", "en": "Coat of arms of Socorro"}},
@@ -286,8 +282,7 @@ def item(qid):
         {"qid": "Q107366390", "label": {"pt-br": "Brasão de Ubatuba", "en": "Coat of arms of Ubatuba"}},
         {"qid": "Q107366382", "label": {"pt-br": "Brasão de Vassouras", "en": "Coat of arms of Vassouras"}},
         {"qid": "Q8778141", "label": {"pt-br": "Brasão do estado de São Paulo", "en": "Coat of arms of São Paulo"}},
-        {"qid": "Q107366397",
-         "label": {"pt-br": "Brasão do Marquez de Valença", "en": "Coat of arms of the Marquis of Valença"}}]
+        {"qid": "Q107366397","label": {"pt-br": "Brasão do Marquez de Valença", "en": "Coat of arms of the Marquis of Valença"}}]
 
     languages = [{"label": gettext("Português brasileiro"), "iso": "pt-br"},
                  {"label": gettext("Português"), "iso": "pt"},
@@ -297,54 +292,41 @@ def item(qid):
                  {"label": gettext("Francês"), "iso": "fr"},
                  {"label": gettext("Alemão"), "iso": "de"}]
 
-    # crowns = query_items(all_queries["crowns"]["query"].replace("LANGUAGE", lang))
-    crowns = [{"qid": "Q114971", "label": {"pt-br": "coronel de barão", "en": "crown of baron"}},
-              {"qid": "Q1216485", "label": {"pt-br": "coroa de nobreza", "en": "noble crown"}},
-              {"qid": "Q1277481", "label": {"pt-br": "coroa de conde", "en": "count's crown"}},
-              {"qid": "Q1399217", "label": {"pt-br": "coroa do povo", "en": "Volkskrone"}},
-              {"qid": "Q139952", "label": {"pt-br": "coroa oriental", "en": "eastern crown"}},
-              {"qid": "Q1483321", "label": {"pt-br": "coroa principesca", "en": "princely crown"}},
-              {"qid": "Q15320147", "label": {"pt-br": "coroa astral", "en": "astral crown"}},
-              {"qid": "Q1603282", "label": {"pt-br": "coroa de elmo", "en": "helmet crown"}},
-              {"qid": "Q16553123", "label": {"pt-br": "coroa celestial", "en": "celestial crown"}},
-              {"qid": "Q17461213", "label": {"pt-br": "coronel de marquês", "en": "marquess crown"}},
-              {"qid": "Q18433798", "label": {"pt-br": "coroa imperial", "en": "imperial crown"}},
-              {"qid": "Q2047836", "label": {"pt-br": "coroa castrense", "en": "camp crown"}},
-              {"qid": "Q2522134", "label": {"pt-br": "coronel de visconde", "en": "viscount crown"}},
-              {"qid": "Q3693964", "label": {"pt-br": "coroa de espinhos", "en": "crown of thorns"}},
-              {"qid": "Q429340", "label": {"pt-br": "coroa mural", "en": "mural crown"}},
-              {"qid": "Q50324108", "label": {"pt-br": "coronel", "en": "coronet"}},
-              {"qid": "Q5788764", "label": {"pt-br": "coroa do Infante", "en": "crown of the Infante"}},
-              {"qid": "Q58995913", "label": {"pt-br": "coroa real", "en": "royal crown"}},
-              {"qid": "Q593235", "label": {"pt-br": "coroa naval", "en": "naval crown"}},
-              {"qid": "Q8351075", "label": {"pt-br": "coronel de conde", "en": "count's coronet"}}]
+    crowns = query_items(all_queries["crowns"]["query"].replace("LANGUAGE", lang))
 
-    colors = [{"qid": "Q88219768", "label": {"pt-br": "aço", "en": "steel"}, "file": "cor_aço.svg"},
-              {"qid": "Q936472", "label": {"pt-br": "argent", "en": "argent"}, "file": "cor_argent.svg"},
-              {"qid": "Q107348978", "label": {"pt-br": "bronze", "en": "bronze"}, "file": "cor_bronze.svg"},
-              {"qid": "Q107348994", "label": {"pt-br": "chumbo", "en": "lead"}, "file": "cor_chumbo.svg"},
-              {"qid": "Q15830500", "label": {"pt-br": "cobre", "en": "copper"}, "file": "cor_cobre.svg"},
-              {"qid": "Q3743211", "label": {"pt-br": "ferro", "en": "iron"}, "file": "cor_ferro.svg"},
-              {"qid": "Q430099", "label": {"pt-br": "or", "en": "or"}, "file": "cor_or.svg"},
-              {"qid": "Q1785501", "label": {"pt-br": "azure", "en": "azure"}, "file": "cor_azure.svg"},
-              {"qid": "Q858055", "label": {"pt-br": "gules", "en": "gules"}, "file": "cor_gules.svg"},
-              {"qid": "Q4401253", "label": {"pt-br": "purpure", "en": "purpure"}, "file": "cor_purpure.svg"},
-              {"qid": "Q936496", "label": {"pt-br": "sable", "en": "sable"}, "file": "cor_sable.svg"},
-              {"qid": "Q936535", "label": {"pt-br": "vert", "en": "vert"}, "file": "cor_vert.svg"},
-              {"qid": "Q107349007", "label": {"pt-br": "amaranto", "en": "amaranth"}, "file": "cor_amaranto.svg"},
-              {"qid": "Q1055869", "label": {"pt-br": "azul-celeste", "en": "bleu celeste"},
-               "file": "cor_azul-celeste.svg"},
-              {"qid": "Q105721308", "label": {"pt-br": "brunâtre", "en": "brunâtre"}, "file": "cor_brunâtre.svg"},
-              {"qid": "Q1663655", "label": {"pt-br": "carnação", "en": "carnation"}, "file": "cor_carnação.svg"},
-              {"qid": "Q218173", "label": {"pt-br": "cendrée", "en": "cendrée"}, "file": "cor_cendrée.svg"},
-              {"qid": "Q1867823", "label": {"pt-br": "cor natural", "en": "natural color"}, "file": "cor_natural.svg"},
-              {"qid": "Q3040333", "label": {"pt-br": "laranja", "en": "orange"}, "file": "cor_laranja.svg"},
-              {"qid": "Q16977936", "label": {"pt-br": "rosa", "en": "rose"}, "file": "cor_rosa.svg"},
-              {"qid": "Q10858582", "label": {"pt-br": "murrey", "en": "murrey"}, "file": "cor_murrey.svg"},
-              {"qid": "Q218177", "label": {"pt-br": "sanguinho", "en": "sanguine"}, "file": "cor_sanguinho.svg"},
-              {"qid": "Q218169", "label": {"pt-br": "tenné", "en": "tenné"}, "file": "cor_tenné.svg"},
-              {"qid": "Q384324", "label": {"pt-br": "arminho", "en": "ermine"}, "file": "cor_arminho.svg"},
-              {"qid": "Q356887", "label": {"pt-br": "veiro", "en": "vair"}, "file": "cor_veiro.svg"}]
+    colors = [
+        {"label": {"pt-br": "Metais", "en": "Metals"},
+         "list": [{"qid": "Q936472", "label": {"pt-br": "argent", "en": "argent"}},
+                  {"qid": "Q430099", "label": {"pt-br": "or", "en": "or"}}]},
+        {"label": {"pt-br": "Cores", "en": "Colours"},
+         "list": [{"qid": "Q1785501", "label": {"pt-br": "azure", "en": "azure"}},
+                  {"qid": "Q858055", "label": {"pt-br": "gules", "en": "gules"}},
+                  {"qid": "Q4401253", "label": {"pt-br": "purpure", "en": "purpure"}},
+                  {"qid": "Q936496", "label": {"pt-br": "sable", "en": "sable"}},
+                  {"qid": "Q936535", "label": {"pt-br": "vert", "en": "vert"}}]},
+        {"label": {"pt-br": "Manchas", "en": "Stains"},
+         "list": [{"qid": "Q10858582", "label": {"pt-br": "murrey", "en": "murrey"}},
+                  {"qid": "Q218177", "label": {"pt-br": "sanguinho", "en": "sanguine"}},
+                  {"qid": "Q218169", "label": {"pt-br": "tenné", "en": "tenné"}}]},
+        {"label": {"pt-br": "Peles", "en": "Furs"},
+         "list": [{"qid": "Q384324", "label": {"pt-br": "arminho", "en": "ermine"}},
+                  {"qid": "Q356887", "label": {"pt-br": "veiro", "en": "vair"}}]},
+        {"label": {"pt-br": "Metais não-tradicionais", "en": "Non-traditional metals"},
+         "list": [{"qid": "Q88219768", "label": {"pt-br": "aço", "en": "steel"}},
+                  {"qid": "Q107348978", "label": {"pt-br": "bronze", "en": "bronze"}},
+                  {"qid": "Q107348994", "label": {"pt-br": "chumbo", "en": "lead"}},
+                  {"qid": "Q15830500", "label": {"pt-br": "cobre", "en": "copper"}},
+                  {"qid": "Q3743211", "label": {"pt-br": "ferro", "en": "iron"}}]},
+        {"label": {"pt-br": "Cores não-tradicionais", "en": "Non-traditional colours"},
+         "list": [{"qid": "Q107349007", "label": {"pt-br": "amaranto", "en": "amaranth"}},
+                  {"qid": "Q1055869", "label": {"pt-br": "azul-celeste", "en": "bleu celeste"}},
+                  {"qid": "Q105721308", "label": {"pt-br": "brunâtre", "en": "brunâtre"}},
+                  {"qid": "Q1663655", "label": {"pt-br": "carnação", "en": "carnation"}},
+                  {"qid": "Q218173", "label": {"pt-br": "cendrée", "en": "cendrée"}},
+                  {"qid": "Q1867823", "label": {"pt-br": "cor natural", "en": "natural color"}},
+                  {"qid": "Q3040333", "label": {"pt-br": "laranja", "en": "orange"}},
+                  {"qid": "Q16977936", "label": {"pt-br": "rosa", "en": "rose"}}]}
+    ]
 
     partitions = query_items(all_queries["partitions"]["query"].replace("LANGUAGE", lang))
 

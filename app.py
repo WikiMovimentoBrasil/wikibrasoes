@@ -584,14 +584,7 @@ def make_stat(prop, val, qualifiers, edit_or_create):
 
 
 def make_monolingual_stat(prop, val, lang, edit_or_create):
-    language_codes = {"Q750553": "pt-br",
-                      "Q5146": "pt",
-                      "Q397": "la",
-                      "Q1860": "en",
-                      "Q1321": "es",
-                      "Q150": "fr"}
-
-    language = language_codes[lang] if lang in language_codes else "und"
+    language = lang if lang else "und"
 
     result_item = {
         "mainsnak":

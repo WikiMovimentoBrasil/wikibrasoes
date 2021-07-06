@@ -1,0 +1,657 @@
+# Translations template for PROJECT.
+# Copyright (C) 2021 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2021.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2021-07-06 16:00-0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.9.1\n"
+
+#: templates/apps.html:9 templates/topnavbar.html:5
+msgid "Outros aplicativos"
+msgstr ""
+
+#: templates/apps.html:19
+msgid ""
+"A iniciativa do <b>Projeto Novo Museu do Ipiranga</b> tem desenvolvido "
+"uma série de aplicativos, chamada <b>Wiki Museu do Ipiranga</b>, com o "
+"objetivo de convidar você a atuar no trabalho de investigação e curadoria"
+" das obras e objetos do acervo do Museu do Ipiranga."
+msgstr ""
+
+#: templates/apps.html:31 templates/apps.html:35
+msgid "Logotipo Wiki Museu do Ipiranga - Quantos tem?"
+msgstr ""
+
+#: templates/apps.html:43
+msgid ""
+"<b>Quantos tem?</b> te convida a contar quantos elementos estão presentes"
+" nas obras do acervo do Museu do Ipiranga."
+msgstr ""
+
+#: templates/apps.html:44
+msgid ""
+"Por exemplo, quantos cordeiros estão retratados no quadro <a "
+"target=\"_blank\" "
+"href=\"https://wikiquantos.toolforge.org/qid/Q52303216/pt\"><i>Mulher na "
+"Janela Alimentando Cordeiros, Menino Sentado numa Banqueta</i></a>, de <a"
+" target=\"_blank\" "
+"href=\"https://wikiquantos.toolforge.org/criador/Q5474348\">Adrien Henri "
+"Vital van Emelen</a>?"
+msgstr ""
+
+#: templates/apps.html:55 templates/apps.html:59
+msgid "Logotipo Wiki Museu do Ipiranga - Com que roupa eu vou?"
+msgstr ""
+
+#: templates/apps.html:67
+msgid ""
+"<b>Com que roupa eu vou?</b> te convida a descrever as roupas e os "
+"acessórios das pessoas retratadas em obras do acervo do Museu do "
+"Ipiranga."
+msgstr ""
+
+#: templates/apps.html:68
+msgid ""
+"Por exemplo, quais acessórios são usados por Dona Jessy de Souza Queiroz "
+"em seu <a target=\"_blank\" "
+"href=\"https://wikiroupas.toolforge.org/item/Q52302832\"><i>retrato por "
+"Karl Ernst Papf</i></a>?"
+msgstr ""
+
+#: templates/apps.html:79 templates/apps.html:83
+msgid "Logotipo Wiki Museu do Ipiranga - Qual a marca?"
+msgstr ""
+
+#: templates/apps.html:91
+msgid ""
+"<b>Qual a marca?</b> te convida a identificar as marcas de objetos do "
+"acervo do Museu do Ipiranga."
+msgstr ""
+
+#: templates/apps.html:92
+msgid ""
+"Por exemplo, qual a marca do <a target=\"_blank\" "
+"href=\"https://wikimarcas.toolforge.org/colecao/brinquedos\"><i>brinquedo</a>"
+" <a target=\"_blank\" "
+"href=\"https://wikimarcas.toolforge.org/item/Q65033132\"><i>Trem de luxo "
+"Nº2</i></a>?"
+msgstr ""
+
+#: templates/apps.html:103 templates/apps.html:107
+msgid "Logotipo Wiki Museu do Ipiranga - Qual o ornamento?"
+msgstr ""
+
+#: templates/apps.html:115
+msgid ""
+"<b>Qual o ornamento?</b> te convida a identificar os ornamentos "
+"representados em objetos do acervo do Museu do Ipiranga."
+msgstr ""
+
+#: templates/apps.html:116
+msgid ""
+"Por exemplo, qual tipo de flor está representada numa <a "
+"target=\"_blank\" "
+"href=\"https://wikimotivos.toolforge.org/item/Q106210419\"><i>sopeira com"
+" tampa</i> produzida pelas Indústrias Reunidas Fábricas Matarazzo</a>?"
+msgstr ""
+
+#: templates/apps.html:127 templates/apps.html:131
+msgid "Logotipo Wiki Museu do Ipiranga - Para que serve?"
+msgstr ""
+
+#: templates/apps.html:139
+msgid ""
+"<b>Para que serve?</b> te convida a fotografar e descrever o uso de "
+"objetos semelhantes aos encontrados no acervo do Museu do Ipiranga que "
+"você possua em casa."
+msgstr ""
+
+#: templates/apps.html:140
+msgid ""
+"Por exemplo, você tem um <a target=\"_blank\" "
+"href=\"https://wikiusos.toolforge.org/item/Q65033097\"><i>ralador de "
+"queijo</i> como este</a> na cozinha da sua casa? Você o utiliza somente "
+"para ralar queijo? Ou o usa como peça decorativa? Ele tem alguma história"
+" especial?"
+msgstr ""
+
+#: templates/apps.html:151 templates/apps.html:155 templates/base.html:39
+#: templates/base.html:41
+msgid "Logotipo Wiki Museu do Ipiranga - O que há no brasão?"
+msgstr ""
+
+#: templates/apps.html:163
+msgid ""
+"<b>O que há no brasão?</b> te convida a identificar os elementos "
+"heráldicos dos brasões retratados em obras e objetos do acervo do Museu "
+"do Ipiranga."
+msgstr ""
+
+#: templates/apps.html:164
+msgid ""
+"Por exemplo, você consegue identificar todos os elementos presentes <a "
+"target=\"_blank\" "
+"href=\"https://wikibrasoes.toolforge.org/item/Q55851804\"><i>nesta "
+"pintura de brasão de José Wasth Rodrigues</i></a>?"
+msgstr ""
+
+#: templates/base.html:20 templates/colecao.html:21 templates/inicio.html:9
+#: templates/topnavbar.html:2
+msgid "Página inicial"
+msgstr ""
+
+#: templates/base.html:20
+msgid "Wiki Museu do Ipiranga - O que há no brasão?"
+msgstr ""
+
+#: templates/base.html:50
+msgid "Projeto Novo Museu do Ipiranga"
+msgstr ""
+
+#: templates/base.html:51
+#, python-format
+msgid ""
+"<i>Wiki Museu do Ipiranga - O que há no brasão?</i> é um aplicativo "
+"desenvolvido no contexto do <i><b>%(projeto)s</b></i>, organizado pelo "
+"<b>Grupo de Usuários Wiki Movimento Brasil</b> e o <b>Museu do "
+"Ipiranga</b>, em parceria com a <b>Fundação Banco do Brasil</b> e com "
+"realização da <b>Universidade de São Paulo</b> e da <b>Fundação de Apoio "
+"à Universidade de São Paulo</b>."
+msgstr ""
+
+#: templates/brasao.html:38
+msgid "Paquife"
+msgstr ""
+
+#: templates/brasao.html:1623
+msgid "Adicionar paquife"
+msgstr ""
+
+#: templates/brasao.html:1629
+msgid ""
+"Paquifes são ornamentos em formato de manto, capa ou folhagem que se "
+"estendem ao redor do escudo a partir do elmo."
+msgstr ""
+
+#: templates/brasao.html:1632 templates/item.html:189 templates/item.html:207
+#: templates/item.html:225 templates/item.html:260 templates/item.html:538
+msgid "--Selecione uma opção--"
+msgstr ""
+
+#: templates/brasao.html:1640 templates/item.html:551 templates/item.html:579
+msgid "Cancelar"
+msgstr ""
+
+#: templates/brasao.html:1642
+msgid "Enviar imagem"
+msgstr ""
+
+#: templates/colecao.html:18
+#, python-format
+msgid ""
+"Esta seleção de objetos apresenta <i>%(p180)s</i> do acervo do Museu do "
+"Ipiranga."
+msgstr ""
+
+#: templates/colecao.html:22
+#, python-format
+msgid ""
+"São %(quant)s objetos selecionados. Para navegar por outras seleções de "
+"objetos, volte à %(home)s."
+msgstr ""
+
+#: templates/error.html:9 templates/error.html:14
+msgid "Algo deu errado!"
+msgstr ""
+
+#: templates/error.html:28
+msgid "REPORTAR ERRO"
+msgstr ""
+
+#: templates/error.html:37 templates/item.html:482
+msgid "VOLTAR À PÁGINA INICIAL"
+msgstr ""
+
+#: templates/inicio.html:16 templates/inicio.html:18
+msgid "Logotipo Wiki Museu do Ipiranga"
+msgstr ""
+
+#: templates/inicio.html:26
+msgid "Bem-vindo(a) ao <i>Wiki Museu do Ipiranga - O que há no brasão?</i>"
+msgstr ""
+
+#: templates/inicio.html:29
+msgid ""
+"Neste aplicativo, você participa do trabalho de pesquisa do Museu do "
+"Ipiranga. Sua tarefa: "
+msgstr ""
+
+#: templates/inicio.html:29
+msgid ""
+"Identificar os <a target=\"_blank\" "
+"href=\"https://pt.wikipedia.org/wiki/Heráldica\">elementos heráldicos</a>"
+" que compõem os brasões representados em obras e objetos do acervo do "
+"Museu do Ipiranga."
+msgstr ""
+
+#: templates/inicio.html:29
+msgid ""
+"Para participar, é preciso autenticar-se; depois, escolha uma categoria "
+"abaixo para começar."
+msgstr ""
+
+#: templates/inicio.html:42
+msgid "Vasos"
+msgstr ""
+
+#: templates/inicio.html:49
+msgid "Ornamentos"
+msgstr ""
+
+#: templates/inicio.html:58
+msgid "Alimentação"
+msgstr ""
+
+#: templates/inicio.html:65
+msgid "Iconografia"
+msgstr ""
+
+#: templates/inicio.html:74
+msgid "Miscelânea"
+msgstr ""
+
+#: templates/item.html:39
+msgid "Veja as imagens desse objeto no Wikimedia Commons"
+msgstr ""
+
+#: templates/item.html:53
+msgid "Veja essa imagem no Wikimedia Commons"
+msgstr ""
+
+#: templates/item.html:61
+msgid "Objeto"
+msgstr ""
+
+#: templates/item.html:68
+msgid "Instância de"
+msgstr ""
+
+#: templates/item.html:81
+msgid "Coleção"
+msgstr ""
+
+#: templates/item.html:94
+msgid "Número de inventário"
+msgstr ""
+
+#: templates/item.html:104
+msgid "Data"
+msgstr ""
+
+#: templates/item.html:112
+msgid "Criador(a)"
+msgstr ""
+
+#: templates/item.html:125
+msgid "Material"
+msgstr ""
+
+#: templates/item.html:138
+msgid "Dimensões"
+msgstr ""
+
+#: templates/item.html:149
+msgid "Método de fabricação"
+msgstr ""
+
+#: templates/item.html:162
+msgid "Versão audível"
+msgstr ""
+
+#: templates/item.html:167
+msgid "Seu navegador não suporta este elemento de áudio"
+msgstr ""
+
+#: templates/item.html:177
+msgid ""
+"Faça a sua autenticação clicando no botão 'Autenticar-se' no canto "
+"superior direito"
+msgstr ""
+
+#: templates/item.html:185
+msgid "Você consegue identificar na lista qual o brasão retratado?"
+msgstr ""
+
+#: templates/item.html:190 templates/item.html:246 templates/item.html:281
+#: templates/item.html:316 templates/item.html:351
+msgid "Não"
+msgstr ""
+
+#: templates/item.html:200
+msgid ""
+"Este brasão possui uma <a target='_blank' "
+"href='https://pt.wikipedia.org/wiki/Coroa_(heráldica)'>coroa</a>?"
+msgstr ""
+
+#: templates/item.html:200
+msgid "Se sim, identifique o tipo:"
+msgstr ""
+
+#: templates/item.html:218
+msgid ""
+"<a target='_blank' "
+"href='https://pt.wikipedia.org/wiki/Esmalte_(heráldica)'>Cor</a> da "
+"coroa:"
+msgstr ""
+
+#: templates/item.html:239
+msgid ""
+"O brasão possui <a target='_blank' "
+"href='https://pt.wikipedia.org/wiki/Elmo_(heráldica)'>elmo</a>?"
+msgstr ""
+
+#: templates/item.html:247 templates/item.html:282 templates/item.html:317
+#: templates/item.html:352
+msgid "Sim"
+msgstr ""
+
+#: templates/item.html:253
+msgid ""
+"<a target='_blank' "
+"href='https://pt.wikipedia.org/wiki/Esmalte_(heráldica)'>Cor</a> do elmo:"
+msgstr ""
+
+#: templates/item.html:274
+msgid ""
+"O brasão possui <a target='_blank' "
+"href='https://pt.wikipedia.org/wiki/Paquife'>paquife</a>?"
+msgstr ""
+
+#: templates/item.html:288
+msgid ""
+"<a target='_blank' "
+"href='https://pt.wikipedia.org/wiki/Esmalte_(heráldica)'>Cor</a> do "
+"paquife:"
+msgstr ""
+
+#: templates/item.html:295 templates/item.html:330 templates/item.html:365
+#: templates/item.html:383
+msgid "--Selecione ao menos uma opção--"
+msgstr ""
+
+#: templates/item.html:309
+msgid ""
+"O brasão possui <a target='_blank' "
+"href='https://pt.wikipedia.org/wiki/Virol'>virol</a>?"
+msgstr ""
+
+#: templates/item.html:323
+msgid ""
+"<a target='_blank' "
+"href='https://pt.wikipedia.org/wiki/Esmalte_(heráldica)'>Cor</a> do "
+"virol:"
+msgstr ""
+
+#: templates/item.html:344
+msgid ""
+"O <a target='_blank' "
+"href='https://pt.wikipedia.org/wiki/Campo_(heráldica)'>campo</a> está "
+"dividido?"
+msgstr ""
+
+#: templates/item.html:358
+msgid ""
+"Como está <a target='_blank' "
+"href='https://pt.wikipedia.org/wiki/Partições_do_campo_(heráldica)'>dividido</a>"
+" o campo do escudo?"
+msgstr ""
+
+#: templates/item.html:376
+msgid ""
+"<a target='_blank' "
+"href='https://pt.wikipedia.org/wiki/Esmalte_(heráldica)'>Cor(es)</a> do "
+"campo:"
+msgstr ""
+
+#: templates/item.html:397
+msgid ""
+"Quais são as <a target='_blank' "
+"href='https://pt.wikipedia.org/wiki/Figuras_(heráldica)'>figuras "
+"heráldicas</a> retratadas?"
+msgstr ""
+
+#: templates/item.html:406 templates/item.html:423 templates/item.html:440
+#: templates/item.html:471 templates/item.html:589
+msgid "Adicionar"
+msgstr ""
+
+#: templates/item.html:414
+msgid ""
+"O brasão possui <a target='_blank' "
+"href='https://pt.wikipedia.org/wiki/Suporte_(heráldica)'>suportes ou "
+"tenentes</a>?"
+msgstr ""
+
+#: templates/item.html:414
+msgid "Se sim, indique-os."
+msgstr ""
+
+#: templates/item.html:431
+msgid ""
+"O brasão possui <a target='_blank' "
+"href='https://pt.wikipedia.org/wiki/Timbre_(heráldica)'>timbre(s)</a>?"
+msgstr ""
+
+#: templates/item.html:431
+msgid "Se sim, indique-o(s)."
+msgstr ""
+
+#: templates/item.html:448
+msgid ""
+"O brasão possui um <a target='_blank' "
+"href='https://pt.wikipedia.org/wiki/Lema'>lema</a>?"
+msgstr ""
+
+#: templates/item.html:448
+msgid "Se sim, escreva-o abaixo:"
+msgstr ""
+
+#: templates/item.html:459
+msgid "Se o brasão possui um lema, em qual idioma está escrito?"
+msgstr ""
+
+#: templates/item.html:474
+msgid "ADICIONAR"
+msgstr ""
+
+#: templates/item.html:491
+msgid "PULAR ESTE ITEM"
+msgstr ""
+
+#: templates/item.html:510
+msgid "Pesquise"
+msgstr ""
+
+#: templates/item.html:519
+msgid "Selecione uma opção:"
+msgstr ""
+
+#: templates/item.html:525
+msgid "Indique a quantidade:"
+msgstr ""
+
+#: templates/item.html:528
+msgid "Quantidade"
+msgstr ""
+
+#: templates/item.html:532
+msgid ""
+"<a target='_blank' "
+"href='https://pt.wikipedia.org/wiki/Esmalte_(heráldica)'>Cor(es)</a>:"
+msgstr ""
+
+#: templates/item.html:590
+msgid ""
+"Figuras heráldicas são todos e quaisquer elementos que se encontrem "
+"dentro do escudo em um brasão."
+msgstr ""
+
+#: templates/item.html:591
+msgid "Suportes heráldicos são as figuras que sustentam ou guardam o escudo."
+msgstr ""
+
+#: templates/item.html:592
+msgid "Timbres são figuras colocadas acima do virol e do elmo em um brasão."
+msgstr ""
+
+#: templates/item.html:634
+msgid "Quantidade: "
+msgstr ""
+
+#: templates/item.html:635
+msgid "Cor(es): "
+msgstr ""
+
+#: templates/item.html:637
+msgid "Quantidade não declarada"
+msgstr ""
+
+#: templates/item.html:678
+msgid "Pesquisando o banco de dados..."
+msgstr ""
+
+#: templates/item.html:700
+msgid "Declaração inserida com sucesso!"
+msgstr ""
+
+#: templates/item.html:719 templates/item.html:763
+msgid "Selecione um elemento"
+msgstr ""
+
+#: templates/item.html:738
+msgid "Nenhum resultado obtido"
+msgstr ""
+
+#: templates/sobre.html:9 templates/topnavbar.html:3
+msgid "Sobre"
+msgstr ""
+
+#: templates/sobre.html:16
+msgid ""
+"Você está pronto(a) para ser um(a) investigador(a) de acervos? É o que o "
+"aplicativo <b>Wiki Museu do Ipiranga - O que há no brasão?</b> te "
+"oferece: desenvolver suas aptidões de investigação e conhecer mais a "
+"fundo o acervo do Museu do Ipiranga."
+msgstr ""
+
+#: templates/sobre.html:17
+msgid ""
+"A curadoria de acervo é uma das atividades mais importantes do museu. "
+"Nela, pesquisadoras e pesquisadores -- e agora você! -- se debruçam sobre"
+" os objetos da coleção para identificar sua procedência, o que retrata, a"
+" história da peça. No aplicativo <b>Wiki Museu do Ipiranga - O que há no "
+"brasão?</b>, você participa desse trabalho de curadoria, identificando <a"
+" target=\"_blank\" "
+"href=\"https://pt.wikipedia.org/wiki/Heráldica\">elementos heráldicos</a>"
+" dos brasões retratados nos objetos e obras do acervo do Museu do "
+"Ipiranga."
+msgstr ""
+
+#: templates/sobre.html:18
+msgid ""
+"O trabalho é sério! Suas edições são interativas e automaticamente "
+"registradas. Elas aparecem num grande documento, uma base de dados, em "
+"que pouco a pouco as informações sobre o acervo do Museu do Ipiranga são "
+"melhoradas. Você agora tem o poder de ajudar -- que responsabilidade, né?"
+msgstr ""
+
+#: templates/sobre.html:19
+msgid ""
+"O aplicativo é um recurso de curadoria colaborativa, em que todas e todos"
+" podem participar. Funciona como a Wikipédia, a enciclopédia em que todo "
+"mundo pode editar."
+msgstr ""
+
+#: templates/sobre.html:20
+#, python-format
+msgid ""
+"Mãos à obra, temos agora %(number_works)s objetos e obras cujas "
+"informações precisam de sua ajuda!"
+msgstr ""
+
+#: templates/sobre.html:24
+msgid "Flask"
+msgstr ""
+
+#: templates/sobre.html:25
+msgid "GitHub"
+msgstr ""
+
+#: templates/sobre.html:26
+msgid "GPL v3.0"
+msgstr ""
+
+#: templates/sobre.html:27
+msgid "CC-BY-SA 4.0 Internacional"
+msgstr ""
+
+#: templates/sobre.html:28
+msgid "CC0"
+msgstr ""
+
+#: templates/sobre.html:30
+#, python-format
+msgid "Este aplicativo foi desenvolvido em %(flask)s."
+msgstr ""
+
+#: templates/sobre.html:31
+#, python-format
+msgid "O código-fonte está disponível no %(github)s."
+msgstr ""
+
+#: templates/sobre.html:32
+#, python-format
+msgid "Licença do cógido-fonte: %(license_code)s."
+msgstr ""
+
+#: templates/sobre.html:33
+#, python-format
+msgid "Licença de textos: %(license_text)s."
+msgstr ""
+
+#: templates/sobre.html:34
+#, python-format
+msgid "Licença dos metadados retornados do Wikidata: %(license_wikidata)s."
+msgstr ""
+
+#: templates/sobre.html:35
+msgid "Versão 1.0."
+msgstr ""
+
+#: templates/topnavbar.html:4
+msgid "Ajuda"
+msgstr ""
+
+#: templates/topnavbar.html:15
+msgid "Autenticar-se"
+msgstr ""
+
+#: templates/topnavbar.html:17
+msgid "Menu"
+msgstr ""
+
+#: templates/tutorial.html:9
+msgid "Tutorial"
+msgstr ""
+

@@ -360,7 +360,7 @@ def send_brasao():
     form = request.form
 
     if "brasao" in form and form["brasao"] != "no":
-        # post_item(json.dumps([{make_stat("P180", form["brasao"], [])}]))
+        add_p180(form["qid"], form["brasao"])
         values_already_on_wd = get_item(form["brasao"])
         statements = []
 
@@ -496,6 +496,16 @@ def send_brasao():
         statements = {"claims": statements}
         post_item(json.dumps(statements), form["brasao"])
     return redirect(url_for("item", qid=form["qid"]))
+
+
+def add_p180(qid, brasao):
+    try:
+        values_already_on_wd = get_item(qid)
+        edit_or_create = check_items(values_already_on_wd, brasao, "")
+        statements = {"claims": [make_stat("P180", brasao, [], edit_or_create)]}
+        post_item(json.dumps(statements), qid)
+    except:
+        pass
 
 
 def get_item(qid):

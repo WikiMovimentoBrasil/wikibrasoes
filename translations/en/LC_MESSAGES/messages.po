@@ -778,8 +778,7 @@ msgstr "Success!"
 msgid ""
 "Confira suas edições clicando no seu nome de usuário(a) no canto superior"
 " direito."
-msgstr ""
-"Check your edits by clicking on your username at the upper right corner."
+msgstr "Check your edits by clicking on your username at the upper right corner."
 
 #: templates/success.html:23
 msgid "Você será redirecionado(a) em: "
@@ -804,3 +803,4 @@ msgstr "Menu"
 #: templates/tutorial.html:9
 msgid "Tutorial"
 msgstr "Tutorial"
+

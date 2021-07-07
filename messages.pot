@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2021-07-06 16:00-0300\n"
+"POT-Creation-Date: 2021-07-07 08:54-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -184,12 +184,12 @@ msgid ""
 "estendem ao redor do escudo a partir do elmo."
 msgstr ""
 
-#: templates/brasao.html:1632 templates/item.html:189 templates/item.html:207
-#: templates/item.html:225 templates/item.html:260 templates/item.html:538
+#: templates/brasao.html:1632 templates/item.html:190 templates/item.html:208
+#: templates/item.html:226 templates/item.html:261 templates/item.html:542
 msgid "--Selecione uma opção--"
 msgstr ""
 
-#: templates/brasao.html:1640 templates/item.html:551 templates/item.html:579
+#: templates/brasao.html:1640 templates/item.html:555 templates/item.html:583
 msgid "Cancelar"
 msgstr ""
 
@@ -219,25 +219,25 @@ msgstr ""
 msgid "REPORTAR ERRO"
 msgstr ""
 
-#: templates/error.html:37 templates/item.html:482
+#: templates/error.html:37 templates/item.html:483
 msgid "VOLTAR À PÁGINA INICIAL"
 msgstr ""
 
-#: templates/inicio.html:16 templates/inicio.html:18
+#: templates/inicio.html:17 templates/inicio.html:20
 msgid "Logotipo Wiki Museu do Ipiranga"
 msgstr ""
 
-#: templates/inicio.html:26
+#: templates/inicio.html:28
 msgid "Bem-vindo(a) ao <i>Wiki Museu do Ipiranga - O que há no brasão?</i>"
 msgstr ""
 
-#: templates/inicio.html:29
+#: templates/inicio.html:31
 msgid ""
 "Neste aplicativo, você participa do trabalho de pesquisa do Museu do "
 "Ipiranga. Sua tarefa: "
 msgstr ""
 
-#: templates/inicio.html:29
+#: templates/inicio.html:31
 msgid ""
 "Identificar os <a target=\"_blank\" "
 "href=\"https://pt.wikipedia.org/wiki/Heráldica\">elementos heráldicos</a>"
@@ -245,29 +245,29 @@ msgid ""
 "Museu do Ipiranga."
 msgstr ""
 
-#: templates/inicio.html:29
+#: templates/inicio.html:31
 msgid ""
 "Para participar, é preciso autenticar-se; depois, escolha uma categoria "
 "abaixo para começar."
 msgstr ""
 
-#: templates/inicio.html:42
+#: templates/inicio.html:44
 msgid "Vasos"
 msgstr ""
 
-#: templates/inicio.html:49
+#: templates/inicio.html:51
 msgid "Ornamentos"
 msgstr ""
 
-#: templates/inicio.html:58
+#: templates/inicio.html:60
 msgid "Alimentação"
 msgstr ""
 
-#: templates/inicio.html:65
+#: templates/inicio.html:67
 msgid "Iconografia"
 msgstr ""
 
-#: templates/inicio.html:74
+#: templates/inicio.html:76
 msgid "Miscelânea"
 msgstr ""
 
@@ -329,217 +329,217 @@ msgid ""
 "superior direito"
 msgstr ""
 
-#: templates/item.html:185
+#: templates/item.html:186
 msgid "Você consegue identificar na lista qual o brasão retratado?"
 msgstr ""
 
-#: templates/item.html:190 templates/item.html:246 templates/item.html:281
-#: templates/item.html:316 templates/item.html:351
+#: templates/item.html:191 templates/item.html:247 templates/item.html:282
+#: templates/item.html:317 templates/item.html:352
 msgid "Não"
 msgstr ""
 
-#: templates/item.html:200
+#: templates/item.html:201
 msgid ""
 "Este brasão possui uma <a target='_blank' "
 "href='https://pt.wikipedia.org/wiki/Coroa_(heráldica)'>coroa</a>?"
 msgstr ""
 
-#: templates/item.html:200
+#: templates/item.html:201
 msgid "Se sim, identifique o tipo:"
 msgstr ""
 
-#: templates/item.html:218
+#: templates/item.html:219
 msgid ""
 "<a target='_blank' "
 "href='https://pt.wikipedia.org/wiki/Esmalte_(heráldica)'>Cor</a> da "
 "coroa:"
 msgstr ""
 
-#: templates/item.html:239
+#: templates/item.html:240
 msgid ""
 "O brasão possui <a target='_blank' "
 "href='https://pt.wikipedia.org/wiki/Elmo_(heráldica)'>elmo</a>?"
 msgstr ""
 
-#: templates/item.html:247 templates/item.html:282 templates/item.html:317
-#: templates/item.html:352
+#: templates/item.html:248 templates/item.html:283 templates/item.html:318
+#: templates/item.html:353
 msgid "Sim"
 msgstr ""
 
-#: templates/item.html:253
+#: templates/item.html:254
 msgid ""
 "<a target='_blank' "
 "href='https://pt.wikipedia.org/wiki/Esmalte_(heráldica)'>Cor</a> do elmo:"
 msgstr ""
 
-#: templates/item.html:274
+#: templates/item.html:275
 msgid ""
 "O brasão possui <a target='_blank' "
 "href='https://pt.wikipedia.org/wiki/Paquife'>paquife</a>?"
 msgstr ""
 
-#: templates/item.html:288
+#: templates/item.html:289
 msgid ""
 "<a target='_blank' "
 "href='https://pt.wikipedia.org/wiki/Esmalte_(heráldica)'>Cor</a> do "
 "paquife:"
 msgstr ""
 
-#: templates/item.html:295 templates/item.html:330 templates/item.html:365
-#: templates/item.html:383
+#: templates/item.html:296 templates/item.html:331 templates/item.html:366
+#: templates/item.html:384
 msgid "--Selecione ao menos uma opção--"
 msgstr ""
 
-#: templates/item.html:309
+#: templates/item.html:310
 msgid ""
 "O brasão possui <a target='_blank' "
 "href='https://pt.wikipedia.org/wiki/Virol'>virol</a>?"
 msgstr ""
 
-#: templates/item.html:323
+#: templates/item.html:324
 msgid ""
 "<a target='_blank' "
 "href='https://pt.wikipedia.org/wiki/Esmalte_(heráldica)'>Cor</a> do "
 "virol:"
 msgstr ""
 
-#: templates/item.html:344
+#: templates/item.html:345
 msgid ""
 "O <a target='_blank' "
 "href='https://pt.wikipedia.org/wiki/Campo_(heráldica)'>campo</a> está "
 "dividido?"
 msgstr ""
 
-#: templates/item.html:358
+#: templates/item.html:359
 msgid ""
 "Como está <a target='_blank' "
 "href='https://pt.wikipedia.org/wiki/Partições_do_campo_(heráldica)'>dividido</a>"
 " o campo do escudo?"
 msgstr ""
 
-#: templates/item.html:376
+#: templates/item.html:377
 msgid ""
 "<a target='_blank' "
 "href='https://pt.wikipedia.org/wiki/Esmalte_(heráldica)'>Cor(es)</a> do "
 "campo:"
 msgstr ""
 
-#: templates/item.html:397
+#: templates/item.html:398
 msgid ""
 "Quais são as <a target='_blank' "
 "href='https://pt.wikipedia.org/wiki/Figuras_(heráldica)'>figuras "
 "heráldicas</a> retratadas?"
 msgstr ""
 
-#: templates/item.html:406 templates/item.html:423 templates/item.html:440
-#: templates/item.html:471 templates/item.html:589
+#: templates/item.html:407 templates/item.html:424 templates/item.html:441
+#: templates/item.html:472 templates/item.html:593
 msgid "Adicionar"
 msgstr ""
 
-#: templates/item.html:414
+#: templates/item.html:415
 msgid ""
 "O brasão possui <a target='_blank' "
 "href='https://pt.wikipedia.org/wiki/Suporte_(heráldica)'>suportes ou "
 "tenentes</a>?"
 msgstr ""
 
-#: templates/item.html:414
+#: templates/item.html:415
 msgid "Se sim, indique-os."
 msgstr ""
 
-#: templates/item.html:431
+#: templates/item.html:432
 msgid ""
 "O brasão possui <a target='_blank' "
 "href='https://pt.wikipedia.org/wiki/Timbre_(heráldica)'>timbre(s)</a>?"
 msgstr ""
 
-#: templates/item.html:431
+#: templates/item.html:432
 msgid "Se sim, indique-o(s)."
 msgstr ""
 
-#: templates/item.html:448
+#: templates/item.html:449
 msgid ""
 "O brasão possui um <a target='_blank' "
 "href='https://pt.wikipedia.org/wiki/Lema'>lema</a>?"
 msgstr ""
 
-#: templates/item.html:448
+#: templates/item.html:449
 msgid "Se sim, escreva-o abaixo:"
 msgstr ""
 
-#: templates/item.html:459
+#: templates/item.html:460
 msgid "Se o brasão possui um lema, em qual idioma está escrito?"
 msgstr ""
 
-#: templates/item.html:474
+#: templates/item.html:475
 msgid "ADICIONAR"
 msgstr ""
 
-#: templates/item.html:491
+#: templates/item.html:492
 msgid "PULAR ESTE ITEM"
 msgstr ""
 
-#: templates/item.html:510
+#: templates/item.html:511
 msgid "Pesquise"
 msgstr ""
 
-#: templates/item.html:519
+#: templates/item.html:521
 msgid "Selecione uma opção:"
 msgstr ""
 
-#: templates/item.html:525
+#: templates/item.html:528
 msgid "Indique a quantidade:"
 msgstr ""
 
-#: templates/item.html:528
+#: templates/item.html:531
 msgid "Quantidade"
 msgstr ""
 
-#: templates/item.html:532
+#: templates/item.html:536
 msgid ""
 "<a target='_blank' "
 "href='https://pt.wikipedia.org/wiki/Esmalte_(heráldica)'>Cor(es)</a>:"
 msgstr ""
 
-#: templates/item.html:590
+#: templates/item.html:594
 msgid ""
 "Figuras heráldicas são todos e quaisquer elementos que se encontrem "
 "dentro do escudo em um brasão."
 msgstr ""
 
-#: templates/item.html:591
+#: templates/item.html:595
 msgid "Suportes heráldicos são as figuras que sustentam ou guardam o escudo."
 msgstr ""
 
-#: templates/item.html:592
+#: templates/item.html:596
 msgid "Timbres são figuras colocadas acima do virol e do elmo em um brasão."
 msgstr ""
 
-#: templates/item.html:634
+#: templates/item.html:638
 msgid "Quantidade: "
 msgstr ""
 
-#: templates/item.html:635
+#: templates/item.html:639
 msgid "Cor(es): "
 msgstr ""
 
-#: templates/item.html:637
+#: templates/item.html:641
 msgid "Quantidade não declarada"
 msgstr ""
 
-#: templates/item.html:678
+#: templates/item.html:682
 msgid "Pesquisando o banco de dados..."
 msgstr ""
 
-#: templates/item.html:700
+#: templates/item.html:704
 msgid "Declaração inserida com sucesso!"
 msgstr ""
 
-#: templates/item.html:719 templates/item.html:763
+#: templates/item.html:722 templates/item.html:766
 msgid "Selecione um elemento"
 msgstr ""
 
-#: templates/item.html:738
+#: templates/item.html:741
 msgid "Nenhum resultado obtido"
 msgstr ""
 
@@ -637,6 +637,24 @@ msgstr ""
 
 #: templates/sobre.html:35
 msgid "Versão 1.0."
+msgstr ""
+
+#: templates/success.html:9 templates/success.html:14
+msgid "Sucesso!"
+msgstr ""
+
+#: templates/success.html:17
+msgid ""
+"Confira suas edições clicando no seu nome de usuário(a) no canto superior"
+" direito."
+msgstr ""
+
+#: templates/success.html:23
+msgid "Você será redirecionado(a) em: "
+msgstr ""
+
+#: templates/success.html:24
+msgid " segundo"
 msgstr ""
 
 #: templates/topnavbar.html:4

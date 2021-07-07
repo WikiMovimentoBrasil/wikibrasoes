@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block navbar %}
+    {% with lang=lang, username=username %}
+        {% include 'topnavbar.html' %}
+    {% endwith %}
+{% endblock %}
+
+{% block title %}{{ _("Sucesso!") }}{% endblock %}
+
+{% block content %}
+    <div class="w3-row" style="text-align:center">
+        <div class="w3-row" style="text-align:center; font-family: 'Josefin Sans', sans-serif; font-size:150%">
+            <p><b>{{ _("Sucesso!") }}</b></p>
+        </div>
+        <div class="w3-row" style="text-align:center; font-family: 'Josefin Sans', sans-serif; font-size:150%">
+            <p>{{ _("Confira suas edições clicando no seu nome de usuário(a) no canto superior direito.") }}</p>
+            <p id="countdown"></p>
+        </div>
+    </div>
+    <script>
+        window.onload = function () {
+            var text_red = "{{ _('Você será redirecionado(a) em: ') }}";
+            var segundos = "{{ _(' segundo') }}";
+            var timeleft = 10;
+            var downloadTimer = setInterval(function () {
+                if (timeleft <= 0) {
+                    clearInterval(downloadTimer);
+                } else if (timeleft === 1) {
+                    document.getElementById("countdown").innerHTML = text_red + timeleft + segundos;
+                } else {
+                    document.getElementById("countdown").innerHTML = text_red + timeleft + segundos + "s";
+                }
+                timeleft -= 1;
+            }, 1000);
+        }
+
+        setTimeout(function () {
+            window.location.href = '{{redirect_url}}';
+        }, 10000);
+    </script>
+{% endblock %}

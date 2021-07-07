@@ -13,9 +13,11 @@
         <div class="w3-container w3-quarter"></div>
         <h1 class="w3-container w3-half" style="text-align: center; padding-top:60px; padding-bottom:60px">
             {% if lang=="en" %}
-                <img class="banner" src="{{ url_for('static', filename= 'logo - en.svg') }}" alt='{{ _("Logotipo Wiki Museu do Ipiranga") }}' width="100%"/>
+                <img class="banner" src="{{ url_for('static', filename= 'logo - en.svg') }}"
+                     alt='{{ _("Logotipo Wiki Museu do Ipiranga") }}' width="100%"/>
             {% else %}
-                <img class="banner" src="{{ url_for('static', filename= 'logo - pt.svg') }}" alt='{{ _("Logotipo Wiki Museu do Ipiranga") }}' width="100%"/>
+                <img class="banner" src="{{ url_for('static', filename= 'logo - pt.svg') }}"
+                     alt='{{ _("Logotipo Wiki Museu do Ipiranga") }}' width="100%"/>
             {% endif %}
         </h1>
     </div>
@@ -23,10 +25,10 @@
         <div class="w3-container w3-quarter"></div>
         <div class="w3-container w3-half">
             <h2 style="text-align:center; padding-bottom:30px;">
-                {{ _("Bem-vindo(a) ao <i>Wiki Museu do Ipiranga - O que há no brasão?</i>")}}
+                {{ _("Bem-vindo(a) ao <i>Wiki Museu do Ipiranga - O que há no brasão?</i>") }}
             </h2>
             <h3 style="text-align:center; padding-bottom:30px;">
-                {{_("Neste aplicativo, você participa do trabalho de pesquisa do Museu do Ipiranga. Sua tarefa: ")}} {{_("Identificar os <a target=\"_blank\" href=\"https://pt.wikipedia.org/wiki/Heráldica\">elementos heráldicos</a> que compõem os brasões representados em obras e objetos do acervo do Museu do Ipiranga.")}} {{_("Para participar, é preciso autenticar-se; depois, escolha uma categoria abaixo para começar.")}}
+                {{ _("Neste aplicativo, você participa do trabalho de pesquisa do Museu do Ipiranga. Sua tarefa: ") }} {{ _("Identificar os <a target=\"_blank\" href=\"https://pt.wikipedia.org/wiki/Heráldica\">elementos heráldicos</a> que compõem os brasões representados em obras e objetos do acervo do Museu do Ipiranga.") }} {{ _("Para participar, é preciso autenticar-se; depois, escolha uma categoria abaixo para começar.") }}
             </h3>
         </div>
     </div>

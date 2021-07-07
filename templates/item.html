@@ -180,6 +180,7 @@
             <form id="brasao_form" method="post" action="{{ url_for("send_brasao") }}"
                   style="overflow: hidden; font-size: 125%; width: 100%; table-layout: fixed; overflow-wrap: break-word;">
                 <input type="hidden" name="qid" value="{{ qid }}">
+                <input type="hidden" name="next_qid" value="{{ next_qid }}">
                 <div class="w3-container w3-row stripped0" id="brasao_container">
                     <div class="w3-container">
                         {{ _("Você consegue identificar na lista qual o brasão retratado?") }}
@@ -406,7 +407,7 @@
                             {{ _("Adicionar") }}
                         </button>
                     </div>
-                    <div class="w3-container w3-half" id="figura_list" style="padding:0; display: none" ></div>
+                    <div class="w3-container w3-half" id="figura_list" style="padding:0; display: none"></div>
                 </div>
                 {# SUPORTES #}
                 <div class="w3-container w3-row stripped1" id="suportes_container">
@@ -515,20 +516,23 @@
                             </button>
                         </div>
                     </div>
-                    <div class="w3-container" id="select_instruction" style="display:none; padding:0 0 16px 0;font-size: 125%">
+                    <div class="w3-container" id="select_instruction"
+                         style="display:none; padding:0 0 16px 0;font-size: 125%">
                         {{ _("Selecione uma opção:") }}
                     </div>
                     <div class="w3-container" style="padding:0">
                         <form id="search_results"></form>
                     </div>
-                    <div class="w3-container" id="quantidade_container" style="display:none;padding:0 0 16px 0;font-size: 125%">
+                    <div class="w3-container" id="quantidade_container"
+                         style="display:none;padding:0 0 16px 0;font-size: 125%">
                         {{ _("Indique a quantidade:") }}
                         <br>
                         <input type="number" class="form-control" id="quantidade"
                                min="1" step="1" placeholder="{{ _('Quantidade') }}"
                                style="font-size: 100%;width:100%" required>
                     </div>
-                    <div class="w3-container" id="elemento_cor_container" style="display:none;padding:0;font-size: 125%;">
+                    <div class="w3-container" id="elemento_cor_container"
+                         style="display:none;padding:0;font-size: 125%;">
                         {{ _("<a target='_blank' href='https://pt.wikipedia.org/wiki/Esmalte_(heráldica)'>Cor(es)</a>:") }}<sup><a
                             href='' onclick='return false;' style='font-size: 60%' data-toggle='popover'
                             data-trigger='focus'
@@ -577,8 +581,8 @@
                 <div class="modal-footer" id="secondModal">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal"
                             style="font-size:125%; ">{{ _("Cancelar") }}</button>
-{#                    <button type="button" id="removestatement" class="btn btn-primary"#}
-{#                            style="font-size:125%; background-color: #d04125"></button>#}
+                    {#                    <button type="button" id="removestatement" class="btn btn-primary"#}
+                    {#                            style="font-size:125%; background-color: #d04125"></button>#}
                 </div>
             </div>
         </div>
@@ -633,10 +637,10 @@
             var title = instance.charAt(0).toUpperCase() + instance.slice(1);
             var quant_text = "{{ _('Quantidade: ') }}";
             var cor_text = "{{ _('Cor(es): ') }}";
-            if (quantidade === "0"){
+            if (quantidade === "0") {
                 var quantidade_value = "{{ _('Quantidade não declarada') }}"
             } else {
-                var quantidade_value=quantidade
+                var quantidade_value = quantidade
             }
 
             $("#declaracao").append(title + ": " + '<a target="_blank" href="https://www.wikidata.org/wiki/' + qid_ + '">' + label + '</a>');
@@ -658,12 +662,12 @@
             var cores = {{ colors|safe }};
             var results = []
             var list_colors = elem_colors.split(",");
-            $.each(list_colors, function(index_1, cor_lista) {
-               $.each(cores, function(index_2, cor) {
-                   if (cor["qid"] === cor_lista) {
-                       results.push('<a target="_blank" href="https://www.wikidata.org/wiki/' + cor["qid"] + '">' + cor["label"] + '</a>');
-                   }
-               });
+            $.each(list_colors, function (index_1, cor_lista) {
+                $.each(cores, function (index_2, cor) {
+                    if (cor["qid"] === cor_lista) {
+                        results.push('<a target="_blank" href="https://www.wikidata.org/wiki/' + cor["qid"] + '">' + cor["label"] + '</a>');
+                    }
+                });
             });
             return results.join("; ")
         }
@@ -689,7 +693,7 @@
             }
         });
 
-        $("#addstatement").on('click', function (event){
+        $("#addstatement").on('click', function (event) {
             var option_checked = $("input[name='claim_option']:checked");
 
             if (option_checked.length > 0) {
@@ -699,7 +703,7 @@
                 var option_label = option_checked.attr('data-label');
                 var sucess_stat = "{{ _('Declaração inserida com sucesso!') }}";
 
-                var quantidade = $("#quantidade").val()||"0";
+                var quantidade = $("#quantidade").val() || "0";
                 var cor = $("#element_cor").val();
                 if (option_label === "") {
                     option_label = option_value
@@ -714,8 +718,7 @@
 
                 alert(sucess_stat);
                 $('#addModal').modal("hide");
-            }
-            else {
+            } else {
                 var select_one = "{{ _('Selecione um elemento') }}";
                 alert(select_one);
             }
@@ -832,5 +835,12 @@
             var text = $('#lema').val();
             $('#lema_lang_container').toggle(text != "");
         })
+
+        $("#brasao").change(function () {
+            var option = $(this).find('option:selected').val();
+            if (option === 'no') {
+                window.location.href = "{{ url_for('item', qid = next_qid) }}";
+            }
+        });
     </script>
 {% endblock %}

@@ -148,7 +148,11 @@ def pt_to_ptbr(lang):
 @app.errorhandler(504)
 @app.errorhandler(505)
 def page_not_found(e):
-    return render_template('error.html')
+    username = get_username()
+    lang = pt_to_ptbr(get_locale())
+    return render_template('error.html',
+                           username=username,
+                           lang=lang)
 
 
 # Função para exibir a tela inicial do aplicativo
@@ -352,15 +356,22 @@ def item(qid):
 
 @app.route('/brasao', methods=["GET"])
 def brasao():
-    return render_template("brasao.html")
+    username = get_username()
+    lang = pt_to_ptbr(get_locale())
+    return render_template("brasao.html",
+                           username=username,
+                           lang=lang)
 
 
 @app.route('/send_brasao', methods=["POST"])
 def send_brasao():
+    username = get_username()
+    lang = pt_to_ptbr(get_locale())
+
     form = request.form
 
     if "brasao" in form and form["brasao"] != "no":
-        add_p180(form["qid"], form["brasao"])
+        # add_p180(form["qid"], form["brasao"])
         values_already_on_wd = get_item(form["brasao"])
         statements = []
 
@@ -494,7 +505,17 @@ def send_brasao():
                 # TODO: Adicionar possibilidade de inserir listel com cor e texto do lema
 
         statements = {"claims": statements}
-        post_item(json.dumps(statements), form["brasao"])
+        # post_item(json.dumps(statements), form["brasao"])
+
+        if "next_qid" in form and form["next_qid"]:
+            next_qid = form["next_qid"]
+        else:
+            next_qid = form["qid"]
+
+        template_data = {'redirect_url': url_for('item', qid=next_qid),
+                         'username': username,
+                         'lang': lang}
+        return render_template("success.html", **template_data)
     return redirect(url_for("item", qid=form["qid"]))
 
 

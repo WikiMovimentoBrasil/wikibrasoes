@@ -1,13 +1,14 @@
 # English translations for Wiki Museu do Ipiranga - O que há no brasão?
 # Copyright (C) 2021 Wki Movimento Brasil
-# This file is distributed under the Creative Commons Atribuição-CompartilhaIgual 4.0 Internacional (CC-BY-SA 4.0).
+# This file is distributed under the Creative Commons
+# Atribuição-CompartilhaIgual 4.0 Internacional (CC-BY-SA 4.0).
 # Éder Porto Ferreira Alves <eder.porto@wmnobrasil.org>, 2021.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 1.0\n"
+"Project-Id-Version:  1.0\n"
 "Report-Msgid-Bugs-To: eder.porto@wmnobrasil.org\n"
-"POT-Creation-Date: 2021-07-06 16:00-0300\n"
+"POT-Creation-Date: 2021-07-07 08:54-0300\n"
 "PO-Revision-Date: 2021-07-06 16:00-0300\n"
 "Last-Translator: Éder Porto Ferreira Alves <eder.porto@wmnobrasil.org>\n"
 "Language: en\n"
@@ -29,9 +30,9 @@ msgid ""
 "objetivo de convidar você a atuar no trabalho de investigação e curadoria"
 " das obras e objetos do acervo do Museu do Ipiranga."
 msgstr ""
-"The initiative of the <b>Novo Museu do Ipiranga Project</b> has developed "
-"a series of applications, called <b>Wiki Museu do Ipiranga</b>, with "
-"the aim to invite you to work in the investigation and curation work of the "
+"The initiative of the <b>Novo Museu do Ipiranga Project</b> has developed"
+" a series of applications, called <b>Wiki Museu do Ipiranga</b>, with the"
+" aim to invite you to work in the investigation and curation work of the "
 "items and objects from the Ipiranga Museum collection."
 
 #: templates/apps.html:31 templates/apps.html:35
@@ -57,10 +58,12 @@ msgid ""
 "Vital van Emelen</a>?"
 msgstr ""
 "For example, how many lambs are depicted in the painting <a "
-"target=\"_blank\" href=\"https://wikiquantos.toolforge.org/qid/Q52303216/pt\">"
-"<i>Mulher na Janela Alimentando Cordeiros, Menino Sentado numa Banqueta</i></a>,"
-" by <a target=\"_blank\" href=\"hhttps://wikiquantos.toolforge.org/criador/Q5474348\">"
-"Adrien Henri Vital van Emelen</a>?"
+"target=\"_blank\" "
+"href=\"https://wikiquantos.toolforge.org/qid/Q52303216/pt\"><i>Mulher na "
+"Janela Alimentando Cordeiros, Menino Sentado numa Banqueta</i></a>, by <a"
+" target=\"_blank\" "
+"href=\"hhttps://wikiquantos.toolforge.org/criador/Q5474348\">Adrien Henri"
+" Vital van Emelen</a>?"
 
 #: templates/apps.html:55 templates/apps.html:59
 msgid "Logotipo Wiki Museu do Ipiranga - Com que roupa eu vou?"
@@ -84,8 +87,9 @@ msgid ""
 "Karl Ernst Papf</i></a>?"
 msgstr ""
 "For example, what accessories are used by Dona Jessy de Souza Queiroz in "
-"her <a target=\"_blank\" href=\"https://wikiroupas.toolforge.org/item/Q52302832\">"
-"<i>portrait by Karl Ernst Papf</i></a>?"
+"her <a target=\"_blank\" "
+"href=\"https://wikiroupas.toolforge.org/item/Q52302832\"><i>portrait by "
+"Karl Ernst Papf</i></a>?"
 
 #: templates/apps.html:79 templates/apps.html:83
 msgid "Logotipo Wiki Museu do Ipiranga - Qual a marca?"
@@ -109,8 +113,9 @@ msgid ""
 msgstr ""
 "For example, which is the brand of the <a target=\"_blank\" "
 "href=\"https://wikimarcas.toolforge.org/colecao/brinquedos\"><i>toy</a> "
-"<a target=\"_blank\" href=\"https://wikimarcas.toolforge.org/item/Q65033132\">"
-"<i>Trem de luxo Nº2</i></a>?"
+"<a target=\"_blank\" "
+"href=\"https://wikimarcas.toolforge.org/item/Q65033132\"><i>Trem de luxo "
+"Nº2</i></a>?"
 
 #: templates/apps.html:103 templates/apps.html:107
 msgid "Logotipo Wiki Museu do Ipiranga - Qual o ornamento?"
@@ -132,8 +137,8 @@ msgid ""
 " tampa</i> produzida pelas Indústrias Reunidas Fábricas Matarazzo</a>?"
 msgstr ""
 "For example, what type of flower is represented in a <a target=\"_blank\""
-" href=\"https://wikimotivos.toolforge.org/item/Q106210419\"><i>tureen with lid</i> "
-"produced by the Indústrias Reunidas Fábricas Matarazzo</a>?"
+" href=\"https://wikimotivos.toolforge.org/item/Q106210419\"><i>tureen "
+"with lid</i> produced by the Indústrias Reunidas Fábricas Matarazzo</a>?"
 
 #: templates/apps.html:127 templates/apps.html:131
 msgid "Logotipo Wiki Museu do Ipiranga - Para que serve?"
@@ -145,8 +150,8 @@ msgid ""
 "objetos semelhantes aos encontrados no acervo do Museu do Ipiranga que "
 "você possua em casa."
 msgstr ""
-"<b>What is it for?</b> invites you to photograph and describe the use "
-"of objects similar to those found in the collection of the Ipiranga Museum "
+"<b>What is it for?</b> invites you to photograph and describe the use of "
+"objects similar to those found in the collection of the Ipiranga Museum "
 "that you have at home."
 
 #: templates/apps.html:140
@@ -158,9 +163,10 @@ msgid ""
 " especial?"
 msgstr ""
 "For example, do you have a <a target=\"_blank\" "
-"href=\"https://wikiusos.toolforge.org/item/Q65033097\"><i>cheese grater</i> "
-"like this</a> in your kitchen at home. Do you only use it for grating cheese? "
-"Or do you use it as a decorative piece? Does it have a special story?"
+"href=\"https://wikiusos.toolforge.org/item/Q65033097\"><i>cheese "
+"grater</i> like this</a> in your kitchen at home. Do you only use it for "
+"grating cheese? Or do you use it as a decorative piece? Does it have a "
+"special story?"
 
 #: templates/apps.html:151 templates/apps.html:155 templates/base.html:39
 #: templates/base.html:41
@@ -173,8 +179,9 @@ msgid ""
 "heráldicos dos brasões retratados em obras e objetos do acervo do Museu "
 "do Ipiranga."
 msgstr ""
-"<b>What is in the coat of arms?</b> invites you to identify the heraldic elements "
-"of the coats of arms depicted in works and objects in the Ipiranga Museum collection."
+"<b>What is in the coat of arms?</b> invites you to identify the heraldic "
+"elements of the coats of arms depicted in works and objects in the "
+"Ipiranga Museum collection."
 
 #: templates/apps.html:164
 msgid ""
@@ -183,9 +190,10 @@ msgid ""
 "href=\"https://wikibrasoes.toolforge.org/item/Q55851804\"><i>nesta "
 "pintura de brasão de José Wasth Rodrigues</i></a>?"
 msgstr ""
-"For example, can you identify all the elements present <a target=\"_blank\" "
-"href=\"https://wikibrasoes.toolforge.org/item/Q55851804\"><i>in this coat of "
-"arms painting by José Wasth Rodrigues</i></a>?"
+"For example, can you identify all the elements present <a "
+"target=\"_blank\" "
+"href=\"https://wikibrasoes.toolforge.org/item/Q55851804\"><i>in this coat"
+" of arms painting by José Wasth Rodrigues</i></a>?"
 
 #: templates/base.html:20 templates/colecao.html:21 templates/inicio.html:9
 #: templates/topnavbar.html:2
@@ -210,12 +218,12 @@ msgid ""
 "realização da <b>Universidade de São Paulo</b> e da <b>Fundação de Apoio "
 "à Universidade de São Paulo</b>."
 msgstr ""
-"<i>Wiki Museu do Ipiranga - What is in the coat of arms?</i> is an application "
-"developed in the context of the <i><b>%(projeto)s</b></i>, organized by the "
-"<b>User Group Wiki Movimento Brasil</b> and the <b>Museu do "
-"Ipiranga</b>, in partnership with the <b>Banco do Brasil Foundation</b> "
-"and supported by the <b>University of São Paulo</b> and the <b>University "
-"of São Paulo Support Foundation</b>."
+"<i>Wiki Museu do Ipiranga - What is in the coat of arms?</i> is an "
+"application developed in the context of the <i><b>%(projeto)s</b></i>, "
+"organized by the <b>User Group Wiki Movimento Brasil</b> and the <b>Museu"
+" do Ipiranga</b>, in partnership with the <b>Banco do Brasil "
+"Foundation</b> and supported by the <b>University of São Paulo</b> and "
+"the <b>University of São Paulo Support Foundation</b>."
 
 #: templates/brasao.html:38
 msgid "Paquife"
@@ -230,15 +238,15 @@ msgid ""
 "Paquifes são ornamentos em formato de manto, capa ou folhagem que se "
 "estendem ao redor do escudo a partir do elmo."
 msgstr ""
-"Mantling are ornaments in the form of a cloak, cape or foliage that extend "
-"around the shield from the helmet."
+"Mantling are ornaments in the form of a cloak, cape or foliage that "
+"extend around the shield from the helmet."
 
-#: templates/brasao.html:1632 templates/item.html:189 templates/item.html:207
-#: templates/item.html:225 templates/item.html:260 templates/item.html:538
+#: templates/brasao.html:1632 templates/item.html:190 templates/item.html:208
+#: templates/item.html:226 templates/item.html:261 templates/item.html:542
 msgid "--Selecione uma opção--"
 msgstr "--Select an option--"
 
-#: templates/brasao.html:1640 templates/item.html:551 templates/item.html:579
+#: templates/brasao.html:1640 templates/item.html:555 templates/item.html:583
 msgid "Cancelar"
 msgstr "Cancel"
 
@@ -252,7 +260,8 @@ msgid ""
 "Esta seleção de objetos apresenta <i>%(p180)s</i> do acervo do Museu do "
 "Ipiranga."
 msgstr ""
-"This selection of objects of the Museu do Ipiranga presents <i>%(p180)s</i>"
+"This selection of objects of the Museu do Ipiranga presents "
+"<i>%(p180)s</i>"
 
 #: templates/colecao.html:22
 #, python-format
@@ -271,27 +280,29 @@ msgstr "Something went wrong!"
 msgid "REPORTAR ERRO"
 msgstr "REPORT ERROR"
 
-#: templates/error.html:37 templates/item.html:482
+#: templates/error.html:37 templates/item.html:483
 msgid "VOLTAR À PÁGINA INICIAL"
 msgstr "GO TO HOMEPAGE"
 
-#: templates/inicio.html:16 templates/inicio.html:18
+#: templates/inicio.html:17 templates/inicio.html:20
 msgid "Logotipo Wiki Museu do Ipiranga"
 msgstr "Logo of Wiki Museu do Ipiranga"
 
-#: templates/inicio.html:26
+#: templates/inicio.html:28
 msgid "Bem-vindo(a) ao <i>Wiki Museu do Ipiranga - O que há no brasão?</i>"
-msgstr "Welcome to the <i>Wiki Museu do Ipiranga - What is in the coat of arms?</i>"
+msgstr ""
+"Welcome to the <i>Wiki Museu do Ipiranga - What is in the coat of "
+"arms?</i>"
 
-#: templates/inicio.html:29
+#: templates/inicio.html:31
 msgid ""
 "Neste aplicativo, você participa do trabalho de pesquisa do Museu do "
 "Ipiranga. Sua tarefa: "
 msgstr ""
-"In this application, you participate in the research work of the Ipiranga "
-"Museum. Your task: "
+"In this application, you participate in the research work of the Ipiranga"
+" Museum. Your task: "
 
-#: templates/inicio.html:29
+#: templates/inicio.html:31
 msgid ""
 "Identificar os <a target=\"_blank\" "
 "href=\"https://pt.wikipedia.org/wiki/Heráldica\">elementos heráldicos</a>"
@@ -299,11 +310,11 @@ msgid ""
 "Museu do Ipiranga."
 msgstr ""
 "Identify the <a target=\"_blank\" "
-"href=\"https://en.wikipedia.org/wiki/Heraldry\">heraldic elements</a>"
-" that compose the coats of arms represented in works and objects of the "
+"href=\"https://en.wikipedia.org/wiki/Heraldry\">heraldic elements</a> "
+"that compose the coats of arms represented in works and objects of the "
 "Ipiranga Museum collection."
 
-#: templates/inicio.html:29
+#: templates/inicio.html:31
 msgid ""
 "Para participar, é preciso autenticar-se; depois, escolha uma categoria "
 "abaixo para começar."
@@ -311,23 +322,23 @@ msgstr ""
 "To participate, you need to authenticate yourself; then choose a category"
 " below to start."
 
-#: templates/inicio.html:42
+#: templates/inicio.html:44
 msgid "Vasos"
 msgstr "Vases"
 
-#: templates/inicio.html:49
+#: templates/inicio.html:51
 msgid "Ornamentos"
 msgstr "Ornaments"
 
-#: templates/inicio.html:58
+#: templates/inicio.html:60
 msgid "Alimentação"
 msgstr "Food"
 
-#: templates/inicio.html:65
+#: templates/inicio.html:67
 msgid "Iconografia"
 msgstr "Iconography"
 
-#: templates/inicio.html:74
+#: templates/inicio.html:76
 msgid "Miscelânea"
 msgstr "Miscellany"
 
@@ -388,30 +399,31 @@ msgid ""
 "Faça a sua autenticação clicando no botão 'Autenticar-se' no canto "
 "superior direito"
 msgstr ""
-"Authenticate yourself by clicking on the 'Login' button in the "
-"upper right corner"
+"Authenticate yourself by clicking on the 'Login' button in the upper "
+"right corner"
 
-#: templates/item.html:185
+#: templates/item.html:186
 msgid "Você consegue identificar na lista qual o brasão retratado?"
 msgstr "Can you identify from the list which coat of arms is depicted?"
 
-#: templates/item.html:190 templates/item.html:246 templates/item.html:281
-#: templates/item.html:316 templates/item.html:351
+#: templates/item.html:191 templates/item.html:247 templates/item.html:282
+#: templates/item.html:317 templates/item.html:352
 msgid "Não"
 msgstr "No"
 
-#: templates/item.html:200
+#: templates/item.html:201
 msgid ""
 "Este brasão possui uma <a target='_blank' "
 "href='https://pt.wikipedia.org/wiki/Coroa_(heráldica)'>coroa</a>?"
-msgstr "This coat of arms has a <a target='_blank' "
+msgstr ""
+"This coat of arms has a <a target='_blank' "
 "href='https://pt.wikipedia.org/wiki/Coroa_(heráldica)'>crown</a>?"
 
-#: templates/item.html:200
+#: templates/item.html:201
 msgid "Se sim, identifique o tipo:"
 msgstr "If yes, identify its type"
 
-#: templates/item.html:218
+#: templates/item.html:219
 msgid ""
 "<a target='_blank' "
 "href='https://pt.wikipedia.org/wiki/Esmalte_(heráldica)'>Cor</a> da "
@@ -420,7 +432,7 @@ msgstr ""
 "Crown <a target='_blank' "
 "href='https://en.wikipedia.org/wiki/Tincture_(heraldry)'>color</a>:"
 
-#: templates/item.html:239
+#: templates/item.html:240
 msgid ""
 "O brasão possui <a target='_blank' "
 "href='https://pt.wikipedia.org/wiki/Elmo_(heráldica)'>elmo</a>?"
@@ -428,19 +440,20 @@ msgstr ""
 "The coat of arms has a <a target='_blank' "
 "href='https://en.wikipedia.org/wiki/Helmet_(heraldry)'>helmet</a>?"
 
-#: templates/item.html:247 templates/item.html:282 templates/item.html:317
-#: templates/item.html:352
+#: templates/item.html:248 templates/item.html:283 templates/item.html:318
+#: templates/item.html:353
 msgid "Sim"
 msgstr "Yes"
 
-#: templates/item.html:253
+#: templates/item.html:254
 msgid ""
 "<a target='_blank' "
 "href='https://pt.wikipedia.org/wiki/Esmalte_(heráldica)'>Cor</a> do elmo:"
-msgstr "Helmet <a target='_blank' "
+msgstr ""
+"Helmet <a target='_blank' "
 "href='https://en.wikipedia.org/wiki/Tincture_(heraldry)'>color</a>:"
 
-#: templates/item.html:274
+#: templates/item.html:275
 msgid ""
 "O brasão possui <a target='_blank' "
 "href='https://pt.wikipedia.org/wiki/Paquife'>paquife</a>?"
@@ -448,7 +461,7 @@ msgstr ""
 "The coat of arms has a <a target='_blank' "
 "href='https://en.wikipedia.org/wiki/Mantling'>mantling</a>?"
 
-#: templates/item.html:288
+#: templates/item.html:289
 msgid ""
 "<a target='_blank' "
 "href='https://pt.wikipedia.org/wiki/Esmalte_(heráldica)'>Cor</a> do "
@@ -457,12 +470,12 @@ msgstr ""
 "Mantling <a target='_blank' "
 "href='https://en.wikipedia.org/wiki/Tincture_(heraldry)'>color</a>:"
 
-#: templates/item.html:295 templates/item.html:330 templates/item.html:365
-#: templates/item.html:383
+#: templates/item.html:296 templates/item.html:331 templates/item.html:366
+#: templates/item.html:384
 msgid "--Selecione ao menos uma opção--"
 msgstr "--Select at least one option--"
 
-#: templates/item.html:309
+#: templates/item.html:310
 msgid ""
 "O brasão possui <a target='_blank' "
 "href='https://pt.wikipedia.org/wiki/Virol'>virol</a>?"
@@ -470,7 +483,7 @@ msgstr ""
 "The coat of arms has a <a target='_blank' "
 "href='https://en.wikipedia.org/wiki/Torse'>torse</a>?"
 
-#: templates/item.html:323
+#: templates/item.html:324
 msgid ""
 "<a target='_blank' "
 "href='https://pt.wikipedia.org/wiki/Esmalte_(heráldica)'>Cor</a> do "
@@ -479,7 +492,7 @@ msgstr ""
 "Torse <a target='_blank' "
 "href='https://en.wikipedia.org/wiki/Tincture_(heraldry)'>color</a>:"
 
-#: templates/item.html:344
+#: templates/item.html:345
 msgid ""
 "O <a target='_blank' "
 "href='https://pt.wikipedia.org/wiki/Campo_(heráldica)'>campo</a> está "
@@ -489,7 +502,7 @@ msgstr ""
 "href='https://en.wikipedia.org/wiki/Field_(heraldry)'>field</a> is "
 "divided?"
 
-#: templates/item.html:358
+#: templates/item.html:359
 msgid ""
 "Como está <a target='_blank' "
 "href='https://pt.wikipedia.org/wiki/Partições_do_campo_(heráldica)'>dividido</a>"
@@ -498,7 +511,7 @@ msgstr ""
 "How the field of the shield is <a target='_blank' "
 "href='https://en.wikipedia.org/wiki/Division_of_the_field'>divided</a>?"
 
-#: templates/item.html:376
+#: templates/item.html:377
 msgid ""
 "<a target='_blank' "
 "href='https://pt.wikipedia.org/wiki/Esmalte_(heráldica)'>Cor(es)</a> do "
@@ -507,7 +520,7 @@ msgstr ""
 "Field <a target='_blank' "
 "href='https://en.wikipedia.org/wiki/Tincture_(heraldry)'>color(s)</a>:"
 
-#: templates/item.html:397
+#: templates/item.html:398
 msgid ""
 "Quais são as <a target='_blank' "
 "href='https://pt.wikipedia.org/wiki/Figuras_(heráldica)'>figuras "
@@ -517,12 +530,12 @@ msgstr ""
 "href='https://en.wikipedia.org/wiki/Charge_(heraldry)'>heraldic "
 "figures</a> depicted?"
 
-#: templates/item.html:406 templates/item.html:423 templates/item.html:440
-#: templates/item.html:471 templates/item.html:589
+#: templates/item.html:407 templates/item.html:424 templates/item.html:441
+#: templates/item.html:472 templates/item.html:593
 msgid "Adicionar"
 msgstr "Add"
 
-#: templates/item.html:414
+#: templates/item.html:415
 msgid ""
 "O brasão possui <a target='_blank' "
 "href='https://pt.wikipedia.org/wiki/Suporte_(heráldica)'>suportes ou "
@@ -531,11 +544,11 @@ msgstr ""
 "The coat of arms has <a target='_blank' "
 "href='https://en.wikipedia.org/wiki/Supporter'>supporters or tenants</a>?"
 
-#: templates/item.html:414
+#: templates/item.html:415
 msgid "Se sim, indique-os."
 msgstr "If yes, indicate them."
 
-#: templates/item.html:431
+#: templates/item.html:432
 msgid ""
 "O brasão possui <a target='_blank' "
 "href='https://pt.wikipedia.org/wiki/Timbre_(heráldica)'>timbre(s)</a>?"
@@ -543,50 +556,51 @@ msgstr ""
 "The coat of arms has <a target='_blank' "
 "href='https://en.wikipedia.org/wiki/Crest_(heraldry)'>crest(s)</a>"
 
-#: templates/item.html:431
+#: templates/item.html:432
 msgid "Se sim, indique-o(s)."
 msgstr "If yes, indicate it/them"
 
-#: templates/item.html:448
+#: templates/item.html:449
 msgid ""
 "O brasão possui um <a target='_blank' "
 "href='https://pt.wikipedia.org/wiki/Lema'>lema</a>?"
-msgstr "The coat of arms has a <a target='_blank' "
+msgstr ""
+"The coat of arms has a <a target='_blank' "
 "href='https://en.wikipedia.org/wiki/Motto#Heraldry'>motto</a>?"
 
-#: templates/item.html:448
+#: templates/item.html:449
 msgid "Se sim, escreva-o abaixo:"
 msgstr "If yes, write it below:"
 
-#: templates/item.html:459
+#: templates/item.html:460
 msgid "Se o brasão possui um lema, em qual idioma está escrito?"
 msgstr "If the coat of arms has a motto, in which language is it written?"
 
-#: templates/item.html:474
+#: templates/item.html:475
 msgid "ADICIONAR"
 msgstr "ADD"
 
-#: templates/item.html:491
+#: templates/item.html:492
 msgid "PULAR ESTE ITEM"
 msgstr "SKIP THIS ITEM"
 
-#: templates/item.html:510
+#: templates/item.html:511
 msgid "Pesquise"
 msgstr "Search"
 
-#: templates/item.html:519
+#: templates/item.html:521
 msgid "Selecione uma opção:"
 msgstr "Select an option:"
 
-#: templates/item.html:525
-msgid "Indicate the quantity:"
-msgstr ""
-
 #: templates/item.html:528
+msgid "Indique a quantidade:"
+msgstr "Indicate the quantity: "
+
+#: templates/item.html:531
 msgid "Quantidade"
 msgstr "Quantity"
 
-#: templates/item.html:532
+#: templates/item.html:536
 msgid ""
 "<a target='_blank' "
 "href='https://pt.wikipedia.org/wiki/Esmalte_(heráldica)'>Cor(es)</a>:"
@@ -594,47 +608,47 @@ msgstr ""
 "<a target='_blank' "
 "href='https://en.wikipedia.org/wiki/Tincture_(heraldry)'>Color(s)</a>:"
 
-#: templates/item.html:590
+#: templates/item.html:594
 msgid ""
 "Figuras heráldicas são todos e quaisquer elementos que se encontrem "
 "dentro do escudo em um brasão."
 msgstr ""
-"Heraldic figures are any and all elements found within the shield
-"in a coat of arms."
+"Heraldic figures are any and all elements found within the shield in a "
+"coat of arms."
 
-#: templates/item.html:591
+#: templates/item.html:595
 msgid "Suportes heráldicos são as figuras que sustentam ou guardam o escudo."
 msgstr "Heraldic supporters are the figures that support or guard the shield."
 
-#: templates/item.html:592
+#: templates/item.html:596
 msgid "Timbres são figuras colocadas acima do virol e do elmo em um brasão."
 msgstr "Crests are figures placed above the virol and helmet on a coat of arms."
 
-#: templates/item.html:634
+#: templates/item.html:638
 msgid "Quantidade: "
 msgstr "Quantity: "
 
-#: templates/item.html:635
+#: templates/item.html:639
 msgid "Cor(es): "
 msgstr "Color(s): "
 
-#: templates/item.html:637
+#: templates/item.html:641
 msgid "Quantidade não declarada"
 msgstr "Non stated quantity"
 
-#: templates/item.html:678
+#: templates/item.html:682
 msgid "Pesquisando o banco de dados..."
 msgstr "Searching the database..."
 
-#: templates/item.html:700
+#: templates/item.html:704
 msgid "Declaração inserida com sucesso!"
 msgstr "Statement inserted successfully"
 
-#: templates/item.html:719 templates/item.html:763
+#: templates/item.html:722 templates/item.html:766
 msgid "Selecione um elemento"
 msgstr "Select an element"
 
-#: templates/item.html:738
+#: templates/item.html:741
 msgid "Nenhum resultado obtido"
 msgstr "No result returned"
 
@@ -650,8 +664,9 @@ msgid ""
 "fundo o acervo do Museu do Ipiranga."
 msgstr ""
 "Are you ready to be a collection researcher? This is what the <b>Wiki "
-"Museu do Ipiranga - What is in the coat of arms?</b> app offers you: develop your "
-"research skills and learn more about the Ipiranga Museum collection."
+"Museu do Ipiranga - What is in the coat of arms?</b> app offers you: "
+"develop your research skills and learn more about the Ipiranga Museum "
+"collection."
 
 #: templates/sobre.html:17
 msgid ""
@@ -669,10 +684,11 @@ msgstr ""
 "museum. Here, researchers -- and now you! -- look at the objects in the "
 "collection to identify their origin, what they portray, the history of "
 "the piece. In the application <b>Wiki Museu do Ipiranga - What is in the "
-"coat of arms?</b>, you participate in this curatorial work, identifying <a"
-" target=\"_blank\" href=\"https://en.wikipedia.org/wiki/Heraldry\">"
-"elementos heráldicos</a> of the coats of arms depicted in the works and "
-"objects of the Ipiranga Museum collection."
+"coat of arms?</b>, you participate in this curatorial work, identifying "
+"<a target=\"_blank\" "
+"href=\"https://en.wikipedia.org/wiki/Heraldry\">elementos heráldicos</a> "
+"of the coats of arms depicted in the works and objects of the Ipiranga "
+"Museum collection."
 
 #: templates/sobre.html:18
 msgid ""
@@ -754,6 +770,25 @@ msgstr "License of objects returned from Wikidata: %(license_wikidata)s."
 msgid "Versão 1.0."
 msgstr "Version 1.0"
 
+#: templates/success.html:9 templates/success.html:14
+msgid "Sucesso!"
+msgstr "Success!"
+
+#: templates/success.html:17
+msgid ""
+"Confira suas edições clicando no seu nome de usuário(a) no canto superior"
+" direito."
+msgstr ""
+"Check your edits by clicking on your username at the upper right corner."
+
+#: templates/success.html:23
+msgid "Você será redirecionado(a) em: "
+msgstr "You ill be redirected in: "
+
+#: templates/success.html:24
+msgid " segundo"
+msgstr " second"
+
 #: templates/topnavbar.html:4
 msgid "Ajuda"
 msgstr "Help"
@@ -769,4 +804,3 @@ msgstr "Menu"
 #: templates/tutorial.html:9
 msgid "Tutorial"
 msgstr "Tutorial"
-

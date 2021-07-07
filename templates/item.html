@@ -798,7 +798,7 @@
 
         $('#brasao').change(function () {
             var selected = $('#brasao option:selected').val();
-            $('#adicionar_declaracoes, #coroa_container, #elmo_container, #paquife_container, #virol_container, #campo_container, #campo_cor_container, #figuras_container, #suportes_container, #timbre_container, #lema_container').toggle(selected != "no");
+            $('#adicionar_declaracoes, #coroa_container, #elmo_container, #paquife_container, #virol_container, #campo_container, #campo_cor_container, #figuras_container, #suportes_container, #timbre_container, #lema_container').toggle(selected != "" && selected != "no");
         })
 
         $('#coroa').change(function () {

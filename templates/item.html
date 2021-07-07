@@ -187,7 +187,7 @@
                     </div>
                     <div class="w3-container">
                         <select id='brasao' name="brasao" style="width:100%; height: 2em">
-                            <option value="no" selected>{{ _("--Selecione uma opção--") }}</option>
+                            <option value="" selected>{{ _("--Selecione uma opção--") }}</option>
                             <option value="no">{{ _("Não") }}</option>
                             {% for brasao in brasoes %}
                                 <option value="{{ brasao.qid }}">{{ brasao.label[lang] }}</option>

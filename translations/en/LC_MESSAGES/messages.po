@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version:  1.0\n"
 "Report-Msgid-Bugs-To: eder.porto@wmnobrasil.org\n"
-"POT-Creation-Date: 2021-07-07 08:54-0300\n"
+"POT-Creation-Date: 2021-07-07 16:01-0300\n"
 "PO-Revision-Date: 2021-07-06 16:00-0300\n"
 "Last-Translator: Éder Porto Ferreira Alves <eder.porto@wmnobrasil.org>\n"
 "Language: en\n"
@@ -252,7 +252,7 @@ msgstr "Cancel"
 
 #: templates/brasao.html:1642
 msgid "Enviar imagem"
-msgstr ""
+msgstr "Send image"
 
 #: templates/colecao.html:18
 #, python-format
@@ -423,6 +423,14 @@ msgstr ""
 msgid "Se sim, identifique o tipo:"
 msgstr "If yes, identify its type"
 
+#: templates/item.html:204
+msgid ""
+"Uma coroa, coronel ou diadema é um anel de metal ornamentado que "
+"identifica a posição nobiliárquica do detentor do brasão."
+msgstr ""
+"A crown, colonel or diadem is an ornate metal ring that identifies the "
+"noble position of the holder of the coat of arms."
+
 #: templates/item.html:219
 msgid ""
 "<a target='_blank' "
@@ -432,6 +440,17 @@ msgstr ""
 "Crown <a target='_blank' "
 "href='https://en.wikipedia.org/wiki/Tincture_(heraldry)'>color</a>:"
 
+#: templates/item.html:222 templates/item.html:257 templates/item.html:292
+#: templates/item.html:327 templates/item.html:380 templates/item.html:539
+msgid ""
+"Em heráldica, cores ou esmaltes são colorações de diversos elementos de "
+"um brasão. São tradicionalmente divididas em <i>metais</i>, <i>cores</i> "
+"e <i>peles</i>."
+msgstr ""
+"In heraldry, colors or tinctures are colorations of several elements of a "
+"coat of arms. They are traditionally divided into <i>metals</i>, "
+"<i>colors</i> and <i>furs</i>."
+
 #: templates/item.html:240
 msgid ""
 "O brasão possui <a target='_blank' "
@@ -439,6 +458,14 @@ msgid ""
 msgstr ""
 "The coat of arms has a <a target='_blank' "
 "href='https://en.wikipedia.org/wiki/Helmet_(heraldry)'>helmet</a>?"
+
+#: templates/item.html:243
+msgid ""
+"Elmo é um equipamento de proteção para a cabeça. Em heráldica, posiciona-"
+"se acima do escudo e serve de base para o virol e o timbre."
+msgstr ""
+"Helmet is a protective headgear. In heraldry, it is positioned above the "
+"shield and serves as a base for the torse and crest."
 
 #: templates/item.html:248 templates/item.html:283 templates/item.html:318
 #: templates/item.html:353
@@ -460,6 +487,14 @@ msgid ""
 msgstr ""
 "The coat of arms has a <a target='_blank' "
 "href='https://en.wikipedia.org/wiki/Mantling'>mantling</a>?"
+
+#: templates/item.html:278
+msgid ""
+"Paquife é o desenho de um manto, capa, plumagem ou folhagem ao redor de "
+"um escudo, saindo do elmo."
+msgstr ""
+"Mantling is the drawing of a cloak, cape or foliage around the shield "
+"from the helmet."
 
 #: templates/item.html:289
 msgid ""
@@ -483,6 +518,14 @@ msgstr ""
 "The coat of arms has a <a target='_blank' "
 "href='https://en.wikipedia.org/wiki/Torse'>torse</a>?"
 
+#: templates/item.html:313
+msgid ""
+"O virol é uma peça de tecido torcido localizada entre o elmo e o timbre. "
+"Tinha a função de manter o paquife no lugar correto."
+msgstr ""
+"The torse is a twisted piece of fabric located between the helmet and the "
+"crest. It was supposed to keep the mantling in the right place."
+
 #: templates/item.html:324
 msgid ""
 "<a target='_blank' "
@@ -502,6 +545,14 @@ msgstr ""
 "href='https://en.wikipedia.org/wiki/Field_(heraldry)'>field</a> is "
 "divided?"
 
+#: templates/item.html:348
+msgid ""
+"Em heráldica, o campo é o plano de fundo do escudo, que pode ser dividido"
+" e receber cores distintas."
+msgstr ""
+"In heraldry, the field is the shield's background, which can be divided "
+"and given different colors."
+
 #: templates/item.html:359
 msgid ""
 "Como está <a target='_blank' "
@@ -510,6 +561,15 @@ msgid ""
 msgstr ""
 "How the field of the shield is <a target='_blank' "
 "href='https://en.wikipedia.org/wiki/Division_of_the_field'>divided</a>?"
+
+#: templates/item.html:362
+msgid ""
+"O campo de um escudo pode ser dividido de diversas maneiras. Estas "
+"divisões também podem ser redivididas. Cada tipo de divisão tem um nome "
+"específico."
+msgstr ""
+"The field of a shield can be divided in several ways. These divisions "
+"can also be re-divided. Each type of division has a specific name."
 
 #: templates/item.html:377
 msgid ""
@@ -530,6 +590,14 @@ msgstr ""
 "href='https://en.wikipedia.org/wiki/Charge_(heraldry)'>heraldic "
 "figures</a> depicted?"
 
+#: templates/item.html:401
+msgid ""
+"Figuras heráldicas são todos os elementos que se encontram dentro do "
+"escudo."
+msgstr ""
+"Heraldic figures are all the elements found within the shield in a "
+"coat of arms."
+
 #: templates/item.html:407 templates/item.html:424 templates/item.html:441
 #: templates/item.html:472 templates/item.html:593
 msgid "Adicionar"
@@ -548,6 +616,14 @@ msgstr ""
 msgid "Se sim, indique-os."
 msgstr "If yes, indicate them."
 
+#: templates/item.html:418
+msgid ""
+"Suportes são elementos que sustentam o escudo. São divididos entre "
+"<i>tenentes</i> (figuras humanas) e <i>suportes</i> (figuras não humanas)"
+msgstr ""
+"Supporters are elements that support the shield. They are divided into "
+"<i>tenants</i> (human figures) and <i>supporters</i> (non-human figures)"
+
 #: templates/item.html:432
 msgid ""
 "O brasão possui <a target='_blank' "
@@ -560,6 +636,16 @@ msgstr ""
 msgid "Se sim, indique-o(s)."
 msgstr "If yes, indicate it/them"
 
+#: templates/item.html:435
+msgid ""
+"Timbre é uma figura colocada sobre o elmo e o virol que serve tanto para "
+"distinguir os detentores dos brasões entre si quanto para marcar seus "
+"graus de nobreza."
+msgstr ""
+"Crest is a figure placed over the helmet and the torse that serves both to "
+"distinguish the holders of coats of arms from each other and to mark their "
+"degrees of nobility."
+
 #: templates/item.html:449
 msgid ""
 "O brasão possui um <a target='_blank' "
@@ -571,6 +657,14 @@ msgstr ""
 #: templates/item.html:449
 msgid "Se sim, escreva-o abaixo:"
 msgstr "If yes, write it below:"
+
+#: templates/item.html:452
+msgid ""
+"Lema, mote ou moto é uma frase, uma ideia ou um grupo de conceitos que "
+"representam o detentor do brasão."
+msgstr ""
+"Motto is a phrase, an idea or a group of concepts that represent the "
+"holder of the coat of arms."
 
 #: templates/item.html:460
 msgid "Se o brasão possui um lema, em qual idioma está escrito?"

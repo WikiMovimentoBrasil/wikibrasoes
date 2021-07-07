@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2021-07-07 08:54-0300\n"
+"POT-Creation-Date: 2021-07-07 16:01-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -348,6 +348,12 @@ msgstr ""
 msgid "Se sim, identifique o tipo:"
 msgstr ""
 
+#: templates/item.html:204
+msgid ""
+"Uma coroa, coronel ou diadema é um anel de metal ornamentado que "
+"identifica a posição nobiliárquica do detentor do brasão."
+msgstr ""
+
 #: templates/item.html:219
 msgid ""
 "<a target='_blank' "
@@ -355,10 +361,24 @@ msgid ""
 "coroa:"
 msgstr ""
 
+#: templates/item.html:222 templates/item.html:257 templates/item.html:292
+#: templates/item.html:327 templates/item.html:380 templates/item.html:539
+msgid ""
+"Em heráldica, cores ou esmaltes são colorações de diversos elementos de "
+"um brasão. São tradicionalmente divididas em <i>metais</i>, <i>cores</i> "
+"e <i>peles</i>."
+msgstr ""
+
 #: templates/item.html:240
 msgid ""
 "O brasão possui <a target='_blank' "
 "href='https://pt.wikipedia.org/wiki/Elmo_(heráldica)'>elmo</a>?"
+msgstr ""
+
+#: templates/item.html:243
+msgid ""
+"Elmo é um equipamento de proteção para a cabeça. Em heráldica, posiciona-"
+"se acima do escudo e serve de base para o virol e o timbre."
 msgstr ""
 
 #: templates/item.html:248 templates/item.html:283 templates/item.html:318
@@ -376,6 +396,12 @@ msgstr ""
 msgid ""
 "O brasão possui <a target='_blank' "
 "href='https://pt.wikipedia.org/wiki/Paquife'>paquife</a>?"
+msgstr ""
+
+#: templates/item.html:278
+msgid ""
+"Paquife é o desenho de um manto, capa, plumagem ou folhagem ao redor de "
+"um escudo, saindo do elmo."
 msgstr ""
 
 #: templates/item.html:289
@@ -396,6 +422,12 @@ msgid ""
 "href='https://pt.wikipedia.org/wiki/Virol'>virol</a>?"
 msgstr ""
 
+#: templates/item.html:313
+msgid ""
+"O virol é uma peça de tecido torcido localizada entre o elmo e o timbre. "
+"Tinha a função de manter o paquife no lugar correto."
+msgstr ""
+
 #: templates/item.html:324
 msgid ""
 "<a target='_blank' "
@@ -410,11 +442,24 @@ msgid ""
 "dividido?"
 msgstr ""
 
+#: templates/item.html:348
+msgid ""
+"Em heráldica, o campo é o plano de fundo do escudo, que pode ser dividido"
+" e receber cores distintas."
+msgstr ""
+
 #: templates/item.html:359
 msgid ""
 "Como está <a target='_blank' "
 "href='https://pt.wikipedia.org/wiki/Partições_do_campo_(heráldica)'>dividido</a>"
 " o campo do escudo?"
+msgstr ""
+
+#: templates/item.html:362
+msgid ""
+"O campo de um escudo pode ser dividido de diversas maneiras. Estas "
+"divisões também podem ser redivididas. Cada tipo de divisão tem um nome "
+"específico."
 msgstr ""
 
 #: templates/item.html:377
@@ -429,6 +474,12 @@ msgid ""
 "Quais são as <a target='_blank' "
 "href='https://pt.wikipedia.org/wiki/Figuras_(heráldica)'>figuras "
 "heráldicas</a> retratadas?"
+msgstr ""
+
+#: templates/item.html:401
+msgid ""
+"Figuras heráldicas são todos os elementos que se encontram dentro do "
+"escudo."
 msgstr ""
 
 #: templates/item.html:407 templates/item.html:424 templates/item.html:441
@@ -447,6 +498,12 @@ msgstr ""
 msgid "Se sim, indique-os."
 msgstr ""
 
+#: templates/item.html:418
+msgid ""
+"Suportes são elementos que sustentam o escudo. São divididos entre "
+"<i>tenentes</i> (figuras humanas) e <i>suportes</i> (figuras não humanas)"
+msgstr ""
+
 #: templates/item.html:432
 msgid ""
 "O brasão possui <a target='_blank' "
@@ -457,6 +514,13 @@ msgstr ""
 msgid "Se sim, indique-o(s)."
 msgstr ""
 
+#: templates/item.html:435
+msgid ""
+"Timbre é uma figura colocada sobre o elmo e o virol que serve tanto para "
+"distinguir os detentores dos brasões entre si quanto para marcar seus "
+"graus de nobreza."
+msgstr ""
+
 #: templates/item.html:449
 msgid ""
 "O brasão possui um <a target='_blank' "
@@ -465,6 +529,12 @@ msgstr ""
 
 #: templates/item.html:449
 msgid "Se sim, escreva-o abaixo:"
+msgstr ""
+
+#: templates/item.html:452
+msgid ""
+"Lema, mote ou moto é uma frase, uma ideia ou um grupo de conceitos que "
+"representam o detentor do brasão."
 msgstr ""
 
 #: templates/item.html:460

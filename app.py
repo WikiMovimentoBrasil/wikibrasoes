@@ -457,7 +457,7 @@ def send_brasao():
         return render_template("success.html", **no_brasao(form))
     if "has_brasao" in form and form["has_brasao"] == "yes":
         if "brasao" in form and form["brasao"] != "no":
-            add_p180(form["qid"], form["brasao"])
+            # add_p180(form["qid"], form["brasao"])
             values_already_on_wd = get_item(form["brasao"])
             statements = []
 
@@ -620,9 +620,9 @@ def add_p180(qid, brasao):
 
 def get_item(qid):
     items = []
-    values = query_wikidata("SELECT ?p ?ps ?pqv WHERE { wd:" +
+    values = query_wikidata("SELECT DISTINCT ?p ?ps ?pqv WHERE { wd:" +
                             qid +
-                            " p:P180|p:P1451 ?p. ?p ps:P180|ps:P1451 ?ps. OPTIONAL {?p pq:P1354 ?pqv.} } ORDER BY DESC(?pqv)")
+                            " p:P180|p:P1451 ?p. OPTIONAL {?p ps:P180|ps:P1451 ?ps}. OPTIONAL {?p pq:P1354 ?pqv.} } ORDER BY DESC(?pqv)")
     if "results" in values and "bindings" in values["results"]:
         for result in values["results"]["bindings"]:
             item = {}

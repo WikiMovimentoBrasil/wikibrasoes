@@ -2,27 +2,5 @@
   "name": "coats-missing-table",
   "title": "Name of coats of arms that are missing in the list",
   "description": "This table keeps record of the coats of arms that users feel that are missing in the list of coats of arms.",
-  "list_of_items": {
-    "Q89818166": [
-      {
-        "username": "Ederporto",
-        "timestamp": "2021-07-07T00:00:00Z",
-        "coats_of_arms": "Bras\u00e3o de Bras\u00edlia"
-      }
-    ],
-    "Q42577310": [
-      {
-        "username": null,
-        "timestamp": "07/08/2021, 14:43:50",
-        "coats_of_arms": ""
-      }
-    ],
-    "Q52303227": [
-      {
-        "username": null,
-        "timestamp": "07/08/2021, 14:44:18",
-        "coats_of_arms": "Teste"
-      }
-    ]
-  }
+  "list_of_items": {}
 }

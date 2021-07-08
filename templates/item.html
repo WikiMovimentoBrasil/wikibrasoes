@@ -181,6 +181,19 @@
                   style="overflow: hidden; font-size: 125%; width: 100%; table-layout: fixed; overflow-wrap: break-word;">
                 <input type="hidden" name="qid" value="{{ qid }}">
                 <input type="hidden" name="next_qid" value="{{ next_qid }}">
+                {# BRASÃO #}
+                <div class="w3-container w3-row stripped0" id="has_brasao_container">
+                    <div class="w3-container">
+                        {{ _("A(s) imagen(s) retrata(m) um <a target='_blank' href='https://pt.wikipedia.org/wiki/Brasão'>brasão</a>?") }}
+                    </div>
+                    <div class="w3-container">
+                        <select {% if not username %}disabled="true"{% endif %} id='has_brasao' name="has_brasao" style="width:100%; height: 2em">
+                            <option value="" selected>{{ _("--Selecione uma opção--") }}</option>
+                            <option value="no">{{ _("Não") }}</option>
+                            <option value="yes">{{ _("Sim") }}</option>
+                        </select>
+                    </div>
+                </div>
                 <div class="w3-container w3-row stripped0" id="brasao_container">
                     <div class="w3-container">
                         {{ _("Você consegue identificar na lista qual o brasão retratado?") }}
@@ -195,13 +208,21 @@
                         </select>
                     </div>
                 </div>
+                <div class="w3-container w3-row stripped0" id="brasao_missing_container">
+                    <div class="w3-container">
+                        {{ _("Se você consegue identificar o brasão, mas ele não consta na lista, escreva o nome do brasão:") }}
+                    </div>
+                    <div class="w3-container">
+                        <input id="brasao_name" name="brasao_name" type="text" maxlength="1490" style="width: 100%"/>
+                    </div>
+                </div>
                 {# COROA #}
                 <div class="w3-container w3-row stripped1" id="coroa_container">
                     <div class="w3-container">
                         {{ _("Este brasão possui uma <a target='_blank' href='https://pt.wikipedia.org/wiki/Coroa_(heráldica)'>coroa</a>?") }} {{ _("Se sim, identifique o tipo:") }}<sup><a
                             href='' onclick='return false;' style='font-size: 60%' data-toggle='popover'
                             data-trigger='focus'
-                            data-content={{ _('Uma coroa, coronel ou diadema é um anel de metal ornamentado que identifica a posição nobiliárquica do detentor do brasão.') }}>&#9432;</a></sup>
+                            data-content="{{ _('Uma coroa, coronel ou diadema é um anel de metal ornamentado que identifica a posição nobiliárquica do detentor do brasão.') }}">&#9432;</a></sup>
                     </div>
                     <div class="w3-container">
                         <select id='coroa' name="coroa" style="width:100%; height: 2em">
@@ -219,7 +240,7 @@
                         {{ _("<a target='_blank' href='https://pt.wikipedia.org/wiki/Esmalte_(heráldica)'>Cor</a> da coroa:") }}<sup><a
                             href='' onclick='return false;' style='font-size: 60%' data-toggle='popover'
                             data-trigger='focus'
-                            data-content={{ _('Em heráldica, cores ou esmaltes são colorações de diversos elementos de um brasão. São tradicionalmente divididas em <i>metais</i>, <i>cores</i> e <i>peles</i>.') }}>&#9432;</a></sup>
+                            data-content="{{ _('Em heráldica, cores ou esmaltes são colorações de diversos elementos de um brasão. São tradicionalmente divididas em <i>metais</i>, <i>cores</i> e <i>peles</i>.') }}">&#9432;</a></sup>
                     </div>
                     <div class="w3-container">
                         <select id='coroa_cor' name="coroa_cor" style="width:100%; height: 2em">
@@ -240,7 +261,7 @@
                         {{ _("O brasão possui <a target='_blank' href='https://pt.wikipedia.org/wiki/Elmo_(heráldica)'>elmo</a>?") }}<sup><a
                             href='' onclick='return false;' style='font-size: 60%' data-toggle='popover'
                             data-trigger='focus'
-                            data-content={{ _('Elmo é um equipamento de proteção para a cabeça. Em heráldica, posiciona-se acima do escudo e serve de base para o virol e o timbre.') }}>&#9432;</a></sup>
+                            data-content="{{ _('Elmo é um equipamento de proteção para a cabeça. Em heráldica, posiciona-se acima do escudo e serve de base para o virol e o timbre.') }}">&#9432;</a></sup>
                     </div>
                     <div class="w3-container">
                         <select id='elmo' name="elmo" style="width:100%; height: 2em">
@@ -254,7 +275,7 @@
                         {{ _("<a target='_blank' href='https://pt.wikipedia.org/wiki/Esmalte_(heráldica)'>Cor</a> do elmo:") }}<sup><a
                             href='' onclick='return false;' style='font-size: 60%' data-toggle='popover'
                             data-trigger='focus'
-                            data-content={{ _('Em heráldica, cores ou esmaltes são colorações de diversos elementos de um brasão. São tradicionalmente divididas em <i>metais</i>, <i>cores</i> e <i>peles</i>.') }}>&#9432;</a></sup>
+                            data-content="{{ _('Em heráldica, cores ou esmaltes são colorações de diversos elementos de um brasão. São tradicionalmente divididas em <i>metais</i>, <i>cores</i> e <i>peles</i>.') }}">&#9432;</a></sup>
                     </div>
                     <div class="w3-container">
                         <select id='elmo_cor' name="elmo_cor" style="width:100%">
@@ -275,7 +296,7 @@
                         {{ _("O brasão possui <a target='_blank' href='https://pt.wikipedia.org/wiki/Paquife'>paquife</a>?") }}<sup><a
                             href='' onclick='return false;' style='font-size: 60%' data-toggle='popover'
                             data-trigger='focus'
-                            data-content={{ _('Paquife é o desenho de um manto, capa, plumagem ou folhagem ao redor de um escudo, saindo do elmo.') }}>&#9432;</a></sup>
+                            data-content="{{ _('Paquife é o desenho de um manto, capa, plumagem ou folhagem ao redor de um escudo, saindo do elmo.') }}">&#9432;</a></sup>
                     </div>
                     <div class="w3-container">
                         <select id='paquife' name="paquife" style="width:100%; height: 2em">
@@ -289,7 +310,7 @@
                         {{ _("<a target='_blank' href='https://pt.wikipedia.org/wiki/Esmalte_(heráldica)'>Cor</a> do paquife:") }}<sup><a
                             href='' onclick='return false;' style='font-size: 60%' data-toggle='popover'
                             data-trigger='focus'
-                            data-content={{ _('Em heráldica, cores ou esmaltes são colorações de diversos elementos de um brasão. São tradicionalmente divididas em <i>metais</i>, <i>cores</i> e <i>peles</i>.') }}>&#9432;</a></sup>
+                            data-content="{{ _('Em heráldica, cores ou esmaltes são colorações de diversos elementos de um brasão. São tradicionalmente divididas em <i>metais</i>, <i>cores</i> e <i>peles</i>.') }}">&#9432;</a></sup>
                     </div>
                     <div class="w3-container">
                         <select multiple id='paquife_cor' name="paquife_cor" style="width:100%">
@@ -310,7 +331,7 @@
                         {{ _("O brasão possui <a target='_blank' href='https://pt.wikipedia.org/wiki/Virol'>virol</a>?") }}<sup><a
                             href='' onclick='return false;' style='font-size: 60%' data-toggle='popover'
                             data-trigger='focus'
-                            data-content={{ _('O virol é uma peça de tecido torcido localizada entre o elmo e o timbre. Tinha a função de manter o paquife no lugar correto.') }}>&#9432;</a></sup>
+                            data-content="{{ _('O virol é uma peça de tecido torcido localizada entre o elmo e o timbre. Tinha a função de manter o paquife no lugar correto.') }}">&#9432;</a></sup>
                     </div>
                     <div class="w3-container">
                         <select id='virol' name="virol" style="width:100%; height: 2em">
@@ -324,7 +345,7 @@
                         {{ _("<a target='_blank' href='https://pt.wikipedia.org/wiki/Esmalte_(heráldica)'>Cor</a> do virol:") }}<sup><a
                             href='' onclick='return false;' style='font-size: 60%' data-toggle='popover'
                             data-trigger='focus'
-                            data-content={{ _('Em heráldica, cores ou esmaltes são colorações de diversos elementos de um brasão. São tradicionalmente divididas em <i>metais</i>, <i>cores</i> e <i>peles</i>.') }}>&#9432;</a></sup>
+                            data-content="{{ _('Em heráldica, cores ou esmaltes são colorações de diversos elementos de um brasão. São tradicionalmente divididas em <i>metais</i>, <i>cores</i> e <i>peles</i>.') }}">&#9432;</a></sup>
                     </div>
                     <div class="w3-container">
                         <select multiple id='virol_cor' name="virol_cor" style="width:100%">
@@ -345,7 +366,7 @@
                         {{ _("O <a target='_blank' href='https://pt.wikipedia.org/wiki/Campo_(heráldica)'>campo</a> está dividido?") }}<sup><a
                             href='' onclick='return false;' style='font-size: 60%' data-toggle='popover'
                             data-trigger='focus'
-                            data-content={{ _('Em heráldica, o campo é o plano de fundo do escudo, que pode ser dividido e receber cores distintas.') }}>&#9432;</a></sup>
+                            data-content="{{ _('Em heráldica, o campo é o plano de fundo do escudo, que pode ser dividido e receber cores distintas.') }}">&#9432;</a></sup>
                     </div>
                     <div class="w3-container">
                         <select id='campo' name="campo" style="width:100%; height: 2em">
@@ -359,7 +380,7 @@
                         {{ _("Como está <a target='_blank' href='https://pt.wikipedia.org/wiki/Partições_do_campo_(heráldica)'>dividido</a> o campo do escudo?") }}<sup><a
                             href='' onclick='return false;' style='font-size: 60%' data-toggle='popover'
                             data-trigger='focus'
-                            data-content={{ _('O campo de um escudo pode ser dividido de diversas maneiras. Estas divisões também podem ser redivididas. Cada tipo de divisão tem um nome específico.') }}>&#9432;</a></sup>
+                            data-content="{{ _('O campo de um escudo pode ser dividido de diversas maneiras. Estas divisões também podem ser redivididas. Cada tipo de divisão tem um nome específico.') }}">&#9432;</a></sup>
                     </div>
                     <div class="w3-container">
                         <select multiple id='divisao' name="divisao" style="width:100%">
@@ -377,7 +398,7 @@
                         {{ _("<a target='_blank' href='https://pt.wikipedia.org/wiki/Esmalte_(heráldica)'>Cor(es)</a> do campo:") }}<sup><a
                             href='' onclick='return false;' style='font-size: 60%' data-toggle='popover'
                             data-trigger='focus'
-                            data-content={{ _('Em heráldica, cores ou esmaltes são colorações de diversos elementos de um brasão. São tradicionalmente divididas em <i>metais</i>, <i>cores</i> e <i>peles</i>.') }}>&#9432;</a></sup>
+                            data-content="{{ _('Em heráldica, cores ou esmaltes são colorações de diversos elementos de um brasão. São tradicionalmente divididas em <i>metais</i>, <i>cores</i> e <i>peles</i>.') }}">&#9432;</a></sup>
                     </div>
                     <div class="w3-container">
                         <select multiple id='campo_cor' name="campo_cor" style="width:100%">
@@ -398,7 +419,7 @@
                         {{ _("Quais são as <a target='_blank' href='https://pt.wikipedia.org/wiki/Figuras_(heráldica)'>figuras heráldicas</a> retratadas?") }}<sup><a
                             href='' onclick='return false;' style='font-size: 60%' data-toggle='popover'
                             data-trigger='focus'
-                            data-content={{ _('Figuras heráldicas são todos os elementos que se encontram dentro do escudo.') }}>&#9432;</a></sup>
+                            data-content="{{ _('Figuras heráldicas são todos os elementos que se encontram dentro do escudo.') }}">&#9432;</a></sup>
                     </div>
                     <div class="w3-container w3-half">
                         <button type="button" class="button" data-toggle="modal"
@@ -415,7 +436,7 @@
                         {{ _("O brasão possui <a target='_blank' href='https://pt.wikipedia.org/wiki/Suporte_(heráldica)'>suportes ou tenentes</a>?") }} {{ _("Se sim, indique-os.") }}<sup><a
                             href='' onclick='return false;' style='font-size: 60%' data-toggle='popover'
                             data-trigger='focus'
-                            data-content={{ _('Suportes são elementos que sustentam o escudo. São divididos entre <i>tenentes</i> (figuras humanas) e <i>suportes</i> (figuras não humanas)') }}>&#9432;</a></sup>
+                            data-content="{{ _('Suportes são elementos que sustentam o escudo. São divididos entre <i>tenentes</i> (figuras humanas) e <i>suportes</i> (figuras não humanas)') }}">&#9432;</a></sup>
                     </div>
                     <div class="w3-container w3-half">
                         <button type="button" class="button" data-toggle="modal"
@@ -432,7 +453,7 @@
                         {{ _("O brasão possui <a target='_blank' href='https://pt.wikipedia.org/wiki/Timbre_(heráldica)'>timbre(s)</a>?") }} {{ _("Se sim, indique-o(s).") }}<sup><a
                             href='' onclick='return false;' style='font-size: 60%' data-toggle='popover'
                             data-trigger='focus'
-                            data-content={{ _('Timbre é uma figura colocada sobre o elmo e o virol que serve tanto para distinguir os detentores dos brasões entre si quanto para marcar seus graus de nobreza.') }}>&#9432;</a></sup>
+                            data-content="{{ _('Timbre é uma figura colocada sobre o elmo e o virol que serve tanto para distinguir os detentores dos brasões entre si quanto para marcar seus graus de nobreza.') }}">&#9432;</a></sup>
                     </div>
                     <div class="w3-container w3-half">
                         <button type="button" class="button" data-toggle="modal"
@@ -449,7 +470,7 @@
                         {{ _("O brasão possui um <a target='_blank' href='https://pt.wikipedia.org/wiki/Lema'>lema</a>?") }} {{ _("Se sim, escreva-o abaixo:") }}<sup><a
                             href='' onclick='return false;' style='font-size: 60%' data-toggle='popover'
                             data-trigger='focus'
-                            data-content={{ _('Lema, mote ou moto é uma frase, uma ideia ou um grupo de conceitos que representam o detentor do brasão.') }}>&#9432;</a></sup>
+                            data-content="{{ _('Lema, mote ou moto é uma frase, uma ideia ou um grupo de conceitos que representam o detentor do brasão.') }}">&#9432;</a></sup>
                     </div>
                     <div class="w3-container">
                         <input id="lema" name="lema" type="text" maxlength="1490" style="width: 100%"/>
@@ -461,6 +482,7 @@
                     </div>
                     <div class="w3-container">
                         <select id='lema_lang' name="lema_lang" style="width:100%; height: 2em">
+                            <option value="" selected>{{ _("Selecione uma opção:") }}</option>
                             {% for language in languages %}
                                 <option value="{{ language.iso }}">{{ language.label }}</option>
                             {% endfor %}
@@ -468,14 +490,16 @@
                     </div>
                 </div>
             </form>
-            <div id="add" class="w3-container" style="justify-content: center;">
-                <a class="button" id="adicionar_declaracoes" tabindex="0" title="{{ _('Adicionar') }}">
-                    <button type="submit" form="brasao_form" id="sendbrasao" class="button"
-                            style="background-color:#008000;width:100%;margin:10px 0 0 0">
-                        {{ _("ADICIONAR") }}
-                    </button>
-                </a>
-            </div>
+            {% if username %}
+                <div id="add" class="w3-container" style="justify-content: center;">
+                    <a class="button" id="adicionar_declaracoes" tabindex="0" title="{{ _('Adicionar') }}">
+                        <button type="submit" form="brasao_form" id="sendbrasao" class="button"
+                                style="background-color:#008000;width:100%;margin:10px 0 0 0">
+                            {{ _("ADICIONAR") }}
+                        </button>
+                    </a>
+                </div>
+            {% endif %}
             <div id="back" class="w3-container" style="justify-content: center;">
                 <a class="button" tabindex="0" href="{{ url_for('inicio') }}">
                     <button type="button" class="button" id="back"
@@ -536,7 +560,7 @@
                         {{ _("<a target='_blank' href='https://pt.wikipedia.org/wiki/Esmalte_(heráldica)'>Cor(es)</a>:") }}<sup><a
                             href='' onclick='return false;' style='font-size: 60%' data-toggle='popover'
                             data-trigger='focus'
-                            data-content={{ _('Em heráldica, cores ou esmaltes são colorações de diversos elementos de um brasão. São tradicionalmente divididas em <i>metais</i>, <i>cores</i> e <i>peles</i>.') }}>&#9432;</a></sup>
+                            data-content="{{ _('Em heráldica, cores ou esmaltes são colorações de diversos elementos de um brasão. São tradicionalmente divididas em <i>metais</i>, <i>cores</i> e <i>peles</i>.') }}">&#9432;</a></sup>
                         <br>
                         <select multiple id='element_cor' name="element_cor" style="width:100%;height: 6em">
                             <option value="no" selected>{{ _("--Selecione uma opção--") }}</option>
@@ -794,11 +818,24 @@
             $('[data-toggle="popover"]').popover({html: true});
         });
 
-        $('#adicionar_declaracoes, #coroa_container, #cor_coroa_container, #elmo_container, #elmo_cor_container, #paquife_container, #paquife_cor_container, #virol_container, #virol_cor_container, #campo_container, #campo_divisao_container, #campo_cor_container, #figuras_container, #suportes_container, #timbre_container, #lema_container, #lema_lang_container').hide();
+        $('#brasao_container, #brasao_missing_container, #coroa_container, #cor_coroa_container, #elmo_container, #elmo_cor_container, #paquife_container, #paquife_cor_container, #virol_container, #virol_cor_container, #campo_container, #campo_divisao_container, #campo_cor_container, #figuras_container, #suportes_container, #timbre_container, #lema_container, #lema_lang_container').hide();
+
+        $('#has_brasao').change(function () {
+            var selected = $('#has_brasao option:selected').val();
+            $('#brasao_container').toggle(selected != "" && selected != "no");
+            $('#brasao').val('');
+            $("#brasao").trigger("change");
+        })
 
         $('#brasao').change(function () {
             var selected = $('#brasao option:selected').val();
-            $('#adicionar_declaracoes, #coroa_container, #elmo_container, #paquife_container, #virol_container, #campo_container, #campo_cor_container, #figuras_container, #suportes_container, #timbre_container, #lema_container').toggle(selected != "" && selected != "no");
+            $('#coroa_container, #elmo_container, #paquife_container, #virol_container, #campo_container, #campo_cor_container, #figuras_container, #suportes_container, #timbre_container, #lema_container').toggle(selected != "" && selected != "no");
+            $('#brasao_missing_container').toggle(selected === "no")
+            if (selected === "" || selected === "no") {
+                $('#lema_container, #lema_lang_container, #campo_divisao_container, #campo_cor_container, #virol_cor_container, #virol_container, #paquife_cor_container, #paquife_container, #elmo_cor_container, #elmo_container, #cor_coroa_container, #coroa_container').hide();
+                $('#lema, #lema_lang').val('');
+                $('#campo, #divisao, #campo_cor, #virol, #virol_cor, #paquife, #paquife_cor, #elmo_cor, #elmo, #coroa_cor, #coroa').val('no');
+            }
         })
 
         $('#coroa').change(function () {
@@ -834,13 +871,7 @@
         $('#lema').on('input', function () {
             var text = $('#lema').val();
             $('#lema_lang_container').toggle(text != "");
+            $('#lema_lang').val('');
         })
-
-        $("#brasao").change(function () {
-            var option = $(this).find('option:selected').val();
-            if (option === 'no') {
-                window.location.href = "{{ url_for('item', qid = next_qid) }}";
-            }
-        });
     </script>
 {% endblock %}

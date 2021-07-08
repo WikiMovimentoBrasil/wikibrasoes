@@ -10,6 +10,7 @@ from wikidata import query_quantidade, query_by_type, query_metadata_of_work, qu
     post_search_entity, get_labels, post_search_query, query_wikidata, query_items
 from oauth_wiki import get_username, get_token, raw_post_request
 from requests_oauthlib import OAuth1Session
+from datetime import datetime
 
 ##############################################################
 # INICIALIZAÇÃO
@@ -233,6 +234,7 @@ def colecao(type):
 def item(qid):
     username = get_username()
     lang = pt_to_ptbr(get_locale())
+    iconography = ["Q3305213", "Q93184"]
 
     with open(os.path.join(app.static_folder, 'queries.json')) as category_queries:
         all_queries = json.load(category_queries)
@@ -240,12 +242,21 @@ def item(qid):
     metadata_query = all_queries["Metadados"]["query"].replace("LANGUAGE", lang).replace("QIDDAOBRA", qid)
     next_qid_query = all_queries["Next_qid"]["query"].replace("QIDDAOBRA", qid)
     work_metadata = query_metadata_of_work(metadata_query, lang=lang)
+
+    if "instancia" in work_metadata and work_metadata["instancia"]:
+        for instancia in work_metadata["instancia"]:
+            if instancia.split("@")[0] in iconography:
+                next_qid_query = next_qid_query.replace(
+                    "OPTIONAL{?obra_next wdt:P180 wd:Q14659.}",
+                    "?obra_next wdt:P180 wd:Q14659.")
+
     next_qid = query_next_qid(next_qid_query)
 
-    brasoes = query_items(all_queries["brasoes"]["query"].replace("LANGUAGE", lang))
+    # brasoes = query_items(all_queries["brasoes"]["query"].replace("LANGUAGE", lang))
     brasoes = [
         {"qid": "Q5198811", "label": {"pt-br": "Brasão da cidade de São Paulo", "en": "Coat of arms of São Paulo"}},
-        {"qid": "Q107366396","label": {"pt-br": "Brasão da Família Souza Queiróz", "en": "Coat of arms of Souza Queiróz Family"}},
+        {"qid": "Q107366396",
+         "label": {"pt-br": "Brasão da Família Souza Queiróz", "en": "Coat of arms of Souza Queiróz Family"}},
         {"qid": "Q107366391", "label": {"pt-br": "Brasão de Amparo", "en": "Coat of arms of Amparo"}},
         {"qid": "Q9664727", "label": {"pt-br": "Brasão de Campinas", "en": "Coat of arms of Campinas"}},
         {"qid": "Q107366378", "label": {"pt-br": "Brasão de Cananeia", "en": "Coat of arms of Cananeia"}},
@@ -273,9 +284,12 @@ def item(qid):
         {"qid": "Q9665758", "label": {"pt-br": "Brasão de Santos", "en": "Coat of arms of Santos"}},
         {"qid": "Q107366383", "label": {"pt-br": "Brasão de São Bernardo", "en": "Coat of arms of São Bernardo"}},
         {"qid": "Q107366386", "label": {"pt-br": "Brasão de São Carlos", "en": "Coat of arms of São Carlos"}},
-        {"qid": "Q9665808","label": {"pt-br": "Brasão de São Francisco do Sul", "en": "Coat of arms of São Francisco do Sul"}},
-        {"qid": "Q9665832","label": {"pt-br": "Brasão de São José do Rio Preto", "en": "Coat of arms of São José do Rio Preto"}},
-        {"qid": "Q18463792","label": {"pt-br": "Brasão de São José dos Campos", "en": "Coat of arms of São José dos Campos"}},
+        {"qid": "Q9665808",
+         "label": {"pt-br": "Brasão de São Francisco do Sul", "en": "Coat of arms of São Francisco do Sul"}},
+        {"qid": "Q9665832",
+         "label": {"pt-br": "Brasão de São José do Rio Preto", "en": "Coat of arms of São José do Rio Preto"}},
+        {"qid": "Q18463792",
+         "label": {"pt-br": "Brasão de São José dos Campos", "en": "Coat of arms of São José dos Campos"}},
         {"qid": "Q107366389", "label": {"pt-br": "Brasão de São Sebastião", "en": "Coat of arms of São Sebastião"}},
         {"qid": "Q9665890", "label": {"pt-br": "Brasão de São Vicente", "en": "Coat of arms of São Vicente"}},
         {"qid": "Q107366381", "label": {"pt-br": "Brasão de Socorro", "en": "Coat of arms of Socorro"}},
@@ -286,7 +300,8 @@ def item(qid):
         {"qid": "Q107366390", "label": {"pt-br": "Brasão de Ubatuba", "en": "Coat of arms of Ubatuba"}},
         {"qid": "Q107366382", "label": {"pt-br": "Brasão de Vassouras", "en": "Coat of arms of Vassouras"}},
         {"qid": "Q8778141", "label": {"pt-br": "Brasão do estado de São Paulo", "en": "Coat of arms of São Paulo"}},
-        {"qid": "Q107366397","label": {"pt-br": "Brasão do Marquez de Valença", "en": "Coat of arms of the Marquis of Valença"}}]
+        {"qid": "Q107366397",
+         "label": {"pt-br": "Brasão do Marquez de Valença", "en": "Coat of arms of the Marquis of Valença"}}]
 
     languages = [{"label": gettext("Português brasileiro"), "iso": "pt-br"},
                  {"label": gettext("Português"), "iso": "pt"},
@@ -363,6 +378,74 @@ def brasao():
                            lang=lang)
 
 
+def no_brasao(form):
+    username = get_username()
+    lang = pt_to_ptbr(get_locale())
+    date = datetime.now().strftime("%m/%d/%Y, %H:%M:%S")
+    qid = form["qid"]
+    next_qid = form["next_qid"]
+    done = False
+
+    with open(os.path.join(app.static_folder, 'no-coats-depicted.json'), "r", encoding="utf-8") as no_brasao_file:
+        all_items = json.load(no_brasao_file)
+        if "list_of_items" in all_items and qid in all_items["list_of_items"]:
+            for item in all_items["list_of_items"][qid]:
+                if item["username"] == username:
+                    item["timestamp"] = date
+                    done = True
+            if not done:
+                all_items["list_of_items"][qid].append({"username": username, "timestamp": date})
+        else:
+            all_items["list_of_items"][qid] = [{"username": username, "timestamp": date}]
+
+    if all_items:
+        with open(os.path.join(app.static_folder, 'no-coats-depicted.json'), "w", encoding="utf-8") as no_brasao_file:
+            json.dump(all_items, no_brasao_file)
+
+    template_data = {'redirect_url': url_for('item', qid=next_qid),
+                     'username': username,
+                     'lang': lang}
+
+    return template_data
+
+
+def brasao_missing(form):
+    username = get_username()
+    lang = pt_to_ptbr(get_locale())
+    date = datetime.now().strftime("%m/%d/%Y, %H:%M:%S")
+    qid = form["qid"]
+    next_qid = form["next_qid"]
+    done = False
+    brasao_name = ""
+
+    if "brasao_name" in form and form["brasao_name"]:
+        brasao_name = form["brasao_name"]
+
+    with open(os.path.join(app.static_folder, 'coats-missing.json'), "r", encoding="utf-8") as brasao_missing_file:
+        all_items = json.load(brasao_missing_file)
+        if "list_of_items" in all_items and qid in all_items["list_of_items"]:
+            for item in all_items["list_of_items"][qid]:
+                if item["username"] == username:
+                    item["timestamp"] = date
+                    item["coats_of_arms"] = brasao_name
+                    done = True
+            if not done:
+                all_items["list_of_items"][qid].append(
+                    {"username": username, "timestamp": date, "coats_of_arms": brasao_name})
+        else:
+            all_items["list_of_items"][qid] = [
+                {"username": username, "timestamp": date, "coats_of_arms": brasao_name}]
+    if all_items:
+        with open(os.path.join(app.static_folder, 'coats-missing.json'), "w", encoding="utf-8") as brasao_missing_file:
+            json.dump(all_items, brasao_missing_file)
+
+    template_data = {'redirect_url': url_for('item', qid=next_qid),
+                     'username': username,
+                     'lang': lang}
+
+    return template_data
+
+
 @app.route('/send_brasao', methods=["POST"])
 def send_brasao():
     username = get_username()
@@ -370,152 +453,158 @@ def send_brasao():
 
     form = request.form
 
-    if "brasao" in form and form["brasao"] != "no":
-        # add_p180(form["qid"], form["brasao"])
-        values_already_on_wd = get_item(form["brasao"])
-        statements = []
+    if "has_brasao" in form and form["has_brasao"] == "no":
+        return render_template("success.html", **no_brasao(form))
+    if "has_brasao" in form and form["has_brasao"] == "yes":
+        if "brasao" in form and form["brasao"] != "no":
+            add_p180(form["qid"], form["brasao"])
+            values_already_on_wd = get_item(form["brasao"])
+            statements = []
 
-        # COROA
-        if "coroa" in form and form["coroa"] != "no":
-            coroa = form["coroa"]
-            coroa_cor = []
+            # COROA
+            if "coroa" in form and form["coroa"] != "no":
+                coroa = form["coroa"]
+                coroa_cor = []
 
-            if "coroa_cor" in form and form["coroa_cor"] != "no":
-                coroa_cor = request.form.getlist("coroa_cor")
+                if "coroa_cor" in form and form["coroa_cor"] != "no":
+                    coroa_cor = request.form.getlist("coroa_cor")
 
-            edit_or_create = check_items(values_already_on_wd, coroa, "Q908430")
-            statements.append(make_stat(
-                "P180",
-                coroa,
-                [{"pq": "P1114", "type": "number", "val": 1}] +
-                [{"pq": "P462", "type": "qid", "val": y} for y in coroa_cor if y != "no"] +
-                [{"pq": "P1354", "type": "qid", "val": "Q908430"}],
-                edit_or_create))
-
-        # ELMO
-        if "elmo" in form and form["elmo"] != "no":
-            elmo_cor = []
-
-            if "elmo_cor" in form and form["elmo_cor"] != "no":
-                elmo_cor = request.form.getlist("elmo_cor")
-
-            edit_or_create = check_items(values_already_on_wd, "Q910873", "")
-            statements.append(make_stat(
-                "P180",
-                "Q910873",
-                [{"pq": "P1114", "type": "number", "val": 1}] +
-                [{"pq": "P462", "type": "qid", "val": y} for y in elmo_cor if y != "no"],
-                edit_or_create))
-
-        # PAQUIFE
-        if "paquife" in form and form["paquife"] != "no":
-            paquife_cor = []
-
-            if "paquife_cor" in form and form["paquife_cor"] != "no":
-                paquife_cor = request.form.getlist("paquife_cor")
-
-            edit_or_create = check_items(values_already_on_wd, "Q1289089", "")
-            statements.append(make_stat(
-                "P180",
-                "Q1289089",
-                [{"pq": "P462", "type": "qid", "val": y} for y in paquife_cor if y != "no"],
-                edit_or_create))
-
-        # VIROL
-        if "virol" in form and form["virol"] != "no":
-            virol_cor = []
-
-            if "virol_cor" in form and form["virol_cor"] != "no":
-                virol_cor = request.form.getlist("virol_cor")
-
-            edit_or_create = check_items(values_already_on_wd, "Q910873", "")
-            statements.append(make_stat(
-                "P180",
-                "Q910873",
-                [{"pq": "P462", "type": "qid", "val": y} for y in virol_cor if y != "no"],
-                edit_or_create))
-
-        # CAMPO
-        if "campo" in form and form["campo"]:
-            divisao = []
-            campo_cor = []
-
-            if "divisao" in form and form["divisao"] != "no":
-                divisao = request.form.getlist("divisao")
-
-            if "campo_cor" in form and form["campo_cor"] != "no":
-                campo_cor = request.form.getlist("campo_cor")
-
-            edit_or_create = check_items(values_already_on_wd, "Q372254", "")
-            statements.append(make_stat(
-                "P180",
-                "Q372254",
-                [{"pq": "P1354", "type": "qid", "val": x} for x in divisao] +
-                [{"pq": "P462", "type": "qid", "val": y} for y in campo_cor if y != "no"],
-                edit_or_create))
-
-        # FIGURA
-        if "figura" in form:
-            figura_values = [figura_aux.split("@") for figura_aux in request.form.getlist("figura")]
-            for figura in figura_values:
-                edit_or_create = check_items(values_already_on_wd, figura[0], "Q1424805")
+                edit_or_create = check_items(values_already_on_wd, coroa, "Q908430")
                 statements.append(make_stat(
                     "P180",
-                    figura[0],
-                    [{"pq": "P1354", "type": "qid", "val": "Q1424805"}] +
-                    [{"pq": "P1114", "type": "number", "val": figura[1]}] +
-                    [{"pq": "P462", "type": "qid", "val": y} for y in figura[2].split(",") if y != "no"],
+                    coroa,
+                    [{"pq": "P1114", "type": "number", "val": 1}] +
+                    [{"pq": "P462", "type": "qid", "val": y} for y in coroa_cor if y != "no"] +
+                    [{"pq": "P1354", "type": "qid", "val": "Q908430"}],
                     edit_or_create))
 
-        # SUPORTE
-        if "suporte" in form:
-            suporte_values = [suporte_aux.split("@") for suporte_aux in request.form.getlist("suporte")]
+            # ELMO
+            if "elmo" in form and form["elmo"] != "no":
+                elmo_cor = []
 
-            for suporte in suporte_values:
-                edit_or_create = check_items(values_already_on_wd, suporte[0], "Q725975")
+                if "elmo_cor" in form and form["elmo_cor"] != "no":
+                    elmo_cor = request.form.getlist("elmo_cor")
+
+                edit_or_create = check_items(values_already_on_wd, "Q910873", "")
                 statements.append(make_stat(
                     "P180",
-                    suporte[0],
-                    [{"pq": "P1354", "type": "qid", "val": "Q725975"}] +
-                    [{"pq": "P1114", "type": "number", "val": suporte[1]}] +
-                    [{"pq": "P462", "type": "qid", "val": y} for y in suporte[2].split(",") if y != "no"],
+                    "Q910873",
+                    [{"pq": "P1114", "type": "number", "val": 1}] +
+                    [{"pq": "P462", "type": "qid", "val": y} for y in elmo_cor if y != "no"],
                     edit_or_create))
 
-        # TIMBRE
-        if "timbre" in form:
-            timbre_values = [timbre_aux.split("@") for timbre_aux in request.form.getlist("timbre")]
+            # PAQUIFE
+            if "paquife" in form and form["paquife"] != "no":
+                paquife_cor = []
 
-            for timbre in timbre_values:
-                edit_or_create = check_items(values_already_on_wd, timbre[0], "Q668732")
+                if "paquife_cor" in form and form["paquife_cor"] != "no":
+                    paquife_cor = request.form.getlist("paquife_cor")
+
+                edit_or_create = check_items(values_already_on_wd, "Q1289089", "")
                 statements.append(make_stat(
                     "P180",
-                    timbre[0],
-                    [{"pq": "P1354", "type": "qid", "val": "Q668732"}] +
-                    [{"pq": "P1114", "type": "number", "val": timbre[1]}] +
-                    [{"pq": "P462", "type": "qid", "val": y} for y in timbre[2].split(",") if y != "no"],
+                    "Q1289089",
+                    [{"pq": "P462", "type": "qid", "val": y} for y in paquife_cor if y != "no"],
                     edit_or_create))
 
-        # LEMA
-        if "lema" in form and form["lema"]:
-            lema = form["lema"]
-            if "lema_lang" in form and form["lema_lang"] != "no":
-                lema_lang = form["lema_lang"]
-                edit_or_create = check_items(values_already_on_wd, lema, "")
-                statements.append(make_monolingual_stat("P1451", lema, lema_lang, edit_or_create))
-                # TODO: Adicionar possibilidade de inserir listel com cor e texto do lema
+            # VIROL
+            if "virol" in form and form["virol"] != "no":
+                virol_cor = []
 
-        statements = {"claims": statements}
-        # post_item(json.dumps(statements), form["brasao"])
+                if "virol_cor" in form and form["virol_cor"] != "no":
+                    virol_cor = request.form.getlist("virol_cor")
 
-        if "next_qid" in form and form["next_qid"]:
-            next_qid = form["next_qid"]
-        else:
-            next_qid = form["qid"]
+                edit_or_create = check_items(values_already_on_wd, "Q910873", "")
+                statements.append(make_stat(
+                    "P180",
+                    "Q910873",
+                    [{"pq": "P462", "type": "qid", "val": y} for y in virol_cor if y != "no"],
+                    edit_or_create))
 
-        template_data = {'redirect_url': url_for('item', qid=next_qid),
-                         'username': username,
-                         'lang': lang}
-        return render_template("success.html", **template_data)
+            # CAMPO
+            if "campo" in form and form["campo"]:
+                divisao = []
+                campo_cor = []
+
+                if "divisao" in form and form["divisao"] != "no":
+                    divisao = request.form.getlist("divisao")
+
+                if "campo_cor" in form and form["campo_cor"] != "no":
+                    campo_cor = request.form.getlist("campo_cor")
+
+                edit_or_create = check_items(values_already_on_wd, "Q372254", "")
+                statements.append(make_stat(
+                    "P180",
+                    "Q372254",
+                    [{"pq": "P1354", "type": "qid", "val": x} for x in divisao] +
+                    [{"pq": "P462", "type": "qid", "val": y} for y in campo_cor if y != "no"],
+                    edit_or_create))
+
+            # FIGURA
+            if "figura" in form:
+                figura_values = [figura_aux.split("@") for figura_aux in request.form.getlist("figura")]
+                for figura in figura_values:
+                    edit_or_create = check_items(values_already_on_wd, figura[0], "Q1424805")
+                    statements.append(make_stat(
+                        "P180",
+                        figura[0],
+                        [{"pq": "P1354", "type": "qid", "val": "Q1424805"}] +
+                        [{"pq": "P1114", "type": "number", "val": figura[1]}] +
+                        [{"pq": "P462", "type": "qid", "val": y} for y in figura[2].split(",") if y != "no"],
+                        edit_or_create))
+
+            # SUPORTE
+            if "suporte" in form:
+                suporte_values = [suporte_aux.split("@") for suporte_aux in request.form.getlist("suporte")]
+
+                for suporte in suporte_values:
+                    edit_or_create = check_items(values_already_on_wd, suporte[0], "Q725975")
+                    statements.append(make_stat(
+                        "P180",
+                        suporte[0],
+                        [{"pq": "P1354", "type": "qid", "val": "Q725975"}] +
+                        [{"pq": "P1114", "type": "number", "val": suporte[1]}] +
+                        [{"pq": "P462", "type": "qid", "val": y} for y in suporte[2].split(",") if y != "no"],
+                        edit_or_create))
+
+            # TIMBRE
+            if "timbre" in form:
+                timbre_values = [timbre_aux.split("@") for timbre_aux in request.form.getlist("timbre")]
+
+                for timbre in timbre_values:
+                    edit_or_create = check_items(values_already_on_wd, timbre[0], "Q668732")
+                    statements.append(make_stat(
+                        "P180",
+                        timbre[0],
+                        [{"pq": "P1354", "type": "qid", "val": "Q668732"}] +
+                        [{"pq": "P1114", "type": "number", "val": timbre[1]}] +
+                        [{"pq": "P462", "type": "qid", "val": y} for y in timbre[2].split(",") if y != "no"],
+                        edit_or_create))
+
+            # LEMA
+            if "lema" in form and form["lema"]:
+                lema = form["lema"]
+                if "lema_lang" in form and form["lema_lang"] != "no":
+                    lema_lang = form["lema_lang"]
+                    edit_or_create = check_items(values_already_on_wd, lema, "")
+                    statements.append(make_monolingual_stat("P1451", lema, lema_lang, edit_or_create))
+                    # TODO: Adicionar possibilidade de inserir listel com cor e texto do lema
+
+            statements = {"claims": statements}
+            post_item(json.dumps(statements), form["brasao"])
+
+            if "next_qid" in form and form["next_qid"]:
+                next_qid = form["next_qid"]
+            else:
+                next_qid = form["qid"]
+
+            template_data = {'redirect_url': url_for('item', qid=next_qid),
+                             'username': username,
+                             'lang': lang}
+            return render_template("success.html", **template_data)
+        elif "brasao" in form and form["brasao"] == "no":
+            return render_template("success.html", **brasao_missing(form))
+
     return redirect(url_for("item", qid=form["qid"]))
 
 

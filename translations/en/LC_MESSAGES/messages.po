@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version:  1.0\n"
 "Report-Msgid-Bugs-To: eder.porto@wmnobrasil.org\n"
-"POT-Creation-Date: 2021-07-07 16:01-0300\n"
+"POT-Creation-Date: 2021-07-08 18:14-0300\n"
 "PO-Revision-Date: 2021-07-06 16:00-0300\n"
 "Last-Translator: Éder Porto Ferreira Alves <eder.porto@wmnobrasil.org>\n"
 "Language: en\n"
@@ -241,12 +241,13 @@ msgstr ""
 "Mantling are ornaments in the form of a cloak, cape or foliage that "
 "extend around the shield from the helmet."
 
-#: templates/brasao.html:1632 templates/item.html:190 templates/item.html:208
-#: templates/item.html:226 templates/item.html:261 templates/item.html:542
+#: templates/brasao.html:1632 templates/item.html:191 templates/item.html:203
+#: templates/item.html:229 templates/item.html:247 templates/item.html:282
+#: templates/item.html:566
 msgid "--Selecione uma opção--"
 msgstr "--Select an option--"
 
-#: templates/brasao.html:1640 templates/item.html:555 templates/item.html:583
+#: templates/brasao.html:1640 templates/item.html:579 templates/item.html:607
 msgid "Cancelar"
 msgstr "Cancel"
 
@@ -280,7 +281,7 @@ msgstr "Something went wrong!"
 msgid "REPORTAR ERRO"
 msgstr "REPORT ERROR"
 
-#: templates/error.html:37 templates/item.html:483
+#: templates/error.html:37 templates/item.html:507
 msgid "VOLTAR À PÁGINA INICIAL"
 msgstr "GO TO HOMEPAGE"
 
@@ -402,16 +403,36 @@ msgstr ""
 "Authenticate yourself by clicking on the 'Login' button in the upper "
 "right corner"
 
-#: templates/item.html:186
-msgid "Você consegue identificar na lista qual o brasão retratado?"
-msgstr "Can you identify from the list which coat of arms is depicted?"
+#: templates/item.html:187
+msgid ""
+"A(s) imagen(s) retrata(m) um <a target='_blank' "
+"href='https://pt.wikipedia.org/wiki/Brasão'>brasão</a>?"
+msgstr ""
+"The image(s) depicts a <a target='_blank' "
+"href='https://en.wikipedia.org/wiki/Coat_of_arms'>coat of arms</a>?"
 
-#: templates/item.html:191 templates/item.html:247 templates/item.html:282
-#: templates/item.html:317 templates/item.html:352
+#: templates/item.html:192 templates/item.html:204 templates/item.html:268
+#: templates/item.html:303 templates/item.html:338 templates/item.html:373
 msgid "Não"
 msgstr "No"
 
-#: templates/item.html:201
+#: templates/item.html:193 templates/item.html:269 templates/item.html:304
+#: templates/item.html:339 templates/item.html:374
+msgid "Sim"
+msgstr "Yes"
+
+#: templates/item.html:199
+msgid "Você consegue identificar na lista qual o brasão retratado?"
+msgstr "Can you identify from the list which coat of arms is depicted?"
+
+#: templates/item.html:213
+msgid ""
+"Se você consegue identificar o brasão, mas ele não consta na lista, "
+"escreva o nome do brasão:"
+msgstr "If you can identify the coat of arms, but it is not on the list, "
+"write its name:"
+
+#: templates/item.html:222
 msgid ""
 "Este brasão possui uma <a target='_blank' "
 "href='https://pt.wikipedia.org/wiki/Coroa_(heráldica)'>coroa</a>?"
@@ -419,11 +440,11 @@ msgstr ""
 "This coat of arms has a <a target='_blank' "
 "href='https://pt.wikipedia.org/wiki/Coroa_(heráldica)'>crown</a>?"
 
-#: templates/item.html:201
+#: templates/item.html:222
 msgid "Se sim, identifique o tipo:"
 msgstr "If yes, identify its type"
 
-#: templates/item.html:204
+#: templates/item.html:225
 msgid ""
 "Uma coroa, coronel ou diadema é um anel de metal ornamentado que "
 "identifica a posição nobiliárquica do detentor do brasão."
@@ -431,7 +452,7 @@ msgstr ""
 "A crown, colonel or diadem is an ornate metal ring that identifies the "
 "noble position of the holder of the coat of arms."
 
-#: templates/item.html:219
+#: templates/item.html:240
 msgid ""
 "<a target='_blank' "
 "href='https://pt.wikipedia.org/wiki/Esmalte_(heráldica)'>Cor</a> da "
@@ -440,18 +461,18 @@ msgstr ""
 "Crown <a target='_blank' "
 "href='https://en.wikipedia.org/wiki/Tincture_(heraldry)'>color</a>:"
 
-#: templates/item.html:222 templates/item.html:257 templates/item.html:292
-#: templates/item.html:327 templates/item.html:380 templates/item.html:539
+#: templates/item.html:243 templates/item.html:278 templates/item.html:313
+#: templates/item.html:348 templates/item.html:401 templates/item.html:563
 msgid ""
 "Em heráldica, cores ou esmaltes são colorações de diversos elementos de "
 "um brasão. São tradicionalmente divididas em <i>metais</i>, <i>cores</i> "
 "e <i>peles</i>."
 msgstr ""
-"In heraldry, colors or tinctures are colorations of several elements of a "
-"coat of arms. They are traditionally divided into <i>metals</i>, "
+"In heraldry, colors or tinctures are colorations of several elements of a"
+" coat of arms. They are traditionally divided into <i>metals</i>, "
 "<i>colors</i> and <i>furs</i>."
 
-#: templates/item.html:240
+#: templates/item.html:261
 msgid ""
 "O brasão possui <a target='_blank' "
 "href='https://pt.wikipedia.org/wiki/Elmo_(heráldica)'>elmo</a>?"
@@ -459,7 +480,7 @@ msgstr ""
 "The coat of arms has a <a target='_blank' "
 "href='https://en.wikipedia.org/wiki/Helmet_(heraldry)'>helmet</a>?"
 
-#: templates/item.html:243
+#: templates/item.html:264
 msgid ""
 "Elmo é um equipamento de proteção para a cabeça. Em heráldica, posiciona-"
 "se acima do escudo e serve de base para o virol e o timbre."
@@ -467,12 +488,7 @@ msgstr ""
 "Helmet is a protective headgear. In heraldry, it is positioned above the "
 "shield and serves as a base for the torse and crest."
 
-#: templates/item.html:248 templates/item.html:283 templates/item.html:318
-#: templates/item.html:353
-msgid "Sim"
-msgstr "Yes"
-
-#: templates/item.html:254
+#: templates/item.html:275
 msgid ""
 "<a target='_blank' "
 "href='https://pt.wikipedia.org/wiki/Esmalte_(heráldica)'>Cor</a> do elmo:"
@@ -480,7 +496,7 @@ msgstr ""
 "Helmet <a target='_blank' "
 "href='https://en.wikipedia.org/wiki/Tincture_(heraldry)'>color</a>:"
 
-#: templates/item.html:275
+#: templates/item.html:296
 msgid ""
 "O brasão possui <a target='_blank' "
 "href='https://pt.wikipedia.org/wiki/Paquife'>paquife</a>?"
@@ -488,7 +504,7 @@ msgstr ""
 "The coat of arms has a <a target='_blank' "
 "href='https://en.wikipedia.org/wiki/Mantling'>mantling</a>?"
 
-#: templates/item.html:278
+#: templates/item.html:299
 msgid ""
 "Paquife é o desenho de um manto, capa, plumagem ou folhagem ao redor de "
 "um escudo, saindo do elmo."
@@ -496,7 +512,7 @@ msgstr ""
 "Mantling is the drawing of a cloak, cape or foliage around the shield "
 "from the helmet."
 
-#: templates/item.html:289
+#: templates/item.html:310
 msgid ""
 "<a target='_blank' "
 "href='https://pt.wikipedia.org/wiki/Esmalte_(heráldica)'>Cor</a> do "
@@ -505,12 +521,12 @@ msgstr ""
 "Mantling <a target='_blank' "
 "href='https://en.wikipedia.org/wiki/Tincture_(heraldry)'>color</a>:"
 
-#: templates/item.html:296 templates/item.html:331 templates/item.html:366
-#: templates/item.html:384
+#: templates/item.html:317 templates/item.html:352 templates/item.html:387
+#: templates/item.html:405
 msgid "--Selecione ao menos uma opção--"
 msgstr "--Select at least one option--"
 
-#: templates/item.html:310
+#: templates/item.html:331
 msgid ""
 "O brasão possui <a target='_blank' "
 "href='https://pt.wikipedia.org/wiki/Virol'>virol</a>?"
@@ -518,15 +534,15 @@ msgstr ""
 "The coat of arms has a <a target='_blank' "
 "href='https://en.wikipedia.org/wiki/Torse'>torse</a>?"
 
-#: templates/item.html:313
+#: templates/item.html:334
 msgid ""
 "O virol é uma peça de tecido torcido localizada entre o elmo e o timbre. "
 "Tinha a função de manter o paquife no lugar correto."
 msgstr ""
-"The torse is a twisted piece of fabric located between the helmet and the "
-"crest. It was supposed to keep the mantling in the right place."
+"The torse is a twisted piece of fabric located between the helmet and the"
+" crest. It was supposed to keep the mantling in the right place."
 
-#: templates/item.html:324
+#: templates/item.html:345
 msgid ""
 "<a target='_blank' "
 "href='https://pt.wikipedia.org/wiki/Esmalte_(heráldica)'>Cor</a> do "
@@ -535,7 +551,7 @@ msgstr ""
 "Torse <a target='_blank' "
 "href='https://en.wikipedia.org/wiki/Tincture_(heraldry)'>color</a>:"
 
-#: templates/item.html:345
+#: templates/item.html:366
 msgid ""
 "O <a target='_blank' "
 "href='https://pt.wikipedia.org/wiki/Campo_(heráldica)'>campo</a> está "
@@ -545,7 +561,7 @@ msgstr ""
 "href='https://en.wikipedia.org/wiki/Field_(heraldry)'>field</a> is "
 "divided?"
 
-#: templates/item.html:348
+#: templates/item.html:369
 msgid ""
 "Em heráldica, o campo é o plano de fundo do escudo, que pode ser dividido"
 " e receber cores distintas."
@@ -553,7 +569,7 @@ msgstr ""
 "In heraldry, the field is the shield's background, which can be divided "
 "and given different colors."
 
-#: templates/item.html:359
+#: templates/item.html:380
 msgid ""
 "Como está <a target='_blank' "
 "href='https://pt.wikipedia.org/wiki/Partições_do_campo_(heráldica)'>dividido</a>"
@@ -562,16 +578,16 @@ msgstr ""
 "How the field of the shield is <a target='_blank' "
 "href='https://en.wikipedia.org/wiki/Division_of_the_field'>divided</a>?"
 
-#: templates/item.html:362
+#: templates/item.html:383
 msgid ""
 "O campo de um escudo pode ser dividido de diversas maneiras. Estas "
 "divisões também podem ser redivididas. Cada tipo de divisão tem um nome "
 "específico."
 msgstr ""
-"The field of a shield can be divided in several ways. These divisions "
-"can also be re-divided. Each type of division has a specific name."
+"The field of a shield can be divided in several ways. These divisions can"
+" also be re-divided. Each type of division has a specific name."
 
-#: templates/item.html:377
+#: templates/item.html:398
 msgid ""
 "<a target='_blank' "
 "href='https://pt.wikipedia.org/wiki/Esmalte_(heráldica)'>Cor(es)</a> do "
@@ -580,7 +596,7 @@ msgstr ""
 "Field <a target='_blank' "
 "href='https://en.wikipedia.org/wiki/Tincture_(heraldry)'>color(s)</a>:"
 
-#: templates/item.html:398
+#: templates/item.html:419
 msgid ""
 "Quais são as <a target='_blank' "
 "href='https://pt.wikipedia.org/wiki/Figuras_(heráldica)'>figuras "
@@ -590,20 +606,20 @@ msgstr ""
 "href='https://en.wikipedia.org/wiki/Charge_(heraldry)'>heraldic "
 "figures</a> depicted?"
 
-#: templates/item.html:401
+#: templates/item.html:422
 msgid ""
 "Figuras heráldicas são todos os elementos que se encontram dentro do "
 "escudo."
 msgstr ""
-"Heraldic figures are all the elements found within the shield in a "
-"coat of arms."
+"Heraldic figures are all the elements found within the shield in a coat "
+"of arms."
 
-#: templates/item.html:407 templates/item.html:424 templates/item.html:441
-#: templates/item.html:472 templates/item.html:593
+#: templates/item.html:428 templates/item.html:445 templates/item.html:462
+#: templates/item.html:495 templates/item.html:617
 msgid "Adicionar"
 msgstr "Add"
 
-#: templates/item.html:415
+#: templates/item.html:436
 msgid ""
 "O brasão possui <a target='_blank' "
 "href='https://pt.wikipedia.org/wiki/Suporte_(heráldica)'>suportes ou "
@@ -612,11 +628,11 @@ msgstr ""
 "The coat of arms has <a target='_blank' "
 "href='https://en.wikipedia.org/wiki/Supporter'>supporters or tenants</a>?"
 
-#: templates/item.html:415
+#: templates/item.html:436
 msgid "Se sim, indique-os."
 msgstr "If yes, indicate them."
 
-#: templates/item.html:418
+#: templates/item.html:439
 msgid ""
 "Suportes são elementos que sustentam o escudo. São divididos entre "
 "<i>tenentes</i> (figuras humanas) e <i>suportes</i> (figuras não humanas)"
@@ -624,7 +640,7 @@ msgstr ""
 "Supporters are elements that support the shield. They are divided into "
 "<i>tenants</i> (human figures) and <i>supporters</i> (non-human figures)"
 
-#: templates/item.html:432
+#: templates/item.html:453
 msgid ""
 "O brasão possui <a target='_blank' "
 "href='https://pt.wikipedia.org/wiki/Timbre_(heráldica)'>timbre(s)</a>?"
@@ -632,21 +648,21 @@ msgstr ""
 "The coat of arms has <a target='_blank' "
 "href='https://en.wikipedia.org/wiki/Crest_(heraldry)'>crest(s)</a>"
 
-#: templates/item.html:432
+#: templates/item.html:453
 msgid "Se sim, indique-o(s)."
 msgstr "If yes, indicate it/them"
 
-#: templates/item.html:435
+#: templates/item.html:456
 msgid ""
 "Timbre é uma figura colocada sobre o elmo e o virol que serve tanto para "
 "distinguir os detentores dos brasões entre si quanto para marcar seus "
 "graus de nobreza."
 msgstr ""
-"Crest is a figure placed over the helmet and the torse that serves both to "
-"distinguish the holders of coats of arms from each other and to mark their "
-"degrees of nobility."
+"Crest is a figure placed over the helmet and the torse that serves both "
+"to distinguish the holders of coats of arms from each other and to mark "
+"their degrees of nobility."
 
-#: templates/item.html:449
+#: templates/item.html:470
 msgid ""
 "O brasão possui um <a target='_blank' "
 "href='https://pt.wikipedia.org/wiki/Lema'>lema</a>?"
@@ -654,11 +670,11 @@ msgstr ""
 "The coat of arms has a <a target='_blank' "
 "href='https://en.wikipedia.org/wiki/Motto#Heraldry'>motto</a>?"
 
-#: templates/item.html:449
+#: templates/item.html:470
 msgid "Se sim, escreva-o abaixo:"
 msgstr "If yes, write it below:"
 
-#: templates/item.html:452
+#: templates/item.html:473
 msgid ""
 "Lema, mote ou moto é uma frase, uma ideia ou um grupo de conceitos que "
 "representam o detentor do brasão."
@@ -666,35 +682,35 @@ msgstr ""
 "Motto is a phrase, an idea or a group of concepts that represent the "
 "holder of the coat of arms."
 
-#: templates/item.html:460
+#: templates/item.html:481
 msgid "Se o brasão possui um lema, em qual idioma está escrito?"
 msgstr "If the coat of arms has a motto, in which language is it written?"
 
-#: templates/item.html:475
-msgid "ADICIONAR"
-msgstr "ADD"
-
-#: templates/item.html:492
-msgid "PULAR ESTE ITEM"
-msgstr "SKIP THIS ITEM"
-
-#: templates/item.html:511
-msgid "Pesquise"
-msgstr "Search"
-
-#: templates/item.html:521
+#: templates/item.html:485 templates/item.html:545
 msgid "Selecione uma opção:"
 msgstr "Select an option:"
 
-#: templates/item.html:528
+#: templates/item.html:498
+msgid "ADICIONAR"
+msgstr "ADD"
+
+#: templates/item.html:516
+msgid "PULAR ESTE ITEM"
+msgstr "SKIP THIS ITEM"
+
+#: templates/item.html:535
+msgid "Pesquise"
+msgstr "Search"
+
+#: templates/item.html:552
 msgid "Indique a quantidade:"
 msgstr "Indicate the quantity: "
 
-#: templates/item.html:531
+#: templates/item.html:555
 msgid "Quantidade"
 msgstr "Quantity"
 
-#: templates/item.html:536
+#: templates/item.html:560
 msgid ""
 "<a target='_blank' "
 "href='https://pt.wikipedia.org/wiki/Esmalte_(heráldica)'>Cor(es)</a>:"
@@ -702,7 +718,7 @@ msgstr ""
 "<a target='_blank' "
 "href='https://en.wikipedia.org/wiki/Tincture_(heraldry)'>Color(s)</a>:"
 
-#: templates/item.html:594
+#: templates/item.html:618
 msgid ""
 "Figuras heráldicas são todos e quaisquer elementos que se encontrem "
 "dentro do escudo em um brasão."
@@ -710,39 +726,39 @@ msgstr ""
 "Heraldic figures are any and all elements found within the shield in a "
 "coat of arms."
 
-#: templates/item.html:595
+#: templates/item.html:619
 msgid "Suportes heráldicos são as figuras que sustentam ou guardam o escudo."
 msgstr "Heraldic supporters are the figures that support or guard the shield."
 
-#: templates/item.html:596
+#: templates/item.html:620
 msgid "Timbres são figuras colocadas acima do virol e do elmo em um brasão."
 msgstr "Crests are figures placed above the virol and helmet on a coat of arms."
 
-#: templates/item.html:638
+#: templates/item.html:662
 msgid "Quantidade: "
 msgstr "Quantity: "
 
-#: templates/item.html:639
+#: templates/item.html:663
 msgid "Cor(es): "
 msgstr "Color(s): "
 
-#: templates/item.html:641
+#: templates/item.html:665
 msgid "Quantidade não declarada"
 msgstr "Non stated quantity"
 
-#: templates/item.html:682
+#: templates/item.html:706
 msgid "Pesquisando o banco de dados..."
 msgstr "Searching the database..."
 
-#: templates/item.html:704
+#: templates/item.html:728
 msgid "Declaração inserida com sucesso!"
 msgstr "Statement inserted successfully"
 
-#: templates/item.html:722 templates/item.html:766
+#: templates/item.html:746 templates/item.html:790
 msgid "Selecione um elemento"
 msgstr "Select an element"
 
-#: templates/item.html:741
+#: templates/item.html:765
 msgid "Nenhum resultado obtido"
 msgstr "No result returned"
 

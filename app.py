@@ -214,7 +214,15 @@ def colecao(type):
 
     try:
         selected_query = all_queries[type]["query"]
-        selection = query_by_type(selected_query)
+        selection_aux = query_by_type(selected_query)
+        selection = []
+
+        with open(os.path.join(app.static_folder, 'no-coats-depicted.json')) as no_coats_depicted:
+            all_items = json.load(no_coats_depicted)["list_of_items"]
+
+        for selected_item in selection_aux:
+            if not (selected_item["qid"] in all_items and len(all_items[selected_item["qid"]]) > 1):
+                selection.append(selected_item)
         if lang == "en":
             descriptor = all_queries[type]["descriptor"]["en"]
         else:

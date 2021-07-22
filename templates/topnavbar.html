@@ -10,7 +10,7 @@
         <a class="right" tabindex="0" href="{{url_for('set_locale', return_to=request.script_root + request.full_path, lang='pt')}}">PT</a>
     {% endif %}
     {% if username %}
-        <a class="right" tabindex="0" target="_blank" href="https://commons.wikimedia.org/wiki/Special:Contributions/{{username}}">{{username}}</a>
+        <a class="right" tabindex="0" target="_blank" href="https://www.wikidata.org/wiki/Special:Contributions/{{username}}">{{username}}</a>
     {% else %}
         <a class="right" tabindex="0" href="{{ url_for('login', next=request.script_root + request.full_path) }}">{{ _("Autenticar-se")}}</a>
     {% endif %}

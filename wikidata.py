@@ -289,3 +289,17 @@ def extract_items(results, list_of_qids):
                 resultados.append(item)
 
     return resultados
+
+
+def get_item_via_api(qid):
+    url = "https://www.wikidata.org/w/api.php?"
+    params = {
+        "action": "wbgetclaims",
+        "format": "json",
+        "entity": qid
+    }
+    result = requests.get(url, params=params)
+
+    dados = result.json()
+
+    return dados

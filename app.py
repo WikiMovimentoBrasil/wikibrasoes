@@ -7,7 +7,7 @@ import yaml
 from flask import Flask, render_template, request, session, redirect, url_for, g, jsonify
 from flask_babel import Babel, gettext
 from wikidata import query_quantidade, query_by_type, query_metadata_of_work, query_next_qid, api_category_members, \
-    post_search_entity, get_labels, post_search_query, query_wikidata, query_items
+    post_search_entity, get_labels, post_search_query, query_wikidata, query_items, get_item_via_api
 from oauth_wiki import get_username, get_token, raw_post_request
 from requests_oauthlib import OAuth1Session
 from datetime import datetime
@@ -456,20 +456,48 @@ def brasao_missing(form):
 
 @app.route('/send_brasao', methods=["POST"])
 def send_brasao():
+    """
+    Esta função recebe um formulário com valores para
+    elementos heráldicos de um brasão retratado em uma
+    obra ou objeto do acervo do Museu do Ipiranga.
+
+    :return:
+    """
     username = get_username()
     lang = pt_to_ptbr(get_locale())
 
     form = request.form
 
+    ######################################################################
+    # Caso 1: Objeto não tem brasão
+    ######################################################################
+    # Neste caso, o objeto é adicionado ao arquivo no-coats-depicted.json,
+    # o que faz com que seja retirado da listagem de obras disponíveis após
+    # dois usuários declararem que o objeto não apresenta um brasão.
     if "has_brasao" in form and form["has_brasao"] == "no":
         return render_template("success.html", **no_brasao(form))
+
     if "has_brasao" in form and form["has_brasao"] == "yes":
-        if "brasao" in form and form["brasao"] != "no":
-            # add_p180(form["qid"], form["brasao"])
+
+        ######################################################################
+        # Caso 2: Objeto tem brasão, e o brasão é identificável na lista
+        ######################################################################
+        # Neste caso, verifica-se o formulário para geração de declarações para
+        # serem inseridas nos itens dos brasões.
+        if "brasao" in form and form["brasao"] != "no" and form["brasao"]:
+
+            # Adiciona-se o brasão da lista como valor retratado (P180) do objeto
+            add_p180(form["qid"], form["brasao"])
+
             values_already_on_wd = get_item(form["brasao"])
+            claims = get_item_via_api(form["brasao"])
+
+            # Inicia-se com um conjunto vazio de declarações
             statements = []
 
+            ######################################################################
             # COROA
+            ######################################################################
             if "coroa" in form and form["coroa"] != "no":
                 coroa = form["coroa"]
                 coroa_cor = []
@@ -477,14 +505,16 @@ def send_brasao():
                 if "coroa_cor" in form and form["coroa_cor"] != "no":
                     coroa_cor = request.form.getlist("coroa_cor")
 
-                edit_or_create = check_items(values_already_on_wd, coroa, "Q908430")
-                statements.append(make_stat(
-                    "P180",
-                    coroa,
-                    [{"pq": "P1114", "type": "number", "val": 1}] +
-                    [{"pq": "P462", "type": "qid", "val": y} for y in coroa_cor if y != "no"] +
-                    [{"pq": "P1354", "type": "qid", "val": "Q908430"}],
-                    edit_or_create))
+                statements.append(build_stat(coroa, 1, coroa_cor, ["Q908430"], claims["claims"], "Q908430"))
+
+                # edit_or_create = check_items(values_already_on_wd, coroa, "Q908430")
+                # statements.append(make_stat(
+                #     "P180",
+                #     coroa,
+                #     [{"pq": "P1114", "type": "number", "val": 1}] +
+                #     [{"pq": "P462", "type": "qid", "val": y} for y in coroa_cor if y != "no"] +
+                #     [{"pq": "P1354", "type": "qid", "val": "Q908430"}],
+                #     edit_or_create))
 
             # ELMO
             if "elmo" in form and form["elmo"] != "no":
@@ -493,13 +523,14 @@ def send_brasao():
                 if "elmo_cor" in form and form["elmo_cor"] != "no":
                     elmo_cor = request.form.getlist("elmo_cor")
 
-                edit_or_create = check_items(values_already_on_wd, "Q910873", "")
-                statements.append(make_stat(
-                    "P180",
-                    "Q910873",
-                    [{"pq": "P1114", "type": "number", "val": 1}] +
-                    [{"pq": "P462", "type": "qid", "val": y} for y in elmo_cor if y != "no"],
-                    edit_or_create))
+                statements.append(build_stat("Q910873", 1, elmo_cor, ["Q910873"], claims["claims"], "Q910873"))
+                # edit_or_create = check_items(values_already_on_wd, "Q910873", "")
+                # statements.append(make_stat(
+                #     "P180",
+                #     "Q910873",
+                #     [{"pq": "P1114", "type": "number", "val": 1}] +
+                #     [{"pq": "P462", "type": "qid", "val": y} for y in elmo_cor if y != "no"],
+                #     edit_or_create))
 
             # PAQUIFE
             if "paquife" in form and form["paquife"] != "no":
@@ -508,12 +539,13 @@ def send_brasao():
                 if "paquife_cor" in form and form["paquife_cor"] != "no":
                     paquife_cor = request.form.getlist("paquife_cor")
 
-                edit_or_create = check_items(values_already_on_wd, "Q1289089", "")
-                statements.append(make_stat(
-                    "P180",
-                    "Q1289089",
-                    [{"pq": "P462", "type": "qid", "val": y} for y in paquife_cor if y != "no"],
-                    edit_or_create))
+                statements.append(build_stat("Q1289089", 1, paquife_cor, ["Q1289089"], claims["claims"], "Q1289089"))
+                # edit_or_create = check_items(values_already_on_wd, "Q1289089", "")
+                # statements.append(make_stat(
+                #     "P180",
+                #     "Q1289089",
+                #     [{"pq": "P462", "type": "qid", "val": y} for y in paquife_cor if y != "no"],
+                #     edit_or_create))
 
             # VIROL
             if "virol" in form and form["virol"] != "no":
@@ -522,12 +554,13 @@ def send_brasao():
                 if "virol_cor" in form and form["virol_cor"] != "no":
                     virol_cor = request.form.getlist("virol_cor")
 
-                edit_or_create = check_items(values_already_on_wd, "Q910873", "")
-                statements.append(make_stat(
-                    "P180",
-                    "Q910873",
-                    [{"pq": "P462", "type": "qid", "val": y} for y in virol_cor if y != "no"],
-                    edit_or_create))
+                statements.append(build_stat("Q910873", 1, virol_cor, ["Q910873"], claims["claims"], "Q910873"))
+                # edit_or_create = check_items(values_already_on_wd, "Q910873", "")
+                # statements.append(make_stat(
+                #     "P180",
+                #     "Q910873",
+                #     [{"pq": "P462", "type": "qid", "val": y} for y in virol_cor if y != "no"],
+                #     edit_or_create))
 
             # CAMPO
             if "campo" in form and form["campo"]:
@@ -540,54 +573,63 @@ def send_brasao():
                 if "campo_cor" in form and form["campo_cor"] != "no":
                     campo_cor = request.form.getlist("campo_cor")
 
-                edit_or_create = check_items(values_already_on_wd, "Q372254", "")
-                statements.append(make_stat(
-                    "P180",
-                    "Q372254",
-                    [{"pq": "P1354", "type": "qid", "val": x} for x in divisao] +
-                    [{"pq": "P462", "type": "qid", "val": y} for y in campo_cor if y != "no"],
-                    edit_or_create))
+                statements.append(build_stat("Q372254", 1, campo_cor, ["Q372254"]+divisao, claims["claims"], "Q372254"))
+                # edit_or_create = check_items(values_already_on_wd, "Q372254", "")
+                # statements.append(make_stat(
+                #     "P180",
+                #     "Q372254",
+                #     [{"pq": "P1354", "type": "qid", "val": x} for x in divisao] +
+                #     [{"pq": "P462", "type": "qid", "val": y} for y in campo_cor if y != "no"],
+                #     edit_or_create))
 
             # FIGURA
             if "figura" in form:
                 figura_values = [figura_aux.split("@") for figura_aux in request.form.getlist("figura")]
                 for figura in figura_values:
-                    edit_or_create = check_items(values_already_on_wd, figura[0], "Q1424805")
-                    statements.append(make_stat(
-                        "P180",
-                        figura[0],
-                        [{"pq": "P1354", "type": "qid", "val": "Q1424805"}] +
-                        [{"pq": "P1114", "type": "number", "val": figura[1]}] +
-                        [{"pq": "P462", "type": "qid", "val": y} for y in figura[2].split(",") if y != "no"],
-                        edit_or_create))
+                    figura_cor = [y for y in figura[2].split(",") if y != "no"]
+                    statements.append(build_stat(figura[0], figura[1], figura_cor, ["Q1424805"], claims["claims"], "Q1424805"))
+                    # edit_or_create = check_items(values_already_on_wd, figura[0], "Q1424805")
+                    # statements.append(make_stat(
+                    #     "P180",
+                    #     figura[0],
+                    #     [{"pq": "P1354", "type": "qid", "val": "Q1424805"}] +
+                    #     [{"pq": "P1114", "type": "number", "val": figura[1]}] +
+                    #     [{"pq": "P462", "type": "qid", "val": y} for y in figura[2].split(",") if y != "no"],
+                    #     edit_or_create))
 
             # SUPORTE
             if "suporte" in form:
                 suporte_values = [suporte_aux.split("@") for suporte_aux in request.form.getlist("suporte")]
 
                 for suporte in suporte_values:
-                    edit_or_create = check_items(values_already_on_wd, suporte[0], "Q725975")
-                    statements.append(make_stat(
-                        "P180",
-                        suporte[0],
-                        [{"pq": "P1354", "type": "qid", "val": "Q725975"}] +
-                        [{"pq": "P1114", "type": "number", "val": suporte[1]}] +
-                        [{"pq": "P462", "type": "qid", "val": y} for y in suporte[2].split(",") if y != "no"],
-                        edit_or_create))
+                    suporte_cor = [y for y in suporte[2].split(",") if y != "no"]
+                    statements.append(build_stat(suporte[0], suporte[1], suporte_cor, ["Q725975"], claims["claims"], "Q725975"))
+
+                    # edit_or_create = check_items(values_already_on_wd, suporte[0], "Q725975")
+                    # statements.append(make_stat(
+                    #     "P180",
+                    #     suporte[0],
+                    #     [{"pq": "P1354", "type": "qid", "val": "Q725975"}] +
+                    #     [{"pq": "P1114", "type": "number", "val": suporte[1]}] +
+                    #     [{"pq": "P462", "type": "qid", "val": y} for y in suporte[2].split(",") if y != "no"],
+                    #     edit_or_create))
 
             # TIMBRE
             if "timbre" in form:
                 timbre_values = [timbre_aux.split("@") for timbre_aux in request.form.getlist("timbre")]
 
                 for timbre in timbre_values:
-                    edit_or_create = check_items(values_already_on_wd, timbre[0], "Q668732")
-                    statements.append(make_stat(
-                        "P180",
-                        timbre[0],
-                        [{"pq": "P1354", "type": "qid", "val": "Q668732"}] +
-                        [{"pq": "P1114", "type": "number", "val": timbre[1]}] +
-                        [{"pq": "P462", "type": "qid", "val": y} for y in timbre[2].split(",") if y != "no"],
-                        edit_or_create))
+                    timbre_cor = [y for y in timbre[2].split(",") if y != "no"]
+                    statements.append(build_stat(timbre[0], timbre[1], timbre_cor, ["Q668732"], claims["claims"], "Q668732"))
+
+                    # edit_or_create = check_items(values_already_on_wd, timbre[0], "Q668732")
+                    # statements.append(make_stat(
+                    #     "P180",
+                    #     timbre[0],
+                    #     [{"pq": "P1354", "type": "qid", "val": "Q668732"}] +
+                    #     [{"pq": "P1114", "type": "number", "val": timbre[1]}] +
+                    #     [{"pq": "P462", "type": "qid", "val": y} for y in timbre[2].split(",") if y != "no"],
+                    #     edit_or_create))
 
             # LEMA
             if "lema" in form and form["lema"]:
@@ -610,6 +652,12 @@ def send_brasao():
                              'username': username,
                              'lang': lang}
             return render_template("success.html", **template_data)
+
+        ######################################################################
+        # Caso 3: Objeto tem brasão, mas o brasão não é identificável na lista
+        ######################################################################
+        # Neste caso, o objeto é adicionado ao arquivo coats-missing.json, para
+        # que seja identificado e adicionado à lista.
         elif "brasao" in form and form["brasao"] == "no":
             return render_template("success.html", **brasao_missing(form))
 
@@ -791,6 +839,168 @@ def search_entity():
                           "descr": item_["descrptbr"] if lang != "en" else item_["descren"]})
 
         return jsonify(items), 200
+
+
+def verify_1354(quals, P1354):
+    for qual in quals:
+        if "datavalue" in qual:
+            if "value" in qual["datavalue"]:
+                if "id" in qual["datavalue"]["value"] and qual["datavalue"]["value"]["id"] in P1354:
+                    return True
+    return False
+
+
+def remove_redundant_p462(qualifiers, p462):
+    if "P462" in qualifiers:
+        list_p462 = p462
+
+        for p462_val in p462:
+            for p462_qual in qualifiers["P462"]:
+                if "datavalue" in p462_qual:
+                    if "value" in p462_qual["datavalue"]:
+                        if "id" in p462_qual["datavalue"]["value"] and p462_qual["datavalue"]["value"]["id"] == p462_val:
+                            list_p462.remove(p462_val)
+        for cor in list_p462:
+            qualifiers["P462"].append(
+                {
+                    "snaktype": "value",
+                    "property": "P462",
+                    "datavalue": {
+                        "value": {
+                            "entity-type": "item",
+                            "numeric-id": int(cor.strip("Q"))
+                        },
+                        "type": "wikibase-entityid"
+                    },
+                    "datatype": "wikibase-item"
+                })
+    else:
+        qualifiers["P462"] = [
+            {
+                "snaktype": "value",
+                "property": "P462",
+                "datavalue": {
+                    "value": {
+                        "entity-type": "item",
+                        "numeric-id": int(cor.strip("Q"))
+                    },
+                    "type": "wikibase-entityid"
+                },
+                "datatype": "wikibase-item"
+            } for cor in p462]
+
+
+def remove_redundant_p1114(qualifiers, p1114):
+    if p1114:
+        qualifiers["P1114"] = [
+            {
+                "snaktype": "value",
+                "property": "P1114",
+                "datavalue":
+                    {
+                        "value":
+                            {
+                                "amount": "+" + str(p1114),
+                                "unit": "1"
+                            },
+                        "type": "quantity"
+                    },
+                "datatype": "quantity"
+            }
+        ]
+
+
+def remove_redundant_p1354(qualifiers, p1354):
+    if "P1354" in qualifiers:
+        list_p1354 = p1354
+
+        for p1354_val in p1354:
+            for p1354_qual in qualifiers["P1354"]:
+                if "datavalue" in p1354_qual:
+                    if "value" in p1354_qual["datavalue"]:
+                        if "id" in p1354_qual["datavalue"]["value"] and p1354_qual["datavalue"]["value"]["id"] == p1354_val:
+                            list_p1354.remove(p1354_val)
+        for atrib in list_p1354:
+            qualifiers["P1354"].append(
+                {
+                    "snaktype": "value",
+                    "property": "P1354",
+                    "datavalue": {
+                        "value": {
+                            "entity-type": "item",
+                            "numeric-id": int(atrib.strip("Q"))
+                        },
+                        "type": "wikibase-entityid"
+                    },
+                    "datatype": "wikibase-item"
+                })
+    else:
+        qualifiers["P1354"] = [
+            {
+                "snaktype": "value",
+                "property": "P1354",
+                "datavalue": {
+                    "value": {
+                        "entity-type": "item",
+                        "numeric-id": int(atrib.strip("Q"))
+                    },
+                    "type": "wikibase-entityid"
+                },
+                "datatype": "wikibase-item"
+            } for atrib in p1354]
+
+
+def build_stat(qid, P1114, P462, P1354, claims, P1354_type):
+    if "P180" in claims:
+        P180_statements = claims["P180"]
+
+        for P180 in P180_statements:
+            if "mainsnak" in P180:
+                if "datavalue" in P180["mainsnak"]:
+                    if "value" in P180["mainsnak"]["datavalue"]:
+                        if "id" in P180["mainsnak"]["datavalue"]["value"] and P180["mainsnak"]["datavalue"]["value"][
+                            "id"] == qid:
+                            if "qualifiers" in P180:
+                                if "P1354" in P180["qualifiers"] and verify_1354(P180["qualifiers"]["P1354"], P1354_type):
+                                    # Se chegamos até aqui, quer dizer que o valor da declaração já existe no Wikidata.
+                                    # Sabemos disso por que o qualificador de identificação corresponde ao que se está
+                                    # tentando adicionar.
+                                    remove_redundant_p462(P180["qualifiers"], P462)
+                                    remove_redundant_p1114(P180["qualifiers"], P1114)
+                                    remove_redundant_p1354(P180["qualifiers"], P1354)
+
+                                    return P180
+
+    # Se chegamos até aqui, quer dizer que o valor da declaração não existe no
+    # item no Wikidata, ou pelo menos que não existe com o qualificador P1354
+    # adequado. Portanto, deve-se criar a declaração junto dos qualificadores
+    statement = {
+        "mainsnak":
+            {
+                "snaktype": "value",
+                "property": "P180",
+                "datavalue":
+                    {
+                        "value":
+                            {
+                                "entity-type": "item",
+                                "numeric-id": int(qid.strip("Q"))
+                            },
+                        "type": "wikibase-entityid"
+                    }
+            },
+        "type": "statement",
+        "rank": "normal"
+    }
+    if P1114 or P462 or P1354:
+        # Criar um dicionário vazio para armazenar os qualificadores
+        statement["qualifiers"] = {}
+        remove_redundant_p462(statement["qualifiers"], P462)
+        remove_redundant_p1114(statement["qualifiers"], P1114)
+        remove_redundant_p1354(statement["qualifiers"], P1354)
+
+    statements = [statement]
+    return statements
 
 
 if __name__ == '__main__':

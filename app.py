@@ -999,8 +999,7 @@ def build_stat(qid, P1114, P462, P1354, claims, P1354_type):
         remove_redundant_p1114(statement["qualifiers"], P1114)
         remove_redundant_p1354(statement["qualifiers"], P1354)
 
-    statements = [statement]
-    return statements
+    return statement
 
 
 if __name__ == '__main__':

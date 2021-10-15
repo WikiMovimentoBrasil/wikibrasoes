@@ -1,7 +1,7 @@
 <img src="https://img.shields.io/github/issues/WikiMovimentoBrasil/wikibrasoes?style=for-the-badge"/> <img src="https://img.shields.io/github/license/WikiMovimentoBrasil/wikibrasoes?style=for-the-badge"/> <img src="https://img.shields.io/github/languages/top/WikiMovimentoBrasil/wikibrasoes?style=for-the-badge"/>
 # Wiki Museu do Ipiranga - O que há no brasão?
 
-This tool is a metadata application to be hosted in Toolforge. It invites Wikimedia users to identify the heraldry elements that compose the coat of arms' depicted in in works of art present in the Museu Paulista collection.
+This tool is a metadata application to be hosted in Toolforge. It invites Wikimedia users to identify the heraldry elements that compose the coat of arms' depicted in works of art present in the Museu Paulista collection.
 
 The tool presents the works of the Museu Paulista collection in categories, giving the users autonomy to navigate through the items.
 Once in a category, the users see a list of images of the works, to visually help them make their choice on which work to contribute.
@@ -23,7 +23,7 @@ Your config file should look like this:
 ```bash
 SECRET_KEY: "YOUR_SECRET_KEY"
 BABEL_DEFAULT_LOCALE: "pt"
-APPLICATION_ROOT: "wikiquantos/"
+APPLICATION_ROOT: "wikibrasoes/"
 OAUTH_MWURI: "https://meta.wikimedia.org/w/index.php"
 CONSUMER_KEY: "YOUR_CONSUMER_KEY"
 CONSUMER_SECRET: "YOUR_CONSUMER_SECRET"
